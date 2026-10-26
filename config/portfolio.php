@@ -24,6 +24,11 @@ return [
     // Password for /admin (before-and-after case studies). Empty = admin disabled.
     'admin_password' => env('ADMIN_PASSWORD'),
 
+    // Hosting without database access at build time: create tables on first request.
+    // AUTO_SEED also loads the demonstration case studies when that table is first created.
+    'auto_setup' => (bool) env('AUTO_SETUP', false),
+    'auto_seed' => (bool) env('AUTO_SEED', false),
+
     'person' => [
         'name' => 'Ali Hassan',
         'first_name' => 'Ali',
