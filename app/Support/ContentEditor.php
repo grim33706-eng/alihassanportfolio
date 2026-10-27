@@ -5,6 +5,7 @@ namespace App\Support;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
@@ -59,6 +60,8 @@ class ContentEditor
     /** Save every part of a section from the request input. */
     public static function saveParts(array $parts, array $input, array $files): void
     {
+        $before = self::mediaIn($parts);
+
         foreach ($parts as $i => $part) {
             $data = $input[$i] ?? [];
             $upload = $files[$i] ?? [];
@@ -80,17 +83,41 @@ class ContentEditor
                 SiteContent::save($part['key'], array_replace($current, $clean));
             }
         }
+
+        self::pruneMedia($before, $parts);
     }
 
     /** Reset every part of a section to its defaults. */
     public static function resetParts(array $parts): void
     {
+        $before = self::mediaIn($parts);
+
         foreach ($parts as $part) {
             if (isset($part['fields'])) {
                 SiteContent::reset($part['key'], array_column($part['fields'], 'name'));
             } else {
                 SiteContent::reset($part['key']);
             }
+        }
+
+        self::pruneMedia($before, $parts);
+    }
+
+    /** Uploaded files (under media/) that the parts' current content refers to. */
+    private static function mediaIn(array $parts): array
+    {
+        return collect($parts)
+            ->flatMap(fn ($part) => Arr::flatten((array) SiteContent::current($part['key'])))
+            ->filter(fn ($value) => is_string($value) && str_starts_with($value, 'media/'))
+            ->unique()
+            ->all();
+    }
+
+    /** Delete uploads that are no longer used, e.g. after a list item was removed or a reset. */
+    private static function pruneMedia(array $before, array $parts): void
+    {
+        foreach (array_diff($before, self::mediaIn($parts)) as $path) {
+            self::deleteMedia($path);
         }
     }
 
@@ -194,8 +221,9 @@ class ContentEditor
         $currentPath = is_string($currentPath) && $currentPath !== '' ? $currentPath : null;
 
         if ($file instanceof UploadedFile) {
-            $extension = strtolower($file->getClientOriginalExtension());
-            if (! $file->isValid() || ! in_array($extension, self::IMAGE_TYPES, true) || $file->getSize() > self::IMAGE_MAX_KB * 1024) {
+            // `mimes` checks the file's actual content, not just its name.
+            $invalid = Validator::make(['file' => $file], ['file' => ['file', 'mimes:'.implode(',', self::IMAGE_TYPES), 'max:'.self::IMAGE_MAX_KB]])->fails();
+            if ($invalid) {
                 throw ValidationException::withMessages([
                     'image' => '"'.$field['label'].'" must be a JPG, PNG, WebP, GIF or SVG image of up to 4 MB.',
                 ]);

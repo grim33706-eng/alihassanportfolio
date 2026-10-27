@@ -23,10 +23,17 @@ class SettingsController extends Controller
 
     public function update(Request $request): RedirectResponse
     {
-        $request->validate(
-            ['parts.0.name' => ['required', 'string', 'max:120']],
-            ['parts.0.name.required' => 'The name cannot be empty.'],
-        );
+        $request->validate([
+            'parts.0.name' => ['required', 'string', 'max:120'],
+            'parts.2.email' => ['nullable', 'email:rfc', 'max:150'],
+            'parts.2.notify_email' => ['nullable', 'email:rfc', 'max:150'],
+            'parts.2.linkedin' => ['nullable', 'url', 'max:255'],
+        ], [
+            'parts.0.name.required' => 'The name cannot be empty.',
+            'parts.2.email.email' => 'The public email address is not valid.',
+            'parts.2.notify_email.email' => 'The notification email address is not valid.',
+            'parts.2.linkedin.url' => 'The LinkedIn link must be a full web address (https://…).',
+        ]);
         ContentEditor::saveParts(config('admin.settings'), $request->input('parts', []), $request->file('files', []));
 
         return redirect()->route('admin.settings')->with('status', 'Settings saved. The changes are live.');

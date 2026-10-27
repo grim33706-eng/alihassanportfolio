@@ -23,20 +23,25 @@
 
     document.querySelectorAll('[data-compare]').forEach((compare) => {
         const range = compare.querySelector('[data-compare-range]');
-        range.addEventListener('input', () => setPos(compare, parseFloat(range.value)));
-        range.addEventListener('pointerdown', () => compare.classList.add('is-dragging'));
+        let intro = null;
+        // The visitor takes over: stop the intro sweep so it can't pull the handle back.
+        const stopIntro = () => { if (intro) { intro.scrollTrigger?.kill(); intro.kill(); intro = null; } };
+        range.addEventListener('input', () => { stopIntro(); setPos(compare, parseFloat(range.value)); });
+        range.addEventListener('pointerdown', () => { stopIntro(); compare.classList.add('is-dragging'); });
+        range.addEventListener('keydown', stopIntro);
         window.addEventListener('pointerup', () => compare.classList.remove('is-dragging'));
 
         // Intro sweep: start fully on "before", then glide to the middle.
         if (motionOK) {
             const state = { v: 100 };
             setPos(compare, 100);
-            gsap.to(state, {
+            intro = gsap.to(state, {
                 v: 50,
                 duration: 1.6,
                 ease: 'power3.inOut',
                 scrollTrigger: { trigger: compare, start: 'top 80%', once: true },
                 onUpdate: () => setPos(compare, state.v),
+                onComplete: () => { intro = null; },
             });
         }
     });
