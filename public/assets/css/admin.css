@@ -25,13 +25,23 @@
     flex-direction: column;
     gap: 1.25rem;
     padding: 1.25rem 0.9rem;
-    background: linear-gradient(180deg, rgba(21, 27, 45, 0.92), rgba(13, 18, 33, 0.95));
-    border-right: 1px solid var(--border-soft);
+    background: linear-gradient(180deg, #080c18 0%, #060912 100%);
+    border-right: 1px solid rgba(109, 147, 255, 0.12);
+    box-shadow: 1px 0 0 rgba(0, 0, 0, 0.4), 12px 0 40px -24px rgba(0, 0, 0, 0.8);
     overflow-y: auto;
-    scrollbar-width: thin;
+    overscroll-behavior: contain;
     z-index: 40;
 }
-.adm-brand { display: flex; align-items: center; gap: 0.75rem; padding: 0.35rem 0.6rem 0.9rem; border-bottom: 1px solid var(--border-soft); color: var(--text); }
+/* Slim scrollbar in the site palette (the default bright one clashed with the dark sidebar). */
+.adm-sidebar::-webkit-scrollbar { width: 6px; }
+.adm-sidebar::-webkit-scrollbar-track { background: transparent; }
+.adm-sidebar::-webkit-scrollbar-thumb { border-radius: 999px; background: rgba(109, 147, 255, 0.18); }
+.adm-sidebar:hover::-webkit-scrollbar-thumb { background: rgba(109, 147, 255, 0.35); }
+.adm-sidebar::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #6d93ff, #8B5CF6); }
+@supports not selector(::-webkit-scrollbar) {
+    .adm-sidebar { scrollbar-width: thin; scrollbar-color: rgba(109, 147, 255, 0.3) transparent; }
+}
+.adm-brand { display: flex; align-items: center; gap: 0.75rem; padding: 0.35rem 0.6rem 0.9rem; border-bottom: 1px solid rgba(166, 176, 195, 0.08); color: var(--text); }
 .adm-brand:hover { color: var(--text); }
 .adm-brand__text { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; }
 .adm-brand__name { font-family: var(--font-display); font-weight: 600; font-size: 0.98rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -168,8 +178,9 @@
 
 .adm-jump { position: sticky; top: 76px; z-index: 20; display: flex; gap: 0.4rem; overflow-x: auto; scrollbar-width: none; margin-bottom: 1.25rem; padding: 0.45rem; border-radius: 14px; background: rgba(13, 18, 33, 0.92); border: 1px solid var(--border-soft); }
 .adm-jump::-webkit-scrollbar { display: none; }
-.adm-jump a { flex-shrink: 0; padding: 0.35rem 0.8rem; border-radius: 9px; font-size: 0.8rem; color: var(--text-2); white-space: nowrap; transition: background-color 0.2s, color 0.2s; }
+.adm-jump a { flex-shrink: 0; padding: 0.4rem 0.85rem; border-radius: 9px; font-size: 0.8rem; font-weight: 500; color: var(--text-2); white-space: nowrap; transition: background-color 0.25s, color 0.25s, box-shadow 0.25s; }
 .adm-jump a:hover { color: var(--text); background: rgba(79, 124, 255, 0.14); }
+.adm-jump a.is-active { color: #fff; background: var(--gradient); box-shadow: 0 6px 18px -8px rgba(79, 124, 255, 0.9); }
 
 /* ---------- Cards ---------- */
 

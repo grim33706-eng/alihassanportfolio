@@ -24,7 +24,12 @@
     <meta property="og:title" content="{{ $fullTitle }}">
     <meta property="og:description" content="{{ $description }}">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta name="twitter:card" content="summary">
+    @if ($shareImage = config('content.site.share_image'))
+        <meta property="og:image" content="{{ media_url($shareImage) }}">
+        <meta name="twitter:card" content="summary_large_image">
+    @else
+        <meta name="twitter:card" content="summary">
+    @endif
 
     <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
 

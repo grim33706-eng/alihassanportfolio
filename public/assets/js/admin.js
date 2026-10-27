@@ -196,6 +196,74 @@
         }, 5000);
     });
 
+    /* ------------------------------------------------------------------
+       Section tabs (General, Hero, …): highlight the section in view
+    ------------------------------------------------------------------ */
+    const jump = document.querySelector('.adm-jump');
+    if (jump) {
+        const links = Array.from(jump.querySelectorAll('a[href^="#"]'));
+        const cards = links.map((a) => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+        let locked = false; // while a clicked tab's smooth scroll runs, ignore the observer
+        let lockTimer;
+
+        const activate = (id) => {
+            links.forEach((a) => {
+                const on = a.getAttribute('href') === `#${id}`;
+                a.classList.toggle('is-active', on);
+                if (on) {
+                    a.setAttribute('aria-current', 'true');
+                    // Keep the active tab visible inside the scrollable bar.
+                    const left = a.offsetLeft - (jump.clientWidth - a.offsetWidth) / 2;
+                    jump.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
+                } else {
+                    a.removeAttribute('aria-current');
+                }
+            });
+        };
+
+        links.forEach((a) => {
+            a.addEventListener('click', () => {
+                activate(a.getAttribute('href').slice(1));
+                locked = true;
+                clearTimeout(lockTimer);
+                lockTimer = setTimeout(() => { locked = false; }, 900);
+            });
+        });
+
+        // Current section = the last one whose top has passed just below the sticky tab bar
+        // (or the last section once the page is scrolled to the bottom).
+        let current = null;
+        let ticking = false;
+        const update = () => {
+            ticking = false;
+            if (locked) return;
+            const line = jump.getBoundingClientRect().bottom + 24;
+            let id = cards[0].id;
+            for (const card of cards) {
+                if (card.getBoundingClientRect().top <= line) id = card.id;
+                else break;
+            }
+            if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+                id = cards[cards.length - 1].id;
+            }
+            if (id !== current) {
+                current = id;
+                activate(id);
+            }
+        };
+        window.addEventListener('scroll', () => {
+            if (!ticking) { ticking = true; requestAnimationFrame(update); }
+        }, { passive: true });
+        window.addEventListener('resize', update);
+
+        if (location.hash && document.querySelector(location.hash)) {
+            current = location.hash.slice(1);
+            activate(current);
+        } else {
+            update();
+        }
+    }
+
     document.querySelectorAll('[data-repeater]').forEach(refreshRepeater);
     enhance(document);
 })();

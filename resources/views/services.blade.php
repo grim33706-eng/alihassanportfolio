@@ -14,7 +14,8 @@
     variant="services"
     :eyebrow="txt($c['hero']['eyebrow'])"
     :title="rich($c['hero']['title'])"
-    :lead="txt($c['hero']['lead'])">
+    :lead="txt($c['hero']['lead'])"
+    :image="$c['hero']['image'] ?? null">
     <x-slot:visual>
         <div class="hero-tiles">
             @for ($i = 0; $i < 12; $i++)<span></span>@endfor

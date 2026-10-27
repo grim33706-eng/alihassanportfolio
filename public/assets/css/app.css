@@ -689,6 +689,29 @@ body.no-scroll { overflow: hidden; }
     .page-hero { min-height: 640px; display: flex; flex-direction: column; justify-content: center; }
 }
 
+/* Uploaded hero image (set in the admin): copy left, framed image right */
+.page-hero__grid { display: grid; gap: 2.25rem; align-items: center; }
+@media (min-width: 992px) { .page-hero__grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 3rem; } }
+.page-hero__media {
+    position: relative;
+    margin: 0;
+    border-radius: 28px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    border: 1px solid transparent;
+    background:
+        linear-gradient(#10172b, #10172b) padding-box,
+        linear-gradient(140deg, rgba(109, 147, 255, 0.65), rgba(41, 50, 71, 0.6) 45%, rgba(139, 92, 246, 0.55)) border-box;
+    box-shadow: 0 40px 80px -45px rgba(79, 124, 255, 0.55);
+}
+.page-hero__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.page-hero__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(11, 16, 32, 0.45)); pointer-events: none; }
+.page-hero__media--globe { aspect-ratio: 1 / 1; max-width: 560px; margin-inline: auto; }
+.page-hero--media .page-hero__title { max-width: none; }
+
+/* Home: an uploaded background image in place of the 3D scene */
+.hero__canvas--image img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+
 /* About: concentric orbits */
 .hero-orbits { position: absolute; right: clamp(16px, 4vw, 48px); top: 50%; width: min(440px, 34vw); aspect-ratio: 1; transform: translateY(-50%); }
 .hero-orbits span {

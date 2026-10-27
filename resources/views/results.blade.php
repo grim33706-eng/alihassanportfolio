@@ -20,7 +20,8 @@
     variant="results"
     :eyebrow="txt($c['hero']['eyebrow'])"
     :title="rich($c['hero']['title'])"
-    :lead="txt($c['hero']['lead'])">
+    :lead="txt($c['hero']['lead'])"
+    :image="$c['hero']['image'] ?? null">
     <x-slot:visual>
         <div class="hero-graph" data-hero-graph>
             <svg viewBox="0 0 600 300" preserveAspectRatio="none">

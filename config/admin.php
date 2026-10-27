@@ -24,6 +24,7 @@ $hero = fn (array $extra = []) => ['name' => 'hero', 'type' => 'group', 'label' 
     ['name' => 'eyebrow', 'label' => 'Small label above the title', 'type' => 'text'],
     ['name' => 'title', 'label' => 'Title', 'type' => 'rich'],
     ['name' => 'lead', 'label' => 'Intro paragraph', 'type' => 'textarea'],
+    ['name' => 'image', 'label' => 'Hero image (optional)', 'type' => 'image', 'help' => 'Shown beside the title in place of the decorative graphic.'],
 ], $extra)];
 
 $heading = fn (string $name, string $label, bool $lead = false, array $extra = []) => [
@@ -85,6 +86,7 @@ return [
                         ['name' => 'platforms_chip', 'label' => 'Platforms chip text', 'type' => 'text'],
                         ['name' => 'markets_label', 'label' => 'Markets strip label', 'type' => 'text'],
                         ['name' => 'markets', 'label' => 'Markets strip', 'type' => 'list'],
+                        ['name' => 'image', 'label' => 'Background image (optional)', 'type' => 'image', 'help' => 'Replaces the 3D animation behind the headline. A wide, darker image works best; the left side is shaded so the text stays readable.'],
                     ]],
                     $heading('platforms', 'Meta / Google tabs section', true, [['name' => 'also_label', 'label' => '"Also running" label', 'type' => 'text']]),
                     $heading('intro', 'Introduction', false, [
@@ -501,6 +503,7 @@ return [
         ]],
         ['key' => 'content.site', 'label' => 'Branding', 'fields' => [
             ['name' => 'monogram', 'label' => 'Monogram (logo letters)', 'type' => 'text', 'help' => 'Two or three letters, e.g. AH.'],
+            ['name' => 'share_image', 'label' => 'Share image', 'type' => 'image', 'help' => 'Shown when the site link is shared on WhatsApp, LinkedIn, Facebook or X. Use 1200 × 630 px.'],
         ]],
         ['key' => 'portfolio.person', 'label' => 'Contact details', 'fields' => [
             ['name' => 'email', 'label' => 'Public email', 'type' => 'text'],

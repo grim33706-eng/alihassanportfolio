@@ -14,7 +14,8 @@
     variant="contact"
     :eyebrow="txt($c['hero']['eyebrow'])"
     :title="rich($c['hero']['title'])"
-    :lead="txt($c['hero']['lead'])">
+    :lead="txt($c['hero']['lead'])"
+    :image="$c['hero']['image'] ?? null">
     <x-slot:visual>
         <div class="hero-orbits hero-orbits--contact">
             <span></span><span></span><span></span>
