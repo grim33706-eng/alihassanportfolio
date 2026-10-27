@@ -9,6 +9,7 @@
 @endphp
 
 <article {{ $attributes->merge(['class' => 'project-card']) }}
+    id="project-{{ $project['slug'] }}"
     data-project
     data-platforms="{{ implode(' ', $project['platforms']) }}"
     data-category="{{ $project['category'] }}"

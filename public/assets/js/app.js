@@ -565,7 +565,7 @@
             const target = e.target instanceof Element ? e.target : null;
             const overText = target && target.closest(textual);
             const overLink = target && !overText && target.closest(interactive);
-            const dragZone = target && target.closest('[data-slider], [data-globe], [data-compare]');
+            const dragZone = target && target.closest('[data-showcase-stage], [data-globe], [data-compare]');
 
             root.classList.toggle('cursor-text', !!overText);
             ring.classList.toggle('is-hover', !!overLink);

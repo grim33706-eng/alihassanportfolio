@@ -194,23 +194,7 @@
 </section>
 
 {{-- ============ PROJECTS ============ --}}
-<section class="section" id="selected-work">
-    <div class="container-xl">
-        <div class="section-head-row">
-            <x-section-heading eyebrow="Selected work" title="Campaigns across categories and continents" lead="Client names are kept confidential. Projects are described by industry, market and platform." />
-            <div class="slider-controls" data-reveal>
-                <button type="button" class="round-btn" data-slider-prev aria-label="Previous project"><x-icon name="arrow-right" size="18" class="flip-x" /></button>
-                <button type="button" class="round-btn" data-slider-next aria-label="Next project"><x-icon name="arrow-right" size="18" /></button>
-            </div>
-        </div>
-    </div>
-    <div class="project-slider" data-slider tabindex="0" aria-label="Selected projects">
-        @foreach ($featuredProjects as $project)
-            <x-project-card :project="$project" class="project-slider__item" />
-        @endforeach
-        @include('partials.explore-card', ['totals' => $portfolioTotals])
-    </div>
-</section>
+@include('partials.showcase', ['projects' => $featuredProjects, 'totals' => $portfolioTotals])
 
 {{-- ============ BEFORE & AFTER ============ --}}
 @include('partials.case-studies-section', [
