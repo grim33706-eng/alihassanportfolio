@@ -67,24 +67,69 @@
     });
 
     /* ------------------------------------------------------------------
-       Image fields: show the picked file before upload
+       Image fields: preview a picked file; Remove / Undo
     ------------------------------------------------------------------ */
+    const HELP = 'JPG, PNG, WebP, GIF or SVG · up to 4 MB';
+    const imageState = (field) => {
+        const saved = field.dataset.hasSaved === '1';
+        const fileInput = field.querySelector('[data-image-input]');
+        const picked = fileInput.files.length > 0;
+        const removing = field.querySelector('[data-image-remove-input]').value === '1';
+        const preview = field.querySelector('[data-image-preview]');
+        const savedImg = preview.querySelector('[data-saved-image]');
+        const pickedImg = preview.querySelector('[data-picked-image]');
+        const removeBtn = field.querySelector('[data-image-remove]');
+
+        field.classList.toggle('is-removing', removing);
+        field.classList.toggle('has-image', (saved && !removing) || picked);
+        if (savedImg) savedImg.hidden = picked;
+        if (pickedImg && !picked) pickedImg.remove();
+
+        removeBtn.hidden = !saved && !picked;
+        field.querySelector('[data-image-remove-label]').textContent = picked
+            ? 'Cancel new image'
+            : (removing ? 'Undo remove' : 'Remove image');
+        field.querySelector('[data-image-pick-label]').textContent = saved || picked ? 'Replace image' : 'Upload image';
+        field.querySelector('[data-image-name]').textContent = picked
+            ? `${fileInput.files[0].name} · will upload when you save`
+            : (removing ? 'The image will be removed when you save.' : HELP);
+    };
+
     document.addEventListener('change', (e) => {
         const input = e.target;
-        if (!input.matches('[data-image-input]') || !input.files.length) return;
+        if (!input.matches('[data-image-input]')) return;
         const field = input.closest('[data-image-field]');
-        const file = input.files[0];
         const preview = field.querySelector('[data-image-preview]');
-        const name = field.querySelector('[data-image-name]');
-        if (file.type.startsWith('image/')) {
-            const url = URL.createObjectURL(file);
-            preview.innerHTML = '';
-            const img = document.createElement('img');
-            img.src = url;
-            img.alt = '';
-            preview.appendChild(img);
+        const old = preview.querySelector('[data-picked-image]');
+        if (old) old.remove();
+        if (input.files.length) {
+            // Picking a new image replaces the saved one, so a pending removal is cancelled.
+            field.querySelector('[data-image-remove-input]').value = '0';
+            const file = input.files[0];
+            if (file.type.startsWith('image/')) {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                img.alt = '';
+                img.dataset.pickedImage = '';
+                preview.prepend(img);
+            }
         }
-        if (name) name.textContent = `${file.name} · will upload when you save`;
+        imageState(field);
+    });
+
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-image-remove]');
+        if (!btn) return;
+        const field = btn.closest('[data-image-field]');
+        const fileInput = field.querySelector('[data-image-input]');
+        const removeInput = field.querySelector('[data-image-remove-input]');
+        if (fileInput.files.length) {
+            fileInput.value = ''; // cancel the newly picked file
+        } else {
+            removeInput.value = removeInput.value === '1' ? '0' : '1';
+        }
+        imageState(field);
+        markDirty();
     });
 
     /* ------------------------------------------------------------------

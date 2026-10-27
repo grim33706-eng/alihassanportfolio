@@ -129,27 +129,27 @@
                     @break
 
                 @case('image')
-                    <div class="adm-image" data-image-field>
+                    <div @class(['adm-image', 'has-image' => $value]) data-image-field data-has-saved="{{ $value ? '1' : '0' }}">
                         <div class="adm-image__preview" data-image-preview>
                             @if ($value)
-                                <img src="{{ media_url($value) }}" alt="">
-                            @else
-                                <span class="adm-image__empty"><x-icon name="image" size="26" /> No image</span>
+                                <img src="{{ media_url($value) }}" alt="" data-saved-image>
                             @endif
+                            <span class="adm-image__empty" data-image-empty><x-icon name="image" size="26" /> No image</span>
+                            <span class="adm-image__removed" data-image-removed><x-icon name="trash" size="22" /> Will be removed when you save</span>
                         </div>
+                        <input type="hidden" name="{{ $name }}" value="{{ $value }}">
+                        {{-- 1 = remove the saved image on save. Set by the Remove button. --}}
+                        <input type="hidden" name="{{ preg_replace('/\]$/', '__remove]', $name) }}" value="0" data-image-remove-input>
                         <div class="adm-image__actions">
-                            <input type="hidden" name="{{ $name }}" value="{{ $value }}">
                             <label class="adm-btn adm-btn--ghost adm-btn--sm adm-file">
                                 <input type="file" name="{{ $file }}" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" data-image-input>
-                                <x-icon name="image" size="15" /> {{ $value ? 'Replace image' : 'Upload image' }}
+                                <x-icon name="image" size="15" /> <span data-image-pick-label>{{ $value ? 'Replace image' : 'Upload image' }}</span>
                             </label>
-                            @if ($value)
-                                <label class="adm-check adm-check--danger">
-                                    <input type="checkbox" name="{{ preg_replace('/\]$/', '__remove]', $name) }}" value="1"> Remove
-                                </label>
-                            @endif
-                            <span class="adm-help" data-image-name>JPG, PNG, WebP, GIF or SVG · up to 4 MB</span>
+                            <button type="button" class="adm-btn adm-btn--danger adm-btn--sm" data-image-remove @unless ($value) hidden @endunless>
+                                <x-icon name="trash" size="15" /> <span data-image-remove-label>Remove image</span>
+                            </button>
                         </div>
+                        <span class="adm-help" data-image-name>JPG, PNG, WebP, GIF or SVG · up to 4 MB</span>
                     </div>
                     @break
 
