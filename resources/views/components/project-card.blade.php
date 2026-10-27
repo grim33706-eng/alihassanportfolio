@@ -13,13 +13,17 @@
     data-platforms="{{ implode(' ', $project['platforms']) }}"
     data-category="{{ $project['category'] }}"
     data-markets="{{ $markets }}">
-    <div class="project-card__art project-card__art--{{ $project['category'] }}" aria-hidden="true">
-        <svg viewBox="0 0 320 120" preserveAspectRatio="none">
-            <path class="project-card__area" d="M0 100 C 40 95, 60 80, 95 78 S 150 60, 185 52 S 250 30, 320 14 V120 H0 Z" />
-            <path class="project-card__line" pathLength="1" d="M0 100 C 40 95, 60 80, 95 78 S 150 60, 185 52 S 250 30, 320 14" />
-        </svg>
+    <div @class(['project-card__art', 'project-card__art--'.$project['category'], 'has-cover' => ! empty($project['image'])]) aria-hidden="true">
+        @if (! empty($project['image']))
+            <img class="project-card__cover" src="{{ media_url($project['image']) }}" alt="" loading="lazy" decoding="async">
+        @else
+            <svg viewBox="0 0 320 120" preserveAspectRatio="none">
+                <path class="project-card__area" d="M0 100 C 40 95, 60 80, 95 78 S 150 60, 185 52 S 250 30, 320 14 V120 H0 Z" />
+                <path class="project-card__line" pathLength="1" d="M0 100 C 40 95, 60 80, 95 78 S 150 60, 185 52 S 250 30, 320 14" />
+            </svg>
+            <span class="project-card__illus">Illustrative</span>
+        @endif
         <span class="project-card__category">{{ config('portfolio.categories.'.$project['category']) }}</span>
-        <span class="project-card__illus">Illustrative</span>
     </div>
 
     <div class="project-card__body">

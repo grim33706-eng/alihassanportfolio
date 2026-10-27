@@ -1041,6 +1041,8 @@ body.no-scroll { overflow: hidden; }
     color: transparent;
     -webkit-text-stroke: 1.5px rgba(166, 176, 195, 0.45);
 }
+/* Optional uploaded profile photo (set in Settings) */
+.portrait-card__photo { position: relative; display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: center 25%; border-radius: var(--radius); border: 1px solid var(--border-soft); }
 .portrait-card__meta { position: relative; margin-top: 1.5rem; }
 .portrait-card__name { font-family: var(--font-display); font-weight: 600; font-size: 1.35rem; }
 .portrait-card__role { color: var(--text-2); font-size: 0.9rem; }
@@ -1161,6 +1163,11 @@ body.no-scroll { overflow: hidden; }
     border-bottom: 1px solid var(--border-soft);
     overflow: hidden;
 }
+/* Optional uploaded cover image (set in the admin) */
+.project-card__cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
+.project-card:hover .project-card__cover { transform: scale(1.05); }
+.project-card__art.has-cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11, 16, 32, 0.55), transparent 45%); pointer-events: none; }
+.project-card__art.has-cover .project-card__category { z-index: 1; }
 .project-card__art--real-estate { background: radial-gradient(circle at 80% 0%, rgba(45, 212, 191, 0.28), transparent 60%), var(--bg-2); }
 .project-card__art--leads { background: radial-gradient(circle at 80% 0%, rgba(139, 92, 246, 0.35), transparent 60%), var(--bg-2); }
 .project-card__art svg { position: absolute; inset: auto 0 0 0; width: 100%; height: 75%; }

@@ -42,6 +42,25 @@ the `contact_messages` table.
 - `public/assets/js/pages/` — home tabs & slider, portfolio filters, contact form
 - `public/assets/js/three/` — home hero scene, international globe (WebGL-checked, paused off-screen, reduced-motion aware)
 
+## Admin panel (`/admin`)
+
+Log in at `/admin/login` with `ADMIN_PASSWORD` (or the password set later in **Settings**).
+
+- **Dashboard** — messages, case studies, projects, recent contact-form messages.
+- **Pages** — every heading, paragraph, button and short list on Home, About, Services, Portfolio,
+  Results, International, Contact, plus the shared header/footer/call-to-action.
+- **Content** — profile, key figures, Meta/Google tabs, services, experience, skills, education,
+  projects (with optional cover images) and markets — add, remove and reorder items.
+- **Case studies**, **Messages** (contact inbox) and **Settings** (name, photo, monogram,
+  contact details, admin password).
+
+How it works: defaults live in `config/content.php` and `config/portfolio.php`; edits are stored in the
+`site_settings` table and layered over the defaults on each request (`App\Support\SiteContent`), so
+**Reset to original** simply removes the edit. The forms are generated from `config/admin.php` —
+to make something new editable, add a field there and read it in the template with `txt()` / `rich()`.
+In text fields, `*words*` become the gradient highlight and `{name}`, `{first_name}`, `{role}`,
+`{location}` are replaced with the profile values. Uploaded images go to `storage/app/public/media`.
+
 ## Before & after case studies
 
 Case studies live in MySQL (`case_studies`, `case_study_images`) and are managed at **`/admin/login`**

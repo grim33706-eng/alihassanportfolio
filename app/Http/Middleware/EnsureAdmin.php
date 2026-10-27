@@ -2,19 +2,20 @@
 
 namespace App\Http\Middleware;
 
+use App\Support\AdminPassword;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Guards the small content admin. Access is a single password set in
- * ADMIN_PASSWORD; with no password configured the admin does not exist.
+ * Guards the admin. Access is a single password (ADMIN_PASSWORD, or one set
+ * in Settings); with neither configured the admin does not exist.
  */
 class EnsureAdmin
 {
     public function handle(Request $request, Closure $next): Response
     {
-        abort_unless(filled(config('portfolio.admin_password')), 404);
+        abort_unless(AdminPassword::configured(), 404);
 
         if (! $request->session()->get('is_admin')) {
             return redirect()->guest(route('admin.login'));
