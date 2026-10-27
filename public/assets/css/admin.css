@@ -434,6 +434,8 @@ a.adm-stat:hover { color: var(--text); border-color: rgba(109, 147, 255, 0.4); t
 .adm-password .adm-input { padding-right: 2.8rem; }
 .adm-password__toggle { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 34px; height: 34px; border: 0; border-radius: 8px; background: none; color: var(--text-3); }
 .adm-password__toggle:hover { color: var(--text); background: rgba(166, 176, 195, 0.08); }
+.adm-password__hide, .adm-password__toggle[aria-pressed="true"] .adm-password__show { display: none; }
+.adm-password__toggle[aria-pressed="true"] .adm-password__hide { display: block; }
 
 /* ==========================================================================
    Legacy admin-* classes (case study manager), restyled to match

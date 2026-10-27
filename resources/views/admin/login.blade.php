@@ -36,7 +36,7 @@
             <label class="adm-label" for="password">Password</label>
             <div class="adm-password">
                 <input class="adm-input @error('password') is-invalid @enderror" type="password" id="password" name="password" required autofocus autocomplete="current-password">
-                <button type="button" class="adm-password__toggle" data-password-toggle aria-label="Show password"><x-icon name="search" size="16" /></button>
+                <button type="button" class="adm-password__toggle" data-password-toggle aria-label="Show password" aria-pressed="false"><x-icon name="eye" size="18" class="adm-password__show" /><x-icon name="eye-off" size="18" class="adm-password__hide" /></button>
             </div>
             @error('password')<p class="adm-error">{{ $message }}</p>@enderror
             <button type="submit" class="adm-btn adm-btn--primary adm-btn--block">Log in <x-icon name="arrow-right" size="16" /></button>
@@ -50,6 +50,8 @@
             var show = input.type === 'password';
             input.type = show ? 'text' : 'password';
             this.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+            this.setAttribute('aria-pressed', show ? 'true' : 'false');
+            input.focus();
         });
     </script>
 </body>
