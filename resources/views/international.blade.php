@@ -24,18 +24,12 @@
                 </ul>
             </div>
             <div class="col-lg-7">
-                @if (! empty($c['hero']['image']))
-                <figure class="page-hero__media page-hero__media--globe" data-hero-item>
-                    <img src="{{ media_url($c['hero']['image']) }}" alt="" decoding="async">
-                </figure>
-                @else
                 <div class="globe" data-globe data-markets="{{ $globeMarkets->toJson() }}" aria-hidden="true">
                     <div class="globe__fallback">
                         <x-icon name="globe" size="120" />
                     </div>
                     <div class="globe__labels" data-globe-labels></div>
                 </div>
-                @endif
             </div>
         </div>
     </div>
@@ -83,7 +77,5 @@
 @endsection
 
 @section('three')
-    @if (empty($c['hero']['image']))
     <script type="module" src="{{ asset('assets/js/three/globe.js') }}?v={{ filemtime(public_path('assets/js/three/globe.js')) }}"></script>
-    @endif
 @endsection

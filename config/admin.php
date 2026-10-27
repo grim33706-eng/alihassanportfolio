@@ -20,12 +20,14 @@
 |
 */
 
-$hero = fn (array $extra = []) => ['name' => 'hero', 'type' => 'group', 'label' => 'Hero', 'fields' => array_merge([
+// Pages with a 3D hero animation (Home, International) pass $image = false so it is never replaced.
+$hero = fn (array $extra = [], bool $image = true) => ['name' => 'hero', 'type' => 'group', 'label' => 'Hero', 'fields' => array_merge([
     ['name' => 'eyebrow', 'label' => 'Small label above the title', 'type' => 'text'],
     ['name' => 'title', 'label' => 'Title', 'type' => 'rich'],
     ['name' => 'lead', 'label' => 'Intro paragraph', 'type' => 'textarea'],
+], $image ? [
     ['name' => 'image', 'label' => 'Hero image (optional)', 'type' => 'image', 'help' => 'Shown beside the title in place of the decorative graphic.'],
-], $extra)];
+] : [], $extra)];
 
 $heading = fn (string $name, string $label, bool $lead = false, array $extra = []) => [
     'name' => $name, 'type' => 'group', 'label' => $label, 'fields' => array_merge(
@@ -265,7 +267,7 @@ return [
             'parts' => [[
                 'key' => 'content.international',
                 'fields' => array_merge($seo, [
-                    $hero(),
+                    $hero(image: false),
                     $heading('markets', 'Markets section', true),
                     ['name' => 'cards', 'label' => 'Work-type cards', 'type' => 'repeater', 'item_label' => 'title', 'fields' => [
                         ['name' => 'icon', 'label' => 'Icon', 'type' => 'icon'],

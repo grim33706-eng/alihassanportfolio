@@ -706,7 +706,6 @@ body.no-scroll { overflow: hidden; }
 }
 .page-hero__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .page-hero__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(11, 16, 32, 0.45)); pointer-events: none; }
-.page-hero__media--globe { aspect-ratio: 1 / 1; max-width: 560px; margin-inline: auto; }
 .page-hero--media .page-hero__title { max-width: none; }
 
 /* About: concentric orbits */
