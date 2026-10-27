@@ -1,9 +1,12 @@
 {{-- Closing card of the home "Selected work" slider. Expects $totals (projects, markets, platforms). --}}
+@php
+    $explore = config('content.home.explore');
+@endphp
 <a href="{{ route('portfolio') }}" class="explore-card project-slider__item" aria-label="Explore all {{ $totals['projects'] }} projects">
     <span class="explore-card__glow" aria-hidden="true"></span>
 
     <span class="explore-card__top">
-        <span class="explore-card__eyebrow">Full portfolio</span>
+        <span class="explore-card__eyebrow">{{ txt($explore['eyebrow']) }}</span>
         <span class="explore-card__count">{{ $totals['projects'] }} projects</span>
     </span>
 
@@ -21,8 +24,8 @@
     </span>
 
     <span class="explore-card__body">
-        <span class="explore-card__title">Explore every campaign</span>
-        <span class="explore-card__text">E-commerce, lead generation and real estate work, filterable by platform, category and market.</span>
+        <span class="explore-card__title">{{ txt($explore['title']) }}</span>
+        <span class="explore-card__text">{{ txt($explore['text']) }}</span>
     </span>
 
     <span class="explore-card__stats">
@@ -32,7 +35,7 @@
     </span>
 
     <span class="explore-card__cta">
-        <span class="explore-card__cta-label">View all projects</span>
+        <span class="explore-card__cta-label">{{ txt($explore['button']) }}</span>
         <span class="explore-card__arrow"><x-icon name="arrow-right" size="20" /></span>
     </span>
 </a>

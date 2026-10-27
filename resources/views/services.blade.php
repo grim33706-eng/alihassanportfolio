@@ -1,22 +1,26 @@
 @extends('layouts.app')
 
+@php
+    $c = config('content.services');
+@endphp
+
 @section('page', 'services')
-@section('title', 'Services')
-@section('description', 'Paid advertising services from Ali Hassan: Meta Ads and Google Ads management, campaign strategy, audience and keyword research, conversion tracking with GTM and GA4, and optimisation and reporting.')
+@section('title', txt($c['seo_title']))
+@section('description', txt($c['seo_description']))
 
 @section('content')
 
 <x-page-hero
     variant="services"
-    eyebrow="Services"
-    title="Paid advertising, <span class='text-gradient'>managed end to end.</span>"
-    lead="Strategy, setup, tracking, creative testing and optimisation for e-commerce sales and B2B/B2C lead generation.">
+    :eyebrow="txt($c['hero']['eyebrow'])"
+    :title="rich($c['hero']['title'])"
+    :lead="txt($c['hero']['lead'])">
     <x-slot:visual>
         <div class="hero-tiles">
             @for ($i = 0; $i < 12; $i++)<span></span>@endfor
         </div>
     </x-slot:visual>
-    <x-button href="#services-list" icon="arrow-right">Explore services</x-button>
+    <x-button href="#services-list" icon="arrow-right">{{ txt($c['hero']['button']) }}</x-button>
 </x-page-hero>
 
 <section class="section" id="services-list">
@@ -32,7 +36,7 @@
 {{-- ============ PLATFORM DETAIL ============ --}}
 <section class="section">
     <div class="container-xl">
-        <x-section-heading eyebrow="By platform" title="What's included on each platform" align="center" />
+        <x-section-heading :eyebrow="txt($c['platforms']['eyebrow'])" :title="rich($c['platforms']['title'])" align="center" />
         <div class="row g-4" data-custom-anim data-anim="sheets">
             @foreach ($platforms as $key => $platform)
                 <div class="col-lg-6">
@@ -60,7 +64,7 @@
             @endforeach
         </div>
         <p class="also-runs also-runs--center" data-reveal>
-            Also available: @foreach ($alsoRuns as $item)<span>{{ $item }}</span>@endforeach
+            {{ txt($c['platforms']['also_label']) }} @foreach ($alsoRuns as $item)<span>{{ $item }}</span>@endforeach
         </p>
     </div>
 </section>
@@ -68,7 +72,7 @@
 {{-- ============ PROCESS ============ --}}
 <section class="section">
     <div class="container-xl">
-        <x-section-heading eyebrow="Working together" title="From tracking setup to scale" />
+        <x-section-heading :eyebrow="txt($c['process']['eyebrow'])" :title="rich($c['process']['title'])" />
         <ol class="process" role="list" data-process data-custom-anim data-anim="process">
             <span class="process__line" aria-hidden="true"><span data-process-fill></span></span>
             @foreach ($process as $step)
@@ -85,25 +89,20 @@
 {{-- ============ WHO FOR ============ --}}
 <section class="section">
     <div class="container-xl">
-        <x-section-heading eyebrow="Industries" title="Experience across sectors" />
+        <x-section-heading :eyebrow="txt($c['industries']['eyebrow'])" :title="rich($c['industries']['title'])" />
         <ul class="industry-grid" role="list" data-custom-anim data-anim="industries">
-            @foreach ([
-                ['cart', 'E-commerce', 'Fashion, home textiles, bedding, jewellery and food brands.'],
-                ['map-pin', 'Real estate', 'Paid lead campaigns in Dubai, Azerbaijan and Uzbekistan, plus real estate accounts in a multi-brand portfolio.'],
-                ['display', 'Software', 'Lead-generation campaigns for software businesses.'],
-                ['briefcase', 'Service businesses', 'B2B and B2C leads for service businesses and local companies.'],
-            ] as [$icon, $title, $text])
+            @foreach ($c['industries']['items'] as $item)
                 <li class="industry" data-reveal-card>
-                    <x-icon :name="$icon" size="22" />
-                    <h3 class="industry__title">{{ $title }}</h3>
-                    <p class="industry__text">{{ $text }}</p>
+                    <x-icon :name="$item['icon']" size="22" />
+                    <h3 class="industry__title">{{ txt($item['title']) }}</h3>
+                    <p class="industry__text">{{ txt($item['text']) }}</p>
                 </li>
             @endforeach
         </ul>
     </div>
 </section>
 
-<x-cta title="Need a hand with your ad accounts?" />
+<x-cta :title="$c['cta']['title']" :text="$c['cta']['text']" />
 
 @endsection
 

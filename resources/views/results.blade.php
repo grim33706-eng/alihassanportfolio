@@ -1,27 +1,26 @@
 @extends('layouts.app')
 
-@section('page', 'results')
-@section('title', 'Results')
-@section('description', 'Documented results from Ali Hassan\'s paid advertising work: approximately 4x average ROAS across an e-commerce portfolio, top campaigns at 8–10x, and portfolios of up to 16 brands.')
-
 @php
-    // Scope of each role, as documented in the CV.
-    $scope = [
-        ['role' => 'NextQuick Solutions', 'detail' => '5 e-commerce + 11 lead-gen brands', 'value' => 16, 'unit' => 'brands'],
-        ['role' => 'Orbit Creator', 'detail' => 'Local client accounts at once', 'value' => 15, 'unit' => 'accounts'],
-        ['role' => 'The Social Links', 'detail' => 'Brands managed simultaneously', 'value' => 10, 'unit' => 'brands'],
-        ['role' => 'Zela Boost', 'detail' => '3 e-commerce + 5 lead-gen brands', 'value' => 8, 'unit' => 'brands'],
-    ];
-    $scopeMax = 16;
+    $c = config('content.results');
+    $roas = $c['roas'];
+    $scale = $c['scale'];
+    // ROAS chart runs 0–10x: each 1x is 10% of the track.
+    $pct = fn ($x) => max(0, min(100, (float) $x * 10));
+    $scopeMax = max(1, collect($scale['bars'])->max('value'));
+    $countable = fn ($v) => is_numeric($v);
 @endphp
+
+@section('page', 'results')
+@section('title', txt($c['seo_title']))
+@section('description', txt($c['seo_description']))
 
 @section('content')
 
 <x-page-hero
     variant="results"
-    eyebrow="Results"
-    title="Results, with the <span class='text-gradient'>context</span> they were earned in."
-    lead="Every figure below comes from documented work history, alongside where and when it was achieved. Past performance doesn't guarantee future results.">
+    :eyebrow="txt($c['hero']['eyebrow'])"
+    :title="rich($c['hero']['title'])"
+    :lead="txt($c['hero']['lead'])">
     <x-slot:visual>
         <div class="hero-graph" data-hero-graph>
             <svg viewBox="0 0 600 300" preserveAspectRatio="none">
@@ -39,8 +38,8 @@
             </svg>
             {{-- Pins sit at fixed points on the curve (as % of the viewBox). Illustrative, not a data plot. --}}
             <span class="hero-graph__dot" data-graph-dot></span>
-            <span class="hero-graph__pin" style="--x: 60%; --y: 46.7%" data-graph-pin>~4x avg</span>
-            <span class="hero-graph__pin hero-graph__pin--peak" style="--x: 100%; --y: 13.3%" data-graph-pin>8–10x peak</span>
+            <span class="hero-graph__pin" style="--x: 60%; --y: 46.7%" data-graph-pin>{{ txt($c['hero']['pin_average']) }}</span>
+            <span class="hero-graph__pin hero-graph__pin--peak" style="--x: 100%; --y: 13.3%" data-graph-pin>{{ txt($c['hero']['pin_peak']) }}</span>
         </div>
     </x-slot:visual>
 </x-page-hero>
@@ -59,8 +58,8 @@
 @include('partials.case-studies-section', [
     'caseStudies' => $caseStudies,
     'full' => true,
-    'title' => "See the difference: <span class='text-gradient'>before &amp; after</span>",
-    'lead' => 'Each case study compares a brand’s advertising performance before Ali’s involvement with the results after it. Drag the slider, switch to side-by-side, or open any screenshot full size.',
+    'title' => $c['case_studies']['title'],
+    'lead' => $c['case_studies']['lead'],
 ])
 
 {{-- ============ ROAS ============ --}}
@@ -68,22 +67,21 @@
     <div class="container-xl">
         <div class="row g-5 align-items-center">
             <div class="col-lg-5">
-                <x-section-heading eyebrow="Return on ad spend" title="Around 4x on average. Up to 10x at the top."
-                    lead="Measured across the e-commerce portfolio at The Social Links (Dec 2024 – Jun 2026) — fashion, home textiles, jewellery and food brands selling into Australia, Canada, the UK and the USA." />
+                <x-section-heading :eyebrow="txt($roas['eyebrow'])" :title="rich($roas['title'])" :lead="txt($roas['lead'])" />
             </div>
             <div class="col-lg-7">
                 <figure class="roas-chart" data-roas data-custom-anim>
-                    <figcaption class="chart-title">ROAS, The Social Links e-commerce portfolio</figcaption>
+                    <figcaption class="chart-title">{{ txt($roas['chart_title']) }}</figcaption>
                     <div class="roas-chart__plot">
                         <div class="roas-chart__track">
-                            <span class="roas-chart__band" style="--from: 80%; --to: 100%" data-tip="Top-performing campaigns: 8–10x ROAS" tabindex="0"></span>
-                            <span class="roas-chart__bar" style="--to: 40%" data-roas-bar data-tip="Portfolio average: approximately 4x ROAS" tabindex="0"></span>
+                            <span class="roas-chart__band" style="--from: {{ $pct($roas['peak_from']) }}%; --to: {{ $pct($roas['peak_to']) }}%" data-tip="{{ txt($roas['peak_tip']) }}" tabindex="0"></span>
+                            <span class="roas-chart__bar" style="--to: {{ $pct($roas['average']) }}%" data-roas-bar data-tip="{{ txt($roas['average_tip']) }}" tabindex="0"></span>
                             <span class="roas-chart__ref" style="--at: 10%"></span>
                         </div>
                         <div class="roas-chart__labels">
-                            <span class="roas-chart__label" style="--at: 10%">1x<small>break-even</small></span>
-                            <span class="roas-chart__label roas-chart__label--strong" style="--at: 40%">~4x<small>average</small></span>
-                            <span class="roas-chart__label roas-chart__label--strong" style="--at: 90%">8–10x<small>top campaigns</small></span>
+                            <span class="roas-chart__label" style="--at: 10%">1x<small>{{ txt($roas['breakeven_caption']) }}</small></span>
+                            <span class="roas-chart__label roas-chart__label--strong" style="--at: {{ $pct($roas['average']) }}%">{{ txt($roas['average_label']) }}<small>{{ txt($roas['average_caption']) }}</small></span>
+                            <span class="roas-chart__label roas-chart__label--strong" style="--at: {{ ($pct($roas['peak_from']) + $pct($roas['peak_to'])) / 2 }}%">{{ txt($roas['peak_label']) }}<small>{{ txt($roas['peak_caption']) }}</small></span>
                         </div>
                         <div class="roas-chart__axis" aria-hidden="true">
                             @foreach ([0, 2, 4, 6, 8, 10] as $tick)
@@ -92,11 +90,11 @@
                         </div>
                     </div>
                     <table class="visually-hidden">
-                        <caption>Return on ad spend, The Social Links e-commerce portfolio, Dec 2024 – Jun 2026</caption>
-                        <tr><th scope="row">Portfolio average</th><td>Approximately 4x</td></tr>
-                        <tr><th scope="row">Top-performing campaigns</th><td>8–10x</td></tr>
+                        <caption>{{ txt($roas['table_caption']) }}</caption>
+                        <tr><th scope="row">Portfolio average</th><td>{{ txt($roas['table_average']) }}</td></tr>
+                        <tr><th scope="row">Top-performing campaigns</th><td>{{ txt($roas['peak_label']) }}</td></tr>
                     </table>
-                    <p class="chart-note">ROAS = revenue attributed to ads ÷ ad spend. A 4x ROAS means roughly four units of revenue for every unit spent.</p>
+                    <p class="chart-note">{{ txt($roas['note']) }}</p>
                 </figure>
             </div>
         </div>
@@ -109,10 +107,10 @@
         <div class="row g-5">
             <div class="col-lg-7 order-lg-2">
                 <figure class="bar-chart" data-bars data-custom-anim>
-                    <figcaption class="chart-title">Portfolio size by role</figcaption>
-                    <p class="chart-subtitle">Brands or client accounts managed at the same time</p>
+                    <figcaption class="chart-title">{{ txt($scale['chart_title']) }}</figcaption>
+                    <p class="chart-subtitle">{{ txt($scale['chart_subtitle']) }}</p>
                     <ul class="bar-chart__rows" role="list">
-                        @foreach ($scope as $row)
+                        @foreach ($scale['bars'] as $row)
                             <li class="bar-chart__row" tabindex="0" data-tip="{{ $row['role'] }}: {{ $row['value'] }} {{ $row['unit'] }} — {{ $row['detail'] }}">
                                 <span class="bar-chart__name">{{ $row['role'] }}<small>{{ $row['detail'] }}</small></span>
                                 <span class="bar-chart__track"><span class="bar-chart__bar" style="--w: {{ round($row['value'] / $scopeMax * 100) }}%" data-bar></span></span>
@@ -123,26 +121,26 @@
                 </figure>
             </div>
             <div class="col-lg-5 order-lg-1">
-                <x-section-heading eyebrow="Scale" title="Trusted with bigger portfolios, year after year" />
+                <x-section-heading :eyebrow="txt($scale['eyebrow'])" :title="rich($scale['title'])" />
                 <div class="compare-cards" data-compare-cards data-custom-anim>
                     <div class="compare-card" data-reveal-card>
-                        <p class="compare-card__label">Portfolio growth · The Social Links</p>
+                        <p class="compare-card__label">{{ txt($scale['growth_label']) }}</p>
                         <div class="compare-card__row">
-                            <span class="compare-card__from">2–3<small>accounts</small></span>
+                            <span class="compare-card__from">{{ $scale['growth_from'] }}<small>{{ $scale['growth_from_unit'] }}</small></span>
                             <x-icon name="arrow-right" size="22" />
-                            <span class="compare-card__to"><span data-count="10">10</span><small>brands at once</small></span>
+                            <span class="compare-card__to">@if ($countable($scale['growth_to']))<span data-count="{{ $scale['growth_to'] }}">{{ $scale['growth_to'] }}</span>@else{{ $scale['growth_to'] }}@endif<small>{{ $scale['growth_to_unit'] }}</small></span>
                         </div>
                     </div>
                     <div class="compare-card" data-reveal-card>
-                        <p class="compare-card__label">Daily Meta ad spend managed</p>
-                        <p class="compare-card__big">PKR 60,000–80,000</p>
-                        <p class="compare-card__note">Approximate, per day, across the portfolio</p>
+                        <p class="compare-card__label">{{ txt($scale['spend_label']) }}</p>
+                        <p class="compare-card__big">{{ $scale['spend_value'] }}</p>
+                        <p class="compare-card__note">{{ txt($scale['spend_note']) }}</p>
                     </div>
                     <div class="compare-card" data-reveal-card>
-                        <p class="compare-card__label">Teams led</p>
+                        <p class="compare-card__label">{{ txt($scale['teams_label']) }}</p>
                         <div class="compare-card__row">
-                            <span class="compare-card__to"><span data-count="7">7</span><small>PPC specialists</small></span>
-                            <span class="compare-card__to">10+<small>marketing team</small></span>
+                            <span class="compare-card__to">@if ($countable($scale['teams_a']))<span data-count="{{ $scale['teams_a'] }}">{{ $scale['teams_a'] }}</span>@else{{ $scale['teams_a'] }}@endif<small>{{ $scale['teams_a_unit'] }}</small></span>
+                            <span class="compare-card__to">@if ($countable($scale['teams_b']))<span data-count="{{ $scale['teams_b'] }}">{{ $scale['teams_b'] }}</span>@else{{ $scale['teams_b'] }}@endif<small>{{ $scale['teams_b_unit'] }}</small></span>
                         </div>
                     </div>
                 </div>
@@ -154,17 +152,10 @@
 {{-- ============ HOW RESULTS ARE DRIVEN ============ --}}
 <section class="section">
     <div class="container-xl">
-        <x-section-heading eyebrow="What drives the numbers" title="The optimisation work behind the results" align="center" />
+        <x-section-heading :eyebrow="txt($c['drivers']['eyebrow'])" :title="rich($c['drivers']['title'])" align="center" />
         <div class="services-grid">
-            @foreach ([
-                ['pulse', 'Reliable tracking', 'Meta Pixel, GTM and GA4 conversion tracking set up so results are measured on real conversion events.'],
-                ['layers', 'Creative testing', 'A/B tests on hooks, angles and formats; weaker assets revised with designers and video editors.'],
-                ['target', 'Audience & keyword refinement', 'Segments, keywords and bids adjusted from campaign and lead-quality data.'],
-                ['gauge', 'Search efficiency', 'Quality Score and click-through-rate improvements on Google Search campaigns.'],
-                ['chart', 'Budget allocation', 'Budgets moved between campaigns, audiences and brands towards what performs.'],
-                ['funnel', 'Lead-quality review', 'Lead quality, conversion volume and acquisition costs reviewed — not just lead counts.'],
-            ] as [$icon, $title, $text])
-                <x-service-card :service="['icon' => $icon, 'title' => $title, 'text' => $text]" />
+            @foreach ($c['drivers']['items'] as $item)
+                <x-service-card :service="['icon' => $item['icon'], 'title' => txt($item['title']), 'text' => txt($item['text'])]" />
             @endforeach
         </div>
     </div>
@@ -173,7 +164,7 @@
 {{-- ============ MARKETS ============ --}}
 <section class="section">
     <div class="container-xl">
-        <x-section-heading eyebrow="By market" title="Where the work was done" />
+        <x-section-heading :eyebrow="txt($c['markets']['eyebrow'])" :title="rich($c['markets']['title'])" />
         <div class="table-wrap" data-market-table data-custom-anim>
             <table class="data-table">
                 <thead>
@@ -190,11 +181,11 @@
                 </tbody>
             </table>
         </div>
-        <p class="fine-print" data-reveal>Cost per lead, cost per acquisition and conversion volume are monitored across accounts. Client-level figures are not published on this site.</p>
+        <p class="fine-print" data-reveal>{{ txt($c['markets']['fine_print']) }}</p>
     </div>
 </section>
 
-<x-cta title="Let's set targets for your account." />
+<x-cta :title="$c['cta']['title']" :text="$c['cta']['text']" />
 
 @endsection
 

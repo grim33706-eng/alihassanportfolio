@@ -67,7 +67,7 @@
             .filter((group) => state[group] !== 'all')
             .map((group) => root.querySelector(`[data-filter="${group}"].is-active`).dataset.label);
         if (state.market !== 'all') parts.push(select.options[select.selectedIndex].text);
-        summary.textContent = parts.length ? parts.join(' · ') : 'All projects';
+        summary.textContent = parts.length ? parts.join(' · ') : (summary.dataset.default || 'All projects');
     }
 
     function updateCount(target) {

@@ -1,27 +1,28 @@
 @php
     $person = config('portfolio.person');
+    $footer = config('content.site.footer');
 @endphp
 
 <footer class="site-footer">
     <div class="container-xl">
         <div class="site-footer__top">
             <div>
-                <p class="eyebrow">Open to new projects &amp; roles</p>
-                <p class="site-footer__headline">Let's make your ad spend<br class="d-none d-md-block"> work harder.</p>
+                <p class="eyebrow">{{ txt($footer['eyebrow']) }}</p>
+                <p class="site-footer__headline">{{ rich($footer['headline'], '<br class="d-none d-md-block"> ') }}</p>
             </div>
-            <x-button :href="route('contact')" icon="arrow-right">Start a conversation</x-button>
+            <x-button :href="route('contact')" icon="arrow-right">{{ txt($footer['button']) }}</x-button>
         </div>
 
         <div class="site-footer__grid">
             <div>
                 <a href="{{ route('home') }}" class="brand">
-                    <span class="brand__mark" aria-hidden="true">AH</span>
+                    <span class="brand__mark" aria-hidden="true">{{ config('content.site.monogram') }}</span>
                     <span class="brand__text">
                         <span class="brand__name">{{ $person['name'] }}</span>
                         <span class="brand__role">{{ $person['role'] }}</span>
                     </span>
                 </a>
-                <p class="site-footer__note">Meta Ads, Google Ads &amp; TikTok Ads for e-commerce sales and B2B/B2C lead generation.</p>
+                <p class="site-footer__note">{{ txt($footer['note']) }}</p>
             </div>
 
             <nav aria-label="Footer">
@@ -50,7 +51,7 @@
 
         <div class="site-footer__bottom">
             <span>&copy; {{ date('Y') }} {{ $person['name'] }}</span>
-            <span>Figures come from documented work history and reflect past performance, not guaranteed results.</span>
+            <span>{{ txt($footer['disclaimer']) }}</span>
         </div>
     </div>
 </footer>

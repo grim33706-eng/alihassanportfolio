@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Support\AutoSetup;
+use App\Support\SiteContent;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
@@ -25,6 +26,9 @@ class AppServiceProvider extends ServiceProvider
     {
         // Create the database tables on the first request after a deploy (AUTO_SETUP=true).
         AutoSetup::run();
+
+        // Apply content edited in the admin over the config defaults.
+        SiteContent::apply();
 
         // Contact form: 5 messages per 10 minutes per visitor.
         RateLimiter::for('contact', function (Request $request) {

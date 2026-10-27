@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
+@php
+    $c = config('content.home');
+@endphp
+
 @section('page', 'home')
-@section('description', 'Ali Hassan is a Performance Marketing Manager in Lahore with 4+ years running Meta Ads, Google Ads and TikTok Ads for e-commerce sales and B2B/B2C lead generation in the USA, Canada, UK and Australia.')
+@section('description', txt($c['seo_description']))
 
 @section('content')
 
@@ -17,34 +21,32 @@
     <div class="container-xl hero__inner">
         <div class="hero__copy">
             <p class="eyebrow" data-hero-item><span class="pulse-dot" aria-hidden="true"></span> {{ $person['role'] }} · {{ $person['location'] }}</p>
-            <h1 class="hero__title" data-split="hero">Paid media that turns ad spend into <span class="text-gradient">revenue</span> and qualified&nbsp;leads.</h1>
-            <p class="hero__lead" data-hero-item>{{ $person['intro'] }}</p>
+            <h1 class="hero__title" data-split="hero">{{ rich($c['hero']['title']) }}</h1>
+            <p class="hero__lead" data-hero-item>{{ txt($person['intro']) }}</p>
             <div class="hero__actions" data-hero-item>
-                <x-button :href="route('portfolio')" icon="arrow-right">View my work</x-button>
-                <x-button :href="route('contact')" variant="ghost">Contact me</x-button>
+                <x-button :href="route('portfolio')" icon="arrow-right">{{ txt($c['hero']['primary']) }}</x-button>
+                <x-button :href="route('contact')" variant="ghost">{{ txt($c['hero']['secondary']) }}</x-button>
             </div>
         </div>
 
         <ul class="hero__chips" role="list" aria-label="Highlights">
-            <li class="glass-chip glass-chip--a" data-hero-chip>
-                <span class="glass-chip__value">~4x</span>
-                <span class="glass-chip__label">Average ROAS<br>e-commerce portfolio</span>
-            </li>
-            <li class="glass-chip glass-chip--b" data-hero-chip>
-                <span class="glass-chip__value">8–10x</span>
-                <span class="glass-chip__label">Top-performing<br>campaigns</span>
-            </li>
+            @foreach ($c['hero']['chips'] as $chip)
+                <li class="glass-chip glass-chip--{{ ['a', 'b'][$loop->index] ?? 'b' }}" data-hero-chip>
+                    <span class="glass-chip__value">{{ txt($chip['value']) }}</span>
+                    <span class="glass-chip__label">{{ rich($chip['label']) }}</span>
+                </li>
+            @endforeach
             <li class="glass-chip glass-chip--c" data-hero-chip>
                 <span class="glass-chip__icons"><x-icon name="meta" size="18" /><x-icon name="google" size="18" /><x-icon name="tiktok" size="18" /></span>
-                <span class="glass-chip__label">Meta · Google · TikTok</span>
+                <span class="glass-chip__label">{{ txt($c['hero']['platforms_chip']) }}</span>
             </li>
         </ul>
     </div>
 
     <div class="hero__markets container-xl" data-hero-item>
-        <span class="hero__markets-label">Campaigns run for</span>
+        <span class="hero__markets-label">{{ txt($c['hero']['markets_label']) }}</span>
         <ul role="list">
-            @foreach (['USA', 'Canada', 'UK', 'France', 'Australia', 'UAE', 'Saudi Arabia', 'Oman', 'Azerbaijan', 'Uzbekistan', 'Bangladesh', 'Pakistan'] as $market)
+            @foreach ($c['hero']['markets'] as $market)
                 <li>{{ $market }}</li>
             @endforeach
         </ul>
@@ -66,9 +68,9 @@
 <section class="section" id="platforms">
     <div class="container-xl">
         <x-section-heading
-            eyebrow="Core platforms"
-            title="Two platforms. One goal: <span class='text-gradient'>profitable growth.</span>"
-            lead="Meta Ads builds demand and drives sales; Google Ads captures the intent that already exists. Here is what I run on each." />
+            :eyebrow="txt($c['platforms']['eyebrow'])"
+            :title="rich($c['platforms']['title'])"
+            :lead="txt($c['platforms']['lead'])" />
 
         <div class="platform-tabs" data-tabs>
             <div class="platform-tabs__list" role="tablist" aria-label="Advertising platforms">
@@ -123,7 +125,7 @@
         </div>
 
         <p class="also-runs" data-reveal>
-            Also running: @foreach ($alsoRuns as $item)<span>{{ $item }}</span>@endforeach
+            {{ txt($c['platforms']['also_label']) }} @foreach ($alsoRuns as $item)<span>{{ $item }}</span>@endforeach
         </p>
     </div>
 </section>
@@ -134,27 +136,31 @@
         <div class="row g-5 align-items-center">
             <div class="col-lg-5">
                 <div class="portrait-card" data-reveal-card>
-                    <div class="portrait-card__monogram" aria-hidden="true">AH</div>
+                    @if (! empty($person['photo']))
+                        <img class="portrait-card__photo" src="{{ media_url($person['photo']) }}" alt="{{ $person['name'] }}" loading="lazy" decoding="async">
+                    @else
+                        <div class="portrait-card__monogram" aria-hidden="true">{{ config('content.site.monogram') }}</div>
+                    @endif
                     <div class="portrait-card__meta">
                         <p class="portrait-card__name">{{ $person['name'] }}</p>
                         <p class="portrait-card__role">{{ $person['role'] }}</p>
                     </div>
                     <ul class="portrait-card__facts" role="list">
-                        <li><x-icon name="users" size="18" /> Led a 7-person PPC team</li>
-                        <li><x-icon name="layers" size="18" /> Up to 16 brands in one portfolio</li>
-                        <li><x-icon name="globe" size="18" /> 12 markets across 4 continents</li>
+                        @foreach ($c['intro']['facts'] as $fact)
+                            <li><x-icon :name="$fact['icon']" size="18" /> {{ txt($fact['text']) }}</li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
             <div class="col-lg-7">
-                <x-section-heading eyebrow="Introduction" title="Hi, I'm Ali. I run ads that have to <span class='text-gradient'>pay for themselves.</span>" />
+                <x-section-heading :eyebrow="txt($c['intro']['eyebrow'])" :title="rich($c['intro']['title'])" />
                 <div class="prose" data-reveal>
                     @foreach (array_slice($person['summary'], 0, 2) as $paragraph)
-                        <p>{{ $paragraph }}</p>
+                        <p>{{ txt($paragraph) }}</p>
                     @endforeach
                 </div>
                 <div data-reveal>
-                    <x-button :href="route('about')" variant="ghost" icon="arrow-right">More about me</x-button>
+                    <x-button :href="route('about')" variant="ghost" icon="arrow-right">{{ txt($c['intro']['button']) }}</x-button>
                 </div>
             </div>
         </div>
@@ -165,8 +171,8 @@
 <section class="section">
     <div class="container-xl">
         <div class="section-head-row">
-            <x-section-heading eyebrow="Services" title="What I can take off your plate" />
-            <x-button :href="route('services')" variant="ghost" icon="arrow-right" data-reveal>All services</x-button>
+            <x-section-heading :eyebrow="txt($c['services']['eyebrow'])" :title="rich($c['services']['title'])" />
+            <x-button :href="route('services')" variant="ghost" icon="arrow-right" data-reveal>{{ txt($c['services']['button']) }}</x-button>
         </div>
         <div class="services-grid">
             @foreach ($services as $service)
@@ -181,14 +187,14 @@
     <div class="marquee" aria-hidden="true">
         <div class="marquee__track" data-marquee>
             @for ($i = 0; $i < 2; $i++)
-                @foreach (['Meta Ads', 'Google Search', 'Performance Max', 'Remarketing', 'TikTok Ads', 'GA4', 'Google Tag Manager', 'Meta Pixel', 'A/B Testing', 'Lead Generation', 'E-commerce', 'Bidding Strategy'] as $item)
+                @foreach ($c['skills']['marquee'] as $item)
                     <span>{{ $item }}</span>
                 @endforeach
             @endfor
         </div>
     </div>
     <div class="container-xl" id="expertise">
-        <x-section-heading eyebrow="Expertise" title="The toolkit behind the results" align="center" />
+        <x-section-heading :eyebrow="txt($c['skills']['eyebrow'])" :title="rich($c['skills']['title'])" align="center" />
         @include('partials.skill-groups', ['skills' => $skills, 'columns' => 3])
     </div>
 </section>
@@ -197,7 +203,7 @@
 <section class="section" id="selected-work">
     <div class="container-xl">
         <div class="section-head-row">
-            <x-section-heading eyebrow="Selected work" title="Campaigns across categories and continents" lead="Client names are kept confidential. Projects are described by industry, market and platform." />
+            <x-section-heading :eyebrow="txt($c['work']['eyebrow'])" :title="rich($c['work']['title'])" :lead="txt($c['work']['lead'])" />
             <div class="slider-controls" data-reveal>
                 <button type="button" class="round-btn" data-slider-prev aria-label="Previous project"><x-icon name="arrow-right" size="18" class="flip-x" /></button>
                 <button type="button" class="round-btn" data-slider-next aria-label="Next project"><x-icon name="arrow-right" size="18" /></button>
@@ -215,8 +221,8 @@
 {{-- ============ BEFORE & AFTER ============ --}}
 @include('partials.case-studies-section', [
     'caseStudies' => $caseStudies,
-    'title' => "Before Ali. <span class='text-gradient'>After Ali.</span>",
-    'lead' => 'Selected case studies comparing campaign performance before and after Ali took over.',
+    'title' => $c['case_studies']['title'],
+    'lead' => $c['case_studies']['lead'],
 ])
 
 {{-- ============ INTERNATIONAL ============ --}}
@@ -225,9 +231,9 @@
         <div class="intl-teaser" data-reveal-card>
             <div class="row g-5 align-items-center">
                 <div class="col-lg-6">
-                    <x-section-heading eyebrow="International experience" title="Campaigns built for <span class='text-gradient'>twelve markets</span>" lead="From e-commerce sales in the UK, USA, Canada and Australia and service-business leads in France, to real estate leads in Dubai, Azerbaijan and Uzbekistan and Meta campaigns across the Gulf and South Asia." />
+                    <x-section-heading :eyebrow="txt($c['international']['eyebrow'])" :title="rich($c['international']['title'])" :lead="txt($c['international']['lead'])" />
                     <div data-reveal>
-                        <x-button :href="route('international')" icon="globe">Explore the markets</x-button>
+                        <x-button :href="route('international')" icon="globe">{{ txt($c['international']['button']) }}</x-button>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -251,55 +257,28 @@
     <div class="container-xl">
         <div class="row g-5">
             <div class="col-lg-7">
-                <x-section-heading eyebrow="Achievements" title="Documented milestones" />
+                <x-section-heading :eyebrow="txt($c['achievements']['eyebrow'])" :title="rich($c['achievements']['title'])" />
                 <ol class="milestones" role="list">
-                    @foreach ([
-                        ['~4x average ROAS', 'Across an e-commerce portfolio of up to 10 brands, with top campaigns reaching 8–10x — The Social Links.'],
-                        ['2–3 → 10 brands', 'Scaled the managed portfolio while handling approximately PKR 60,000–80,000 in daily Meta ad spend.'],
-                        ['Team of 10+ led', 'Paid media specialists, designers and video creators across 5 e-commerce and 11 lead-generation brands — NextQuick Solutions.'],
-                        ['7-person PPC team', 'Leading PPC and Google Ads specialists on lead generation for USA and Canada clients — Dynasty Marketing Agency.'],
-                        ['15 accounts at once', 'Managed local lead-generation clients end to end — Orbit Creator.'],
-                    ] as [$headline, $detail])
+                    @foreach ($c['achievements']['items'] as $item)
                         <li class="milestone" data-reveal>
-                            <span class="milestone__headline">{{ $headline }}</span>
-                            <span class="milestone__detail">{{ $detail }}</span>
+                            <span class="milestone__headline">{{ txt($item['headline']) }}</span>
+                            <span class="milestone__detail">{{ txt($item['detail']) }}</span>
                         </li>
                     @endforeach
                 </ol>
                 <div data-reveal>
-                    <x-button :href="route('results')" variant="ghost" icon="arrow-right">See results in context</x-button>
+                    <x-button :href="route('results')" variant="ghost" icon="arrow-right">{{ txt($c['achievements']['button']) }}</x-button>
                 </div>
             </div>
             <div class="col-lg-5">
-                <x-section-heading eyebrow="Qualifications" title="Education" />
-                <div class="edu-list">
-                    @foreach ($education as $item)
-                        <div class="edu-card" data-reveal-card>
-                            <span class="icon-chip icon-chip--sm"><x-icon name="graduation" size="20" /></span>
-                            <div>
-                                <p class="edu-card__title">{{ $item['title'] }}</p>
-                                <p class="edu-card__school">{{ $item['school'] }}</p>
-                                <p class="edu-card__period">{{ $item['period'] }}</p>
-                            </div>
-                        </div>
-                    @endforeach
-                    @foreach ($certifications as $cert)
-                        <div class="edu-card" data-reveal-card>
-                            <span class="icon-chip icon-chip--sm"><x-icon name="check" size="20" /></span>
-                            <div>
-                                <p class="edu-card__title">{{ $cert['title'] }}</p>
-                                <p class="edu-card__school">{{ $cert['issuer'] }}</p>
-                                <p class="edu-card__period">{{ $cert['year'] }}</p>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
+                <x-section-heading :eyebrow="txt($c['education']['eyebrow'])" :title="rich($c['education']['title'])" />
+                @include('partials.education-list', ['education' => $education, 'certifications' => $certifications])
             </div>
         </div>
     </div>
 </section>
 
-<x-cta />
+<x-cta :title="$c['cta']['title']" :text="$c['cta']['text']" />
 
 @endsection
 

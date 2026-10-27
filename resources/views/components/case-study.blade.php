@@ -95,11 +95,11 @@
         </div>
 
         <div class="case-study__info">
-            <h4 class="case-study__subhead">What Ali did</h4>
+            <h4 class="case-study__subhead">{{ txt(config('content.site.case_studies.did_label')) }}</h4>
             <p class="case-study__text">{{ $compact ? \Illuminate\Support\Str::limit($cs->strategy, 170) : $cs->strategy }}</p>
 
             @if (! $compact && $cs->improvements)
-                <h4 class="case-study__subhead">What improved</h4>
+                <h4 class="case-study__subhead">{{ txt(config('content.site.case_studies.improved_label')) }}</h4>
                 <p class="case-study__text">{{ $cs->improvements }}</p>
             @endif
 

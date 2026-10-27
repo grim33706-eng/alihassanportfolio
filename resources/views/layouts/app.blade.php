@@ -42,7 +42,7 @@
             '@type' => 'Person',
             'name' => config('portfolio.person.name'),
             'jobTitle' => config('portfolio.person.role'),
-            'address' => ['@type' => 'PostalAddress', 'addressLocality' => 'Lahore', 'addressCountry' => 'PK'],
+            'address' => ['@type' => 'PostalAddress', 'addressLocality' => trim(explode(',', (string) config('portfolio.person.location'))[0]), 'addressCountry' => 'PK'],
             'sameAs' => [config('portfolio.person.linkedin')],
             'url' => url('/'),
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
@@ -64,7 +64,7 @@
                     <circle cx="50" cy="50" r="46" />
                     <circle class="page-loader__arc" cx="50" cy="50" r="46" />
                 </svg>
-                <span>AH</span>
+                <span>{{ config('content.site.monogram') }}</span>
             </div>
             <span class="page-loader__bar"><span data-loader-bar></span></span>
             <span class="page-loader__label">{{ config('portfolio.person.name') }}</span>

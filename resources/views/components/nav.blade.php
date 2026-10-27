@@ -12,10 +12,10 @@
 <header class="site-header" data-header>
     <nav class="site-nav container-xl" aria-label="Main">
         <a href="{{ route('home') }}" class="brand" aria-label="{{ config('portfolio.person.name') }}, home">
-            <span class="brand__mark" aria-hidden="true">AH</span>
+            <span class="brand__mark" aria-hidden="true">{{ config('content.site.monogram') }}</span>
             <span class="brand__text">
                 <span class="brand__name">{{ config('portfolio.person.name') }}</span>
-                <span class="brand__role">Performance Marketing</span>
+                <span class="brand__role">{{ txt(config('content.site.brand_tagline')) }}</span>
             </span>
         </a>
 
@@ -31,7 +31,7 @@
         </div>
 
         <div class="site-nav__actions">
-            <x-button :href="route('contact')" size="sm" class="d-none d-sm-inline-flex">Let's talk</x-button>
+            <x-button :href="route('contact')" size="sm" class="d-none d-sm-inline-flex">{{ txt(config('content.site.nav_cta')) }}</x-button>
             <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
                 <span class="visually-hidden" data-menu-label>Open menu</span>
                 <span class="menu-toggle__bar"></span>

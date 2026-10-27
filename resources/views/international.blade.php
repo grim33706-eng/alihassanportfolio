@@ -1,8 +1,12 @@
 @extends('layouts.app')
 
+@php
+    $c = config('content.international');
+@endphp
+
 @section('page', 'international')
-@section('title', 'International Experience')
-@section('description', 'Ali Hassan\'s international advertising experience: Meta, Google and TikTok campaigns for the UK, France, USA, Canada, Australia, the UAE, Saudi Arabia, Oman, Azerbaijan, Uzbekistan, Bangladesh and Pakistan.')
+@section('title', txt($c['seo_title']))
+@section('description', txt($c['seo_description']))
 
 @section('content')
 
@@ -10,9 +14,9 @@
     <div class="container-xl">
         <div class="row g-4 align-items-center">
             <div class="col-lg-5 globe-hero__copy">
-                <p class="eyebrow" data-hero-item>International experience</p>
-                <h1 class="page-hero__title" data-split="hero">One strategist, <span class="text-gradient">twelve markets.</span></h1>
-                <p class="page-hero__lead" data-hero-item>Paid campaigns for e-commerce brands and lead-generation clients across North America, Europe, the Gulf, Central and South Asia and Australia — run from Lahore.</p>
+                <p class="eyebrow" data-hero-item>{{ txt($c['hero']['eyebrow']) }}</p>
+                <h1 class="page-hero__title" data-split="hero">{{ rich($c['hero']['title']) }}</h1>
+                <p class="page-hero__lead" data-hero-item>{{ txt($c['hero']['lead']) }}</p>
                 <ul class="region-pills" role="list" data-hero-item>
                     @foreach (collect($markets)->pluck('region')->unique() as $region)
                         <li>{{ $region }}</li>
@@ -33,7 +37,7 @@
 
 <section class="section section--flush-top">
     <div class="container-xl">
-        <x-section-heading eyebrow="Markets" title="Where I've run campaigns" lead="Grouped by the type of work done in each market." />
+        <x-section-heading :eyebrow="txt($c['markets']['eyebrow'])" :title="rich($c['markets']['title'])" :lead="txt($c['markets']['lead'])" />
         <div class="market-grid">
             @foreach ($markets as $market)
                 <article class="market-card" data-reveal-card data-market-card="{{ $market['code'] }}">
@@ -54,20 +58,13 @@
 <section class="section">
     <div class="container-xl">
         <div class="row g-4">
-            @foreach ([
-                ['cart', 'E-commerce sales', 'Australia · Canada · UK · USA', 'Conversion-focused campaigns for fashion, home textiles, jewellery and food brands, including Google Search, Performance Max and remarketing for an international bedding brand. Portfolio average ~4x ROAS.'],
-                ['funnel', 'B2B & B2C lead generation', 'USA · Canada', 'Qualified lead generation through Meta, Google and TikTok Ads, with a focus on conversion performance and lead quality.'],
-                ['briefcase', 'Service-business leads', 'UK · France', 'Meta and TikTok lead campaigns with tailored targeting and creative tests, on daily budgets of PKR 20,000–40,000 across client accounts, optimised for cost per lead.'],
-                ['map-pin', 'Real estate leads', 'Dubai · Azerbaijan · Uzbekistan', 'Real estate and other paid lead campaigns, with creative angles and hooks directed by performance data.'],
-                ['meta', 'Meta campaigns', 'Saudi Arabia · UAE · Oman · Bangladesh · Pakistan', 'Meta campaigns for company and client brands, optimised through audience segmentation, budget monitoring and A/B tests.'],
-                ['users', 'Local lead generation', 'Pakistan', 'Lead generation for local businesses, managing up to 15 client accounts at the same time.'],
-            ] as [$icon, $title, $where, $text])
+            @foreach ($c['cards'] as $card)
                 <div class="col-md-6 col-xl-4">
                     <div class="intl-card" data-reveal-card data-tilt>
-                        <span class="icon-chip"><x-icon :name="$icon" /></span>
-                        <h3 class="intl-card__title">{{ $title }}</h3>
-                        <p class="intl-card__where">{{ $where }}</p>
-                        <p class="intl-card__text">{{ $text }}</p>
+                        <span class="icon-chip"><x-icon :name="$card['icon']" /></span>
+                        <h3 class="intl-card__title">{{ txt($card['title']) }}</h3>
+                        <p class="intl-card__where">{{ txt($card['where']) }}</p>
+                        <p class="intl-card__text">{{ txt($card['text']) }}</p>
                     </div>
                 </div>
             @endforeach
@@ -75,7 +72,7 @@
     </div>
 </section>
 
-<x-cta title="Selling into a new market?" text="I've planned audiences, budgets and creative for campaigns across four continents. Let's talk about where you want to grow." />
+<x-cta :title="$c['cta']['title']" :text="$c['cta']['text']" />
 
 @endsection
 

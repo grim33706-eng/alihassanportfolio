@@ -1,16 +1,20 @@
 @extends('layouts.app')
 
+@php
+    $c = config('content.portfolio');
+@endphp
+
 @section('page', 'portfolio')
-@section('title', 'Portfolio')
-@section('description', 'Selected Meta Ads, Google Ads and TikTok Ads projects by Ali Hassan — e-commerce, lead generation and real estate campaigns across the UK, USA, Canada, Australia, the UAE and Central Asia.')
+@section('title', txt($c['seo_title']))
+@section('description', txt($c['seo_description']))
 
 @section('content')
 
 <x-page-hero
     variant="portfolio"
-    eyebrow="Portfolio"
-    title="Selected <span class='text-gradient'>advertising projects</span>"
-    lead="Case studies from my work history, described by industry, market and platform. Client names are kept confidential and graphics are illustrative.">
+    :eyebrow="txt($c['hero']['eyebrow'])"
+    :title="rich($c['hero']['title'])"
+    :lead="txt($c['hero']['lead'])">
     <x-slot:visual>
         <div class="hero-cards">
             <span></span><span></span><span></span>
@@ -34,8 +38,8 @@
                 <div class="pf-filters__heading">
                     <span class="pf-filters__icon"><x-icon name="funnel" size="20" /></span>
                     <div>
-                        <p class="pf-filters__title">Filter projects</p>
-                        <p class="pf-filters__sub">By platform, category or market</p>
+                        <p class="pf-filters__title">{{ txt($c['filters']['title']) }}</p>
+                        <p class="pf-filters__sub">{{ txt($c['filters']['subtitle']) }}</p>
                     </div>
                 </div>
 
@@ -52,13 +56,13 @@
                     </svg>
                     <span class="pf-meter__value"><strong data-filter-visible>{{ $total }}</strong><small>/{{ $total }}</small></span>
                     <p class="pf-meter__text" aria-live="polite" data-filter-count>
-                        <span class="pf-meter__label">Showing</span>
-                        <span class="pf-meter__summary" data-filter-summary>All projects</span>
+                        <span class="pf-meter__label">{{ txt($c['filters']['showing']) }}</span>
+                        <span class="pf-meter__summary" data-filter-summary data-default="{{ txt($c['filters']['all_projects']) }}">{{ txt($c['filters']['all_projects']) }}</span>
                     </p>
                 </div>
 
                 <button type="button" class="pf-filters__reset" data-filter-reset disabled>
-                    <x-icon name="repeat" size="15" /> Reset filters
+                    <x-icon name="repeat" size="15" /> {{ txt($c['filters']['reset']) }}
                 </button>
             </div>
 
@@ -115,19 +119,19 @@
 
         <div class="empty-state" data-empty-state hidden>
             <x-icon name="search" size="28" />
-            <p>No projects match those filters.</p>
-            <button type="button" class="btn-ui btn-ui--ghost btn-ui--sm" data-filter-reset><span class="btn-ui__label">Reset filters</span></button>
+            <p>{{ txt($c['filters']['empty']) }}</p>
+            <button type="button" class="btn-ui btn-ui--ghost btn-ui--sm" data-filter-reset><span class="btn-ui__label">{{ txt($c['filters']['reset']) }}</span></button>
         </div>
     </div>
 </section>
 
 @include('partials.case-studies-section', [
     'caseStudies' => $caseStudies,
-    'title' => 'Before &amp; after case studies',
-    'lead' => 'Drag the slider to compare a brand’s results before Ali started with what changed after.',
+    'title' => $c['case_studies']['title'],
+    'lead' => $c['case_studies']['lead'],
 ])
 
-<x-cta title="Have a campaign like these in mind?" />
+<x-cta :title="$c['cta']['title']" :text="$c['cta']['text']" />
 
 @endsection
 
