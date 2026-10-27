@@ -11,17 +11,11 @@
 
 {{-- ============ HERO ============ --}}
 <section class="hero" data-page-hero>
-    @if (! empty($c['hero']['image']))
-        <div class="hero__canvas hero__canvas--image" aria-hidden="true">
-            <img src="{{ media_url($c['hero']['image']) }}" alt="" decoding="async">
+    <div class="hero__canvas" data-hero-scene aria-hidden="true">
+        <div class="hero__fallback">
+            <div class="hero__fallback-bars"><span></span><span></span><span></span><span></span><span></span><span></span></div>
         </div>
-    @else
-        <div class="hero__canvas" data-hero-scene aria-hidden="true">
-            <div class="hero__fallback">
-                <div class="hero__fallback-bars"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-            </div>
-        </div>
-    @endif
+    </div>
     <div class="hero__vignette" aria-hidden="true"></div>
 
     <div class="container-xl hero__inner">
@@ -289,9 +283,7 @@
 @endsection
 
 @section('three')
-    @if (empty($c['hero']['image']))
     <script type="module" src="{{ asset('assets/js/three/hero-scene.js') }}?v={{ filemtime(public_path('assets/js/three/hero-scene.js')) }}"></script>
-    @endif
 @endsection
 
 @push('scripts')

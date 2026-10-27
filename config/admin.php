@@ -86,7 +86,6 @@ return [
                         ['name' => 'platforms_chip', 'label' => 'Platforms chip text', 'type' => 'text'],
                         ['name' => 'markets_label', 'label' => 'Markets strip label', 'type' => 'text'],
                         ['name' => 'markets', 'label' => 'Markets strip', 'type' => 'list'],
-                        ['name' => 'image', 'label' => 'Background image (optional)', 'type' => 'image', 'help' => 'Replaces the 3D animation behind the headline. A wide, darker image works best; the left side is shaded so the text stays readable.'],
                     ]],
                     $heading('platforms', 'Meta / Google tabs section', true, [['name' => 'also_label', 'label' => '"Also running" label', 'type' => 'text']]),
                     $heading('intro', 'Introduction', false, [
