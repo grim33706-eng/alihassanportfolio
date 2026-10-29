@@ -16,7 +16,16 @@ function webglAvailable() {
     }
 }
 
-if (container && webglAvailable()) init();
+// Phones, small screens, 4-core-or-less CPUs and data-saver mode get a lighter render.
+const lowPower = window.matchMedia('(max-width: 767px)').matches
+    || (navigator.hardwareConcurrency || 8) <= 4
+    || Boolean(navigator.connection && navigator.connection.saveData);
+
+// Build the scene once the browser is idle after first paint, so it doesn't
+// compete with the page loader and the opening animations.
+const whenIdle = window.requestIdleCallback || ((fn) => setTimeout(fn, 200));
+
+if (container && webglAvailable()) whenIdle(init, { timeout: 800 });
 
 function latLngToVec(lat, lng, r) {
     const phi = THREE.MathUtils.degToRad(90 - lat);
@@ -34,8 +43,8 @@ function init() {
     const labelsEl = container.querySelector('[data-globe-labels]');
     const R = 2;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    const renderer = new THREE.WebGLRenderer({ antialias: !lowPower, alpha: true, powerPreference: 'high-performance' });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, lowPower ? 1 : 1.5));
     container.prepend(renderer.domElement);
 
     const scene = new THREE.Scene();

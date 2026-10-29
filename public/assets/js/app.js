@@ -587,10 +587,13 @@
     function smoothScroll() {
         if (!motionOK || typeof window.Lenis === 'undefined') return null;
 
+        // lerp: each frame closes 11% of the gap to the target, so the page follows
+        // the wheel closely instead of gliding on for a fixed second after every notch.
         const instance = new Lenis({
-            duration: 1.15,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            lerp: 0.11,
             smoothWheel: true,
+            wheelMultiplier: 1,
+            touchMultiplier: 1.2,
             // Let these scroll natively: menus, dialogs and anything opted out.
             prevent: (node) => !!(node.closest && node.closest('[data-lenis-prevent], dialog, .mobile-menu')),
         });

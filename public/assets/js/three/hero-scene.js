@@ -19,14 +19,23 @@ function webglAvailable() {
     }
 }
 
-if (container && webglAvailable()) init();
+// Phones, small screens, 4-core-or-less CPUs and data-saver mode get a lighter render.
+const lowPower = window.matchMedia('(max-width: 767px)').matches
+    || (navigator.hardwareConcurrency || 8) <= 4
+    || Boolean(navigator.connection && navigator.connection.saveData);
+
+// Build the scene once the browser is idle after first paint, so it doesn't
+// compete with the page loader and the opening animations.
+const whenIdle = window.requestIdleCallback || ((fn) => setTimeout(fn, 200));
+
+if (container && webglAvailable()) whenIdle(init, { timeout: 800 });
 
 function init() {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isSmall = () => window.innerWidth < 992;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    const renderer = new THREE.WebGLRenderer({ antialias: !lowPower, alpha: true, powerPreference: 'high-performance' });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, lowPower ? 1 : 1.5));
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
 
@@ -237,7 +246,7 @@ function init() {
         const dt = clock.getDelta();
         t += Math.min(dt, 1 / 30);
         if (!downgraded && dt > 1 / 40) {
-            if (++slowFrames > 90) {
+            if (++slowFrames > 45) {
                 downgraded = true;
                 renderer.setPixelRatio(1);
                 layout();
