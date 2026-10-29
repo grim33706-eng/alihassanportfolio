@@ -108,12 +108,12 @@
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
     <script src="{{ asset('assets/js/app.js') }}?v={{ filemtime(public_path('assets/js/app.js')) }}" defer></script>
 
-    @hasSection('three')
-        <script type="importmap">
-            { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
-        </script>
-        @yield('three')
-    @endif
+    {{-- Three.js is only downloaded when a page's hero scene runs, or an in-page scene scrolls near. --}}
+    <script type="importmap">
+        { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+    </script>
+    @yield('three')
+    <script type="module" src="{{ asset('assets/js/three/sections.js') }}?v={{ filemtime(public_path('assets/js/three/sections.js')) }}"></script>
 
     @stack('scripts')
 </body>

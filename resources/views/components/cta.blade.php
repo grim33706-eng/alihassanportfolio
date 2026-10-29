@@ -10,6 +10,7 @@
 <section class="cta-band">
     <div class="container-xl">
         <div class="cta-band__panel" data-reveal-card>
+            <div class="cta-band__scene" data-cta-scene aria-hidden="true"></div>
             <div class="cta-band__orb" aria-hidden="true"></div>
             <p class="eyebrow">{{ txt($cta['eyebrow']) }}</p>
             <h2 class="cta-band__title" data-split>{{ rich($title) }}</h2>

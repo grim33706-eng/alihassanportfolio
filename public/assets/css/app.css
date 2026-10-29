@@ -1499,6 +1499,16 @@ body.no-scroll { overflow: hidden; }
 .cta-band__text { position: relative; margin: 1.1rem auto 0; max-width: 560px; color: var(--text-2); font-size: 1.05rem; }
 .cta-band__actions { position: relative; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.85rem; margin-top: 2rem; }
 .cta-band .eyebrow { position: relative; }
+/* 3D light wave behind the panel (cta-scene.js); kept low so the text stays clear. */
+.cta-band__scene {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.35) 35%, #000 70%);
+    mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.35) 35%, #000 70%);
+}
+.cta-band__scene canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity 1.4s ease; }
+.cta-band__scene.webgl-ready canvas { opacity: 1; }
 
 /* ---------- Footer ---------- */
 
@@ -1544,6 +1554,17 @@ body.no-scroll { overflow: hidden; }
     .motion-ok .process__line span { transform: scaleX(0); }
 }
 .process__step { position: relative; padding: 0 0 0 0; }
+/* 3D pipeline over the step columns (process-scene.js) */
+.process-scene { display: none; }
+@media (min-width: 992px) {
+    .process-scene { display: block; position: relative; height: 250px; margin: -1.5rem 0 0.5rem; pointer-events: none; }
+    .process-scene canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity 1s ease; }
+    .process-scene.webgl-ready canvas { opacity: 1; }
+    .process-scene.webgl-ready + .process .process__line { display: none; }
+    .process__step { transition: border-color 0.5s, box-shadow 0.5s, transform 0.5s var(--ease); }
+    .process__step.is-active { border-color: rgba(109, 147, 255, 0.45); box-shadow: 0 18px 40px -24px rgba(79, 124, 255, 0.7); }
+    .process__step.is-active .process__num { color: #fff; background: var(--gradient); border-color: transparent; box-shadow: 0 0 0 6px rgba(79, 124, 255, 0.15); }
+}
 .process__num {
     position: relative;
     display: inline-grid;
@@ -1981,6 +2002,8 @@ body.no-scroll { overflow: hidden; }
 .region-pills { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 1.75rem; }
 .region-pills li { padding: 0.35rem 0.8rem; border-radius: 999px; font-size: 0.8rem; border: 1px solid var(--border); color: var(--text-2); }
 .globe { position: relative; width: 100%; aspect-ratio: 1; max-width: 680px; margin-inline: auto; }
+.globe--teaser { display: none; }
+@media (min-width: 992px) { .globe--teaser { display: block; max-width: 360px; margin: 1.25rem auto -1.5rem; } }
 .globe canvas { display: block; width: 100% !important; height: 100% !important; }
 .globe__fallback { position: absolute; inset: 0; display: grid; place-items: center; color: rgba(109, 147, 255, 0.4); }
 .webgl-ready .globe__fallback { display: none; }
@@ -2365,3 +2388,20 @@ a.contact-line:hover { border-color: var(--accent); transform: translateX(4px); 
     .marquee__track span:nth-child(n + 13) { display: none; }
     .motion-ok .roas-chart__bar, .motion-ok .bar-chart__bar, .motion-ok .process__line span, .motion-ok .timeline__rail span { transform: none; }
 }
+
+/* ---------- 3D cards ([data-tilt], app.js tiltCards) ----------
+   A light sheen follows the pointer and the icon and title float above the card. */
+.tilt-sheen {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.11), transparent 45%),
+        linear-gradient(115deg, transparent 35%, rgba(177, 140, 255, 0.07) 50%, transparent 65%);
+    mix-blend-mode: screen;
+    transition: opacity 0.45s ease;
+}
+[data-tilt].is-tilting .tilt-sheen { opacity: 1; }
+[data-tilt].is-tilting { border-color: rgba(109, 147, 255, 0.4); }

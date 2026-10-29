@@ -235,6 +235,11 @@
                     <div data-reveal>
                         <x-button :href="route('international')" icon="globe">{{ txt($c['international']['button']) }}</x-button>
                     </div>
+                    {{-- Market globe (globe.js, loaded when scrolled near); desktop only. --}}
+                    <div class="globe globe--teaser" data-globe data-lazy data-markets="{{ $globeMarkets->toJson() }}" aria-hidden="true">
+                        <div class="globe__fallback"><x-icon name="globe" size="90" /></div>
+                        <div class="globe__labels" data-globe-labels></div>
+                    </div>
                 </div>
                 <div class="col-lg-6">
                     <ul class="market-list" role="list">

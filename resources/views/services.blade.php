@@ -78,6 +78,8 @@
 <section class="section">
     <div class="container-xl">
         <x-section-heading :eyebrow="txt($c['process']['eyebrow'])" :title="rich($c['process']['title'])" />
+        {{-- 3D pipeline over the steps (process-scene.js); desktop only. --}}
+        <div class="process-scene" data-process-scene aria-hidden="true"></div>
         <ol class="process" role="list" data-process data-custom-anim data-anim="process">
             <span class="process__line" aria-hidden="true"><span data-process-fill></span></span>
             @foreach ($process as $step)

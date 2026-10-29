@@ -295,27 +295,69 @@
     function tiltCards() {
         document.querySelectorAll('[data-tilt]').forEach((card) => {
             // Measure once per hover and reuse one tween per axis, instead of a layout
-            // read and a new tween on every pointer move.
+            // read and a new tween on every pointer move. The tweens are made fresh on each
+            // hover: the leave reset (or a card's entrance animation) may have killed the last ones.
             let rect = null;
-            const rotX = gsap.quickTo(card, 'rotateX', { duration: 0.6, ease: 'power2.out' });
-            const rotY = gsap.quickTo(card, 'rotateY', { duration: 0.6, ease: 'power2.out' });
+            let rotX = null;
+            let rotY = null;
+            let layers = [];
+
+            // Depth: the icon floats furthest above the card, the title a little less.
+            const depthEls = [
+                [card.querySelector('.icon-chip, [class*="__icon"]'), 14],
+                [card.querySelector('h3'), 7],
+            ].filter(([el]) => el);
+
+            // A light sheen that follows the pointer (styled in app.css).
+            if (getComputedStyle(card).position === 'static') card.style.position = 'relative';
+            const sheen = document.createElement('span');
+            sheen.className = 'tilt-sheen';
+            sheen.setAttribute('aria-hidden', 'true');
+            card.appendChild(sheen);
+
+            // Start tilting only once the card's own animations (entrance, leave reset) are
+            // done, so they don't fight over the same transform.
+            const arm = () => {
+                rotX = gsap.quickTo(card, 'rotationX', { duration: 0.6, ease: 'power2.out' });
+                rotY = gsap.quickTo(card, 'rotationY', { duration: 0.6, ease: 'power2.out' });
+                layers = depthEls.map(([el, depth]) => ({
+                    depth,
+                    x: gsap.quickTo(el, 'x', { duration: 0.7, ease: 'power3.out' }),
+                    y: gsap.quickTo(el, 'y', { duration: 0.7, ease: 'power3.out' }),
+                }));
+                gsap.set(card, { transformPerspective: 900 });
+                gsap.to(card, { y: -6, duration: 0.5, ease: 'power3.out' });
+            };
 
             card.addEventListener('pointerenter', () => {
                 rect = card.getBoundingClientRect();
-                gsap.set(card, { transformPerspective: 900 });
+                card.classList.add('is-tilting');
+                if (!gsap.isTweening(card)) arm();
             });
             card.addEventListener('pointermove', (e) => {
+                if (!rotX) {
+                    if (gsap.isTweening(card)) return;
+                    arm();
+                }
                 if (!rect) rect = card.getBoundingClientRect();
                 const px = (e.clientX - rect.left) / rect.width;
                 const py = (e.clientY - rect.top) / rect.height;
                 card.style.setProperty('--mx', `${px * 100}%`);
                 card.style.setProperty('--my', `${py * 100}%`);
-                rotY((px - 0.5) * 6);
-                rotX((0.5 - py) * 6);
+                rotY((px - 0.5) * 10);
+                rotX((0.5 - py) * 10);
+                layers.forEach((l) => {
+                    l.x((px - 0.5) * l.depth);
+                    l.y((py - 0.5) * l.depth);
+                });
             });
             card.addEventListener('pointerleave', () => {
                 rect = null;
-                gsap.to(card, { rotateX: 0, rotateY: 0, duration: 0.8, ease: 'elastic.out(1, 0.6)', overwrite: true });
+                card.classList.remove('is-tilting');
+                rotX = rotY = null;
+                gsap.to(card, { rotationX: 0, rotationY: 0, y: 0, duration: 0.8, ease: 'elastic.out(1, 0.6)', overwrite: true });
+                depthEls.forEach(([el]) => gsap.to(el, { x: 0, y: 0, duration: 0.8, ease: 'elastic.out(1, 0.6)', overwrite: true }));
+                layers = [];
             });
         });
     }

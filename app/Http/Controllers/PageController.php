@@ -27,6 +27,7 @@ class PageController extends Controller
                 'platforms' => count($portfolio['platform_labels']),
             ],
             'markets' => $portfolio['markets'],
+            'globeMarkets' => $this->globeMarkets($portfolio['markets']),
             'education' => $portfolio['education'],
             'certifications' => $portfolio['certifications'],
             'caseStudies' => $this->caseStudies(featuredOnly: true, limit: 2),
@@ -93,11 +94,17 @@ class PageController extends Controller
 
         return view('international', [
             'markets' => $portfolio['markets'],
-            'globeMarkets' => collect($portfolio['markets'])
-                ->map(fn ($m) => collect($m)->only(['name', 'code', 'lat', 'lng']))
-                ->values(),
+            'globeMarkets' => $this->globeMarkets($portfolio['markets']),
             'platformLabels' => $portfolio['platform_labels'],
         ]);
+    }
+
+    /** Just what the 3D globe needs for each market. */
+    private function globeMarkets(array $markets)
+    {
+        return collect($markets)
+            ->map(fn ($m) => collect($m)->only(['name', 'code', 'lat', 'lng']))
+            ->values();
     }
 
     /**
