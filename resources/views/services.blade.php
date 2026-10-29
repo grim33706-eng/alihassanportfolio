@@ -81,10 +81,15 @@
         {{-- 3D pipeline over the steps (process-scene.js); desktop only. --}}
         <div class="process-scene" data-process-scene aria-hidden="true"></div>
         <ol class="process" role="list" data-process data-custom-anim data-anim="process">
-            <span class="process__line" aria-hidden="true"><span data-process-fill></span></span>
             @foreach ($process as $step)
+                @php $n = str_pad($loop->iteration, 2, '0', STR_PAD_LEFT); @endphp
                 <li class="process__step" data-reveal-card>
-                    <span class="process__num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+                    <span class="process__bar" aria-hidden="true"></span>
+                    <span class="process__ghost" aria-hidden="true">{{ $n }}</span>
+                    <div class="process__head">
+                        <span class="process__num">{{ $n }}</span>
+                        <span class="process__label">Step</span>
+                    </div>
                     <h3 class="process__title">{{ $step['title'] }}</h3>
                     <p class="process__text">{{ $step['text'] }}</p>
                 </li>

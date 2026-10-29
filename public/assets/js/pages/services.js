@@ -56,7 +56,7 @@
         });
     }
 
-    /* Process: each step's number pops as the connecting line reaches it. */
+    /* Process: each step's number pops in, one after another. */
     const process = document.querySelector('[data-anim="process"]');
     if (process) {
         const steps = process.querySelectorAll('.process__step');

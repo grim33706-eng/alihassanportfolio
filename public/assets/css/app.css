@@ -1550,41 +1550,95 @@ body.no-scroll { overflow: hidden; }
 
 .process { position: relative; display: grid; gap: 1rem; }
 @media (min-width: 992px) { .process { grid-template-columns: repeat(4, 1fr); gap: 1.25rem; } }
-.process__line { display: none; }
-@media (min-width: 992px) {
-    .process__line { display: block; position: absolute; top: calc(1.6rem + 28px); left: calc(1.5rem + 28px); right: calc(1.5rem + 28px); z-index: 1; height: 2px; background: var(--border); border-radius: 2px; overflow: hidden; }
-    .process__line span { display: block; height: 100%; width: 100%; background: var(--gradient); transform-origin: left; }
-    .motion-ok .process__line span { transform: scaleX(0); }
-}
-.process__step { position: relative; padding: 1.25rem; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--border-soft); }
-@media (min-width: 992px) { .process__step { padding: 1.6rem 1.5rem 1.75rem; } }
+
 /* 3D pipeline over the step columns (process-scene.js) */
 .process-scene { display: none; }
 @media (min-width: 992px) {
     .process-scene { display: block; position: relative; height: 250px; margin: -1.5rem 0 0.5rem; pointer-events: none; }
     .process-scene canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity 1s ease; }
     .process-scene.webgl-ready canvas { opacity: 1; }
-    .process-scene.webgl-ready + .process .process__line { display: none; }
-    .process__step { transition: border-color 0.5s, box-shadow 0.5s, transform 0.5s var(--ease); }
-    .process__step.is-active { border-color: rgba(109, 147, 255, 0.45); box-shadow: 0 18px 40px -24px rgba(79, 124, 255, 0.7); }
-    .process__step.is-active .process__num { color: #fff; background: var(--gradient); border-color: transparent; box-shadow: 0 0 0 6px rgba(79, 124, 255, 0.15); }
 }
+
+/* Step cards: badge + label, a faint outlined number behind, and a gradient bar
+   along the top that fills when the step is reached (.is-active). */
+.process__step {
+    position: relative;
+    isolation: isolate;
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(160deg, rgba(27, 35, 56, 0.9), rgba(15, 21, 38, 0.9));
+    border: 1px solid var(--border-soft);
+    transition: border-color 0.5s, box-shadow 0.5s, translate 0.5s var(--ease);
+}
+@media (min-width: 992px) { .process__step { padding: 1.75rem 1.6rem 1.9rem; } }
+.process__step:hover { translate: 0 -4px; border-color: rgba(109, 147, 255, 0.35); }
+.process__step.is-active { border-color: rgba(109, 147, 255, 0.45); box-shadow: 0 24px 50px -30px rgba(79, 124, 255, 0.85); }
+
+.process__bar {
+    position: absolute;
+    top: -1px;
+    left: 1.5rem;
+    right: 1.5rem;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--gradient);
+    box-shadow: 0 0 14px rgba(109, 147, 255, 0.6);
+    transform-origin: left;
+    transition: transform 0.9s var(--ease);
+}
+.motion-ok .process__step:not(.is-active) .process__bar { transform: scaleX(0); }
+
+.process__ghost {
+    position: absolute;
+    top: 0.6rem;
+    right: 1.1rem;
+    z-index: -1;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 4.6rem;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(109, 147, 255, 0.16);
+    pointer-events: none;
+    transition: -webkit-text-stroke-color 0.6s;
+}
+.process__step.is-active .process__ghost { -webkit-text-stroke-color: rgba(139, 92, 246, 0.38); }
+
+.process__head { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.35rem; }
 .process__num {
     position: relative;
     display: inline-grid;
     place-items: center;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: var(--bg-2);
-    border: 1px solid rgba(109, 147, 255, 0.4);
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    background: rgba(79, 124, 255, 0.1);
+    border: 1px solid rgba(109, 147, 255, 0.35);
     font-family: var(--font-mono);
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     color: var(--accent-2);
-    margin-bottom: 1.25rem;
+    transition: background 0.5s, color 0.5s, box-shadow 0.5s, border-color 0.5s;
 }
+.process__step.is-active .process__num { color: #fff; background: var(--gradient); border-color: transparent; box-shadow: 0 8px 22px -8px rgba(139, 92, 246, 0.8), 0 0 0 5px rgba(79, 124, 255, 0.12); }
+.process__label { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-3); }
 .process__title { font-size: 1.2rem; margin-bottom: 0.5rem; }
 .process__text { color: var(--text-2); font-size: 0.93rem; }
+
+/* Connectors in the gaps between cards (desktop), lit once the step is reached. */
+@media (min-width: 992px) {
+    .process__step:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        top: calc(1.75rem + 22px);
+        right: -1.25rem;
+        width: 1.25rem;
+        height: 2px;
+        background: linear-gradient(90deg, rgba(109, 147, 255, 0.1), rgba(109, 147, 255, 0.45));
+        transition: background 0.6s, box-shadow 0.6s;
+    }
+    .process__step.is-active:not(:last-child)::after { background: var(--gradient); box-shadow: 0 0 10px rgba(109, 147, 255, 0.7); }
+}
 
 .timeline { position: relative; display: grid; gap: 1.25rem; padding-left: 2.25rem; }
 .timeline__rail { position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: var(--border); border-radius: 2px; overflow: hidden; }
@@ -2387,7 +2441,7 @@ a.contact-line:hover { border-color: var(--accent); transform: translateX(4px); 
     *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
     .marquee__track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
     .marquee__track span:nth-child(n + 13) { display: none; }
-    .motion-ok .roas-chart__bar, .motion-ok .bar-chart__bar, .motion-ok .process__line span, .motion-ok .timeline__rail span { transform: none; }
+    .motion-ok .roas-chart__bar, .motion-ok .bar-chart__bar, .motion-ok .timeline__rail span { transform: none; }
 }
 
 /* ---------- 3D cards ([data-tilt], app.js tiltCards) ----------

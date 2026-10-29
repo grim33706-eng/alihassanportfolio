@@ -251,9 +251,19 @@
         });
 
         // Process line fills as the steps scroll through.
+        // Process steps light up in turn as they scroll into view. On desktop Services
+        // the 3D pipeline (process-scene.js) does this instead, in step with the pipe.
+        const pipeline = window.matchMedia('(min-width: 992px)');
         document.querySelectorAll('[data-process]').forEach((el) => {
-            const fill = el.querySelector('[data-process-fill]');
-            if (fill) gsap.to(fill, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 60%', scrub: 0.6 } });
+            if (pipeline.matches && el.parentElement.querySelector('[data-process-scene]')) return;
+            el.querySelectorAll('.process__step').forEach((step, i) => {
+                ScrollTrigger.create({
+                    trigger: step,
+                    start: 'top 82%',
+                    once: true,
+                    onEnter: () => gsap.delayedCall(0.25 + i * 0.22, () => step.classList.add('is-active')),
+                });
+            });
         });
 
         // Timeline rail + items.
