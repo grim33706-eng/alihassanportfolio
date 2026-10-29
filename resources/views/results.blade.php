@@ -23,6 +23,11 @@
     :lead="txt($c['hero']['lead'])"
     :image="$c['hero']['image'] ?? null">
     <x-slot:visual>
+        {{-- 3D growth chart (results-scene.js) on desktop; the SVG graph below is the phone / no-WebGL version. --}}
+        <div class="services-scene results-scene" data-results-scene
+            data-pin-average="{{ txt($c['hero']['pin_average']) }}" data-pin-peak="{{ txt($c['hero']['pin_peak']) }}">
+            <div class="services-scene__labels" data-scene-labels></div>
+        </div>
         <div class="hero-graph" data-hero-graph>
             <svg viewBox="0 0 600 300" preserveAspectRatio="none">
                 <defs>
@@ -188,6 +193,12 @@
 
 <x-cta :title="$c['cta']['title']" :text="$c['cta']['text']" />
 
+@endsection
+
+@section('three')
+    @if (empty($c['hero']['image']))
+    <script type="module" src="{{ asset('assets/js/three/results-scene.js') }}?v={{ filemtime(public_path('assets/js/three/results-scene.js')) }}"></script>
+    @endif
 @endsection
 
 @push('scripts')
