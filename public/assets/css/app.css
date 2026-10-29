@@ -1552,11 +1552,12 @@ body.no-scroll { overflow: hidden; }
 @media (min-width: 992px) { .process { grid-template-columns: repeat(4, 1fr); gap: 1.25rem; } }
 .process__line { display: none; }
 @media (min-width: 992px) {
-    .process__line { display: block; position: absolute; top: 28px; left: 28px; right: 28px; height: 2px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .process__line { display: block; position: absolute; top: calc(1.6rem + 28px); left: calc(1.5rem + 28px); right: calc(1.5rem + 28px); z-index: 1; height: 2px; background: var(--border); border-radius: 2px; overflow: hidden; }
     .process__line span { display: block; height: 100%; width: 100%; background: var(--gradient); transform-origin: left; }
     .motion-ok .process__line span { transform: scaleX(0); }
 }
-.process__step { position: relative; padding: 0 0 0 0; }
+.process__step { position: relative; padding: 1.25rem; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--border-soft); }
+@media (min-width: 992px) { .process__step { padding: 1.6rem 1.5rem 1.75rem; } }
 /* 3D pipeline over the step columns (process-scene.js) */
 .process-scene { display: none; }
 @media (min-width: 992px) {
@@ -1584,9 +1585,6 @@ body.no-scroll { overflow: hidden; }
 }
 .process__title { font-size: 1.2rem; margin-bottom: 0.5rem; }
 .process__text { color: var(--text-2); font-size: 0.93rem; }
-@media (max-width: 991.98px) {
-    .process__step { padding: 1.25rem; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--border-soft); }
-}
 
 .timeline { position: relative; display: grid; gap: 1.25rem; padding-left: 2.25rem; }
 .timeline__rail { position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: var(--border); border-radius: 2px; overflow: hidden; }
