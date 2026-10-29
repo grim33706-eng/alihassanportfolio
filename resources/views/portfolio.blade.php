@@ -2,6 +2,12 @@
 
 @php
     $c = config('content.portfolio');
+    // Real project facts for the 3D hero cards (industry, platforms, category) — no figures.
+    $sceneCards = collect($projects)->map(fn ($p) => [
+        'industry' => $p['industry'],
+        'category' => config('portfolio.categories.'.$p['category'], ''),
+        'platforms' => array_values($p['platforms']),
+    ])->values();
 @endphp
 
 @section('page', 'portfolio')
@@ -17,8 +23,11 @@
     :lead="txt($c['hero']['lead'])"
     :image="$c['hero']['image'] ?? null">
     <x-slot:visual>
-        <div class="hero-cards">
-            <span></span><span></span><span></span>
+        {{-- 3D campaign carousel (portfolio-scene.js); the cards stay as the fallback without WebGL. --}}
+        <div class="services-scene portfolio-scene" data-portfolio-scene data-cards="{{ $sceneCards->toJson() }}">
+            <div class="hero-cards">
+                <span></span><span></span><span></span>
+            </div>
         </div>
     </x-slot:visual>
 </x-page-hero>
@@ -134,6 +143,12 @@
 
 <x-cta :title="$c['cta']['title']" :text="$c['cta']['text']" />
 
+@endsection
+
+@section('three')
+    @if (empty($c['hero']['image']))
+    <script type="module" src="{{ asset('assets/js/three/portfolio-scene.js') }}?v={{ filemtime(public_path('assets/js/three/portfolio-scene.js')) }}"></script>
+    @endif
 @endsection
 
 @push('scripts')
