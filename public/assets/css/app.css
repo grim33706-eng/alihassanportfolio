@@ -782,6 +782,7 @@ body.no-scroll { overflow: hidden; }
 .services-scene.webgl-ready canvas { opacity: 1; }
 .services-scene.webgl-ready .hero-tiles,
 .portfolio-scene.webgl-ready .hero-cards,
+.about-scene.webgl-ready .hero-orbits,
 .results-scene.webgl-ready + .hero-graph { display: none; }
 .services-scene__labels { position: absolute; inset: 0; pointer-events: none; }
 /* Text keeps the left side, the funnel the right. */
@@ -791,7 +792,9 @@ body.no-scroll { overflow: hidden; }
     .page-hero--portfolio .page-hero__title,
     .page-hero--portfolio .page-hero__lead,
     .page-hero--results .page-hero__title,
-    .page-hero--results .page-hero__lead { max-width: min(780px, 56%); }
+    .page-hero--results .page-hero__lead,
+    .page-hero--about .page-hero__title,
+    .page-hero--about .page-hero__lead { max-width: min(780px, 56%); }
 }
 @media (min-width: 992px) and (max-width: 1199.98px) {
     .services-scene { width: 46%; }

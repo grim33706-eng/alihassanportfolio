@@ -17,8 +17,13 @@
     :lead="txt($c['hero']['lead'])"
     :image="$c['hero']['image'] ?? null">
     <x-slot:visual>
-        <div class="hero-orbits">
-            <span></span><span></span><span></span>
+        {{-- 3D expertise system (about-scene.js): one orbit per skill group; the CSS orbits are the fallback. --}}
+        <div class="services-scene about-scene" data-about-scene
+            data-groups="{{ json_encode(array_keys($skills)) }}" data-monogram="{{ txt(config('content.site.monogram')) }}">
+            <div class="hero-orbits">
+                <span></span><span></span><span></span>
+            </div>
+            <div class="services-scene__labels" data-scene-labels></div>
         </div>
     </x-slot:visual>
     <x-button :href="route('contact')" icon="arrow-right">{{ txt($c['hero']['primary']) }}</x-button>
@@ -136,4 +141,10 @@
 
 <x-cta :title="$c['cta']['title']" :text="$c['cta']['text']" />
 
+@endsection
+
+@section('three')
+    @if (empty($c['hero']['image']))
+    <script type="module" src="{{ asset('assets/js/three/about-scene.js') }}?v={{ filemtime(public_path('assets/js/three/about-scene.js')) }}"></script>
+    @endif
 @endsection
