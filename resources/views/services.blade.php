@@ -17,8 +17,12 @@
     :lead="txt($c['hero']['lead'])"
     :image="$c['hero']['image'] ?? null">
     <x-slot:visual>
-        <div class="hero-tiles">
-            @for ($i = 0; $i < 12; $i++)<span></span>@endfor
+        {{-- 3D funnel (services-scene.js); the tiles stay as the fallback without WebGL. --}}
+        <div class="services-scene" data-services-scene>
+            <div class="hero-tiles">
+                @for ($i = 0; $i < 12; $i++)<span></span>@endfor
+            </div>
+            <div class="services-scene__labels" data-scene-labels></div>
         </div>
     </x-slot:visual>
     <x-button href="#services-list" icon="arrow-right">{{ txt($c['hero']['button']) }}</x-button>
@@ -105,6 +109,12 @@
 
 <x-cta :title="$c['cta']['title']" :text="$c['cta']['text']" />
 
+@endsection
+
+@section('three')
+    @if (empty($c['hero']['image']))
+    <script type="module" src="{{ asset('assets/js/three/services-scene.js') }}?v={{ filemtime(public_path('assets/js/three/services-scene.js')) }}"></script>
+    @endif
 @endsection
 
 @push('scripts')
