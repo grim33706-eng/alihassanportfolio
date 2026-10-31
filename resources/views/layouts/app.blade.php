@@ -1,37 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en-GB" class="no-js">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    @php
-        $siteName = config('portfolio.person.name').' · '.config('portfolio.person.role');
-        $pageTitle = trim($__env->yieldContent('title'));
-        $fullTitle = $pageTitle ? $pageTitle.' | '.config('portfolio.person.name') : $siteName;
-        $description = trim($__env->yieldContent('description')) ?: config('portfolio.person.intro');
-    @endphp
-
-    <title>{{ $fullTitle }}</title>
-    <meta name="description" content="{{ $description }}">
-    <meta name="author" content="{{ config('portfolio.person.name') }}">
-    <meta name="robots" content="index, follow">
+    @include('partials.seo')
     <meta name="theme-color" content="#0B1020">
-    <link rel="canonical" href="{{ url()->current() }}">
-
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="{{ $siteName }}">
-    <meta property="og:title" content="{{ $fullTitle }}">
-    <meta property="og:description" content="{{ $description }}">
-    <meta property="og:url" content="{{ url()->current() }}">
-    @if ($shareImage = config('content.site.share_image'))
-        <meta property="og:image" content="{{ media_url($shareImage) }}">
-        <meta name="twitter:card" content="summary_large_image">
-    @else
-        <meta name="twitter:card" content="summary">
-    @endif
-
-    <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
 
     <script>document.documentElement.classList.replace('no-js', 'js');</script>
 
@@ -41,17 +16,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}?v={{ filemtime(public_path('assets/css/app.css')) }}">
 
-    <script type="application/ld+json">
-        {!! json_encode([
-            '@context' => 'https://schema.org',
-            '@type' => 'Person',
-            'name' => config('portfolio.person.name'),
-            'jobTitle' => config('portfolio.person.role'),
-            'address' => ['@type' => 'PostalAddress', 'addressLocality' => trim(explode(',', (string) config('portfolio.person.location'))[0]), 'addressCountry' => 'PK'],
-            'sameAs' => [config('portfolio.person.linkedin')],
-            'url' => url('/'),
-        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
-    </script>
 </head>
 <body data-page="@yield('page', 'default')">
     <a class="skip-link" href="#main">Skip to content</a>

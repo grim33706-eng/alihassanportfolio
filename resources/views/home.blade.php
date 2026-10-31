@@ -5,6 +5,7 @@
 @endphp
 
 @section('page', 'home')
+@section('title', txt($c['seo_title'] ?? ''))
 @section('description', txt($c['seo_description']))
 
 @section('content')

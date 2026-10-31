@@ -114,6 +114,40 @@
     </div>
 </section>
 
+{{-- ============ FAQ ============ --}}
+@if (! empty($c['faq']['items']))
+<section class="section" id="faq">
+    <div class="container-xl">
+        <div class="faq-layout">
+            <x-section-heading :eyebrow="txt($c['faq']['eyebrow'])" :title="rich($c['faq']['title'])" />
+            <div class="faq" data-faq>
+                @foreach ($c['faq']['items'] as $item)
+                    <details class="faq__item" data-reveal @if ($loop->first) open @endif>
+                        <summary class="faq__q">
+                            <span>{{ txt($item['q']) }}</span>
+                            <span class="faq__icon" aria-hidden="true"></span>
+                        </summary>
+                        <div class="faq__a"><p>{{ txt($item['a']) }}</p></div>
+                    </details>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</section>
+
+@push('schema')
+    <script type="application/ld+json">{!! json_encode([
+        '@context' => 'https://schema.org',
+        '@type' => 'FAQPage',
+        'mainEntity' => collect($c['faq']['items'])->map(fn ($item) => [
+            '@type' => 'Question',
+            'name' => txt($item['q']),
+            'acceptedAnswer' => ['@type' => 'Answer', 'text' => txt($item['a'])],
+        ])->values()->all(),
+    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) !!}</script>
+@endpush
+@endif
+
 <x-cta :title="$c['cta']['title']" :text="$c['cta']['text']" />
 
 @endsection

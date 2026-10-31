@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\CaseStudy;
+use App\Models\SiteSetting;
 use Illuminate\Http\Response;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
 
@@ -124,10 +126,34 @@ class PageController extends Controller
 
     public function sitemap(): Response
     {
-        $routes = ['home', 'about', 'services', 'portfolio', 'results', 'international', 'contact'];
+        // Priority by how central the page is to "who Ali is and what he offers".
+        $routes = ['home' => '1.0', 'about' => '0.9', 'services' => '0.9', 'results' => '0.8', 'portfolio' => '0.8', 'international' => '0.7', 'contact' => '0.7'];
+
+        // Last change: the latest admin edit, else when the site's content was last deployed.
+        $edited = rescue(fn () => SiteSetting::max('updated_at'), null, false);
+        $lastmod = ($edited ? Carbon::parse($edited) : Carbon::createFromTimestamp(filemtime(config_path('content.php'))))->toAtomString();
+
+        $urls = collect($routes)->map(fn ($priority, $name) => [
+            'loc' => $name === 'home' ? url('/').'/' : route($name),
+            'priority' => $priority,
+            'lastmod' => $lastmod,
+        ])->values();
 
         return response()
-            ->view('sitemap', ['urls' => array_map(fn ($name) => route($name), $routes)])
+            ->view('sitemap', ['urls' => $urls])
             ->header('Content-Type', 'application/xml');
+    }
+
+    public function robots(): Response
+    {
+        $lines = [
+            'User-agent: *',
+            'Allow: /',
+            'Disallow: /admin',
+            '',
+            'Sitemap: '.route('sitemap'),
+        ];
+
+        return response(implode("\n", $lines)."\n", 200, ['Content-Type' => 'text/plain; charset=UTF-8']);
     }
 }

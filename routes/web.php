@@ -13,6 +13,7 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/results', 'results')->name('results');
     Route::get('/international-experience', 'international')->name('international');
     Route::get('/sitemap.xml', 'sitemap')->name('sitemap');
+    Route::get('/robots.txt', 'robots')->name('robots');
 });
 
 Route::get('/contact', [ContactController::class, 'show'])->name('contact');

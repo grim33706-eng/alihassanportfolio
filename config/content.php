@@ -22,6 +22,30 @@ return [
     'site' => [
         'monogram' => 'AH',
         'brand_tagline' => 'Performance Marketing',
+        // Search engines. Keywords also feed the meta keywords tag; alternate names are
+        // other names people search for the site by (used in the WebSite schema).
+        'seo' => [
+            'keywords' => [
+                'Ali Hassan performance marketer',
+                'Ali Hassan Meta Ads expert',
+                'Ali Hassan Google Ads expert',
+                'Ali Hassan ad expert',
+                'Ali Meta Ads expert',
+                'Ali Google Ads expert',
+                'Ali ad expert',
+                'Hassan Ads expert',
+                'performance marketer Lahore',
+                'Meta Ads expert Pakistan',
+                'Google Ads expert Pakistan',
+                'PPC specialist Lahore',
+                'Facebook and Instagram Ads expert',
+                'TikTok Ads specialist',
+                'paid media manager',
+            ],
+            'alternate_names' => ['Hassan Ads Expert', 'Ali Hassan Ad Expert'],
+            'google_verification' => '',
+            'bing_verification' => '',
+        ],
         'nav_cta' => "Let's talk",
         'cta' => [
             'eyebrow' => 'Get in touch',
@@ -34,7 +58,7 @@ return [
             'eyebrow' => 'Open to new projects & roles',
             'headline' => "Let's make your ad spend\nwork harder.",
             'button' => 'Start a conversation',
-            'note' => 'Meta Ads, Google Ads & TikTok Ads for e-commerce sales and B2B/B2C lead generation.',
+            'note' => '{name} is a performance marketer and Meta Ads & Google Ads expert in {location}, running Meta, Google and TikTok Ads for e-commerce sales and B2B/B2C lead generation.',
             'disclaimer' => 'Figures come from documented work history and reflect past performance, not guaranteed results.',
         ],
         'case_studies' => [
@@ -48,7 +72,8 @@ return [
     ],
 
     'home' => [
-        'seo_description' => '{name} is a Performance Marketing Manager in Lahore with 4+ years running Meta Ads, Google Ads and TikTok Ads for e-commerce sales and B2B/B2C lead generation in the USA, Canada, UK and Australia.',
+        'seo_title' => '{name} — Performance Marketer & Meta, Google Ads Expert',
+        'seo_description' => '{name} — performance marketer and Meta & Google Ads expert in Lahore, Pakistan, with 4+ years of PPC, TikTok Ads, e-commerce and lead-gen campaigns.',
         'hero' => [
             'title' => "Paid media that turns ad spend into *revenue* and qualified\u{00A0}leads.",
             'primary' => 'View my work',
@@ -128,8 +153,8 @@ return [
     ],
 
     'about' => [
-        'seo_title' => 'About',
-        'seo_description' => 'About {name}: 4+ years in performance marketing, from local lead generation to leading PPC and marketing teams running Meta, Google and TikTok Ads for international brands.',
+        'seo_title' => 'About {name}, Performance Marketer & Ad Expert',
+        'seo_description' => 'Meet {name}, a performance marketer and ad expert with 4+ years managing Meta, Google and TikTok Ads and leading PPC teams for e-commerce and lead-gen brands.',
         'hero' => [
             'eyebrow' => 'About me',
             'title' => 'Four years of turning *ad budgets* into measurable growth.',
@@ -167,8 +192,8 @@ return [
     ],
 
     'services' => [
-        'seo_title' => 'Services',
-        'seo_description' => 'Paid advertising services from {name}: Meta Ads and Google Ads management, campaign strategy, audience and keyword research, conversion tracking with GTM and GA4, and optimisation and reporting.',
+        'seo_title' => 'Meta Ads & Google Ads Management Services',
+        'seo_description' => 'Hire {name}, a Meta Ads and Google Ads expert, for campaign strategy, PPC management, GTM & GA4 conversion tracking, creative testing and reporting.',
         'hero' => [
             'eyebrow' => 'Services',
             'title' => 'Paid advertising, *managed end to end.*',
@@ -191,12 +216,24 @@ return [
                 ['icon' => 'briefcase', 'title' => 'Service businesses', 'text' => 'B2B and B2C leads for service businesses and local companies.'],
             ],
         ],
+        'faq' => [
+            'eyebrow' => 'FAQ',
+            'title' => 'Questions about *working with {first_name}*',
+            'items' => [
+                ['q' => 'Who is {name}?', 'a' => '{name} is a performance marketer based in {location} with 4+ years in paid advertising. He runs Meta Ads, Google Ads and TikTok Ads for e-commerce sales and B2B/B2C lead generation, and has led a seven-person PPC team.'],
+                ['q' => 'Is {name} a Meta Ads expert?', 'a' => 'Yes. Meta Ads (Facebook and Instagram) are his main platform: account structure, prospecting and remarketing, creative testing with designers and video editors, and Meta Pixel setup. Across an e-commerce portfolio his campaigns averaged about 4x ROAS, with top campaigns at 8–10x.'],
+                ['q' => 'Does {first_name} manage Google Ads too?', 'a' => 'Yes — Search, Display, Performance Max and remarketing campaigns, with keyword research, bidding strategy, Quality Score and CTR improvement, and conversion tracking through Google Tag Manager and GA4.'],
+                ['q' => 'Which countries has {first_name} run ad campaigns for?', 'a' => 'Twelve markets: the UK, France, the USA, Canada, Australia, the UAE, Saudi Arabia, Oman, Bangladesh, Azerbaijan, Uzbekistan and Pakistan.'],
+                ['q' => 'What kinds of businesses does {first_name} work with?', 'a' => 'E-commerce brands (fashion, home textiles, bedding, jewellery and food), real estate, software and service businesses — for both online sales and lead generation.'],
+                ['q' => 'How can I hire {name}?', 'a' => 'Send a message through the contact page or connect on LinkedIn. He is open to freelance ad management projects and full-time performance marketing roles.'],
+            ],
+        ],
         'cta' => ['title' => 'Need a hand with your ad accounts?', 'text' => ''],
     ],
 
     'portfolio' => [
-        'seo_title' => 'Portfolio',
-        'seo_description' => 'Selected Meta Ads, Google Ads and TikTok Ads projects by {name} — e-commerce, lead generation and real estate campaigns across the UK, USA, Canada, Australia, the UAE and Central Asia.',
+        'seo_title' => 'Meta, Google & TikTok Ads Portfolio',
+        'seo_description' => 'Paid ads portfolio of {name}, Meta & Google Ads expert: e-commerce, lead generation and real estate campaigns in the UK, USA, Canada, Australia and UAE.',
         'hero' => [
             'eyebrow' => 'Portfolio',
             'title' => 'Selected *advertising projects*',
@@ -218,8 +255,8 @@ return [
     ],
 
     'results' => [
-        'seo_title' => 'Results',
-        'seo_description' => "Documented results from {name}'s paid advertising work: approximately 4x average ROAS across an e-commerce portfolio, top campaigns at 8–10x, and portfolios of up to 16 brands.",
+        'seo_title' => 'Ad Results: ~4x ROAS, 8–10x Peak Campaigns',
+        'seo_description' => 'Documented results from ad expert {name}: about 4x average ROAS across an e-commerce portfolio, top campaigns at 8–10x, and portfolios of up to 16 brands.',
         'hero' => [
             'eyebrow' => 'Results',
             'title' => 'Results, with the *context* they were earned in.',
@@ -296,8 +333,8 @@ return [
     ],
 
     'international' => [
-        'seo_title' => 'International Experience',
-        'seo_description' => "{name}'s international advertising experience: Meta, Google and TikTok campaigns for the UK, France, USA, Canada, Australia, the UAE, Saudi Arabia, Oman, Azerbaijan, Uzbekistan, Bangladesh and Pakistan.",
+        'seo_title' => 'International PPC & Paid Social Campaigns',
+        'seo_description' => 'Performance marketer {name} has run Meta, Google and TikTok Ads for 12 markets, including the UK, France, USA, Canada, Australia, UAE, Saudi Arabia and Pakistan.',
         'hero' => [
             'eyebrow' => 'International experience',
             'title' => 'One strategist, *twelve markets.*',
@@ -323,8 +360,8 @@ return [
     ],
 
     'contact' => [
-        'seo_title' => 'Contact',
-        'seo_description' => 'Contact {name}, Performance Marketing Manager, about Meta Ads and Google Ads projects or professional opportunities.',
+        'seo_title' => 'Hire a Meta & Google Ads Expert',
+        'seo_description' => 'Contact {name}, performance marketer and Meta & Google Ads expert in Lahore, Pakistan, about ad campaigns, PPC management or full-time roles.',
         'hero' => [
             'eyebrow' => 'Contact',
             'title' => "Let's talk about *growing your results.*",

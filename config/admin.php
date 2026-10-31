@@ -41,8 +41,8 @@ $heading = fn (string $name, string $label, bool $lead = false, array $extra = [
 ];
 
 $seo = [
-    ['name' => 'seo_title', 'label' => 'Browser tab title', 'type' => 'text', 'help' => 'Shown as "Title | Name" in the browser tab and search results.'],
-    ['name' => 'seo_description', 'label' => 'Search engine description', 'type' => 'textarea'],
+    ['name' => 'seo_title', 'label' => 'Browser tab title', 'type' => 'text', 'help' => 'Shown as "Title | Name" in the browser tab and Google results (the name is not repeated if the title already contains it). Keep it under about 60 characters.'],
+    ['name' => 'seo_description', 'label' => 'Search engine description', 'type' => 'textarea', 'help' => 'The snippet under the title in Google. Aim for 140–160 characters and include the main keywords naturally.'],
 ];
 
 $cta = ['name' => 'cta', 'type' => 'group', 'label' => 'Call-to-action band', 'help' => 'Leave empty to use the shared default from Pages → Shared.', 'fields' => [
@@ -75,8 +75,7 @@ return [
             'description' => 'Every heading, button and short list on the home page.',
             'parts' => [[
                 'key' => 'content.home',
-                'fields' => [
-                    ['name' => 'seo_description', 'label' => 'Search engine description', 'type' => 'textarea'],
+                'fields' => array_merge($seo, [
                     ['name' => 'hero', 'type' => 'group', 'label' => 'Hero', 'help' => 'The intro paragraph comes from Content → Profile.', 'fields' => [
                         ['name' => 'title', 'label' => 'Headline', 'type' => 'rich'],
                         ['name' => 'primary', 'label' => 'Main button', 'type' => 'text'],
@@ -120,7 +119,7 @@ return [
                     ]),
                     $heading('education', 'Education heading'),
                     $cta,
-                ],
+                ]),
             ]],
         ],
 
@@ -164,6 +163,12 @@ return [
                     $heading('process', 'Process heading'),
                     $heading('industries', 'Industries', false, [
                         ['name' => 'items', 'label' => 'Industries', 'type' => 'repeater', 'item_label' => 'title', 'fields' => $iconText()],
+                    ]),
+                    $heading('faq', 'FAQ', false, [
+                        ['name' => 'items', 'label' => 'Questions', 'type' => 'repeater', 'item_label' => 'q', 'help' => 'Shown on the Services page and given to Google as FAQ results. Keep answers factual.', 'fields' => [
+                            ['name' => 'q', 'label' => 'Question', 'type' => 'text'],
+                            ['name' => 'a', 'label' => 'Answer', 'type' => 'textarea'],
+                        ]],
                     ]),
                     $cta,
                 ]),
@@ -514,6 +519,14 @@ return [
             ['name' => 'linkedin', 'label' => 'LinkedIn URL', 'type' => 'text'],
             ['name' => 'linkedin_label', 'label' => 'LinkedIn link text', 'type' => 'text'],
             ['name' => 'notify_email', 'label' => 'Send contact-form messages to', 'type' => 'text'],
+        ]],
+        ['key' => 'content.site', 'label' => 'Search engines (SEO)', 'fields' => [
+            ['name' => 'seo', 'type' => 'group', 'label' => 'Search engines', 'fields' => [
+                ['name' => 'keywords', 'label' => 'Keywords', 'type' => 'list', 'help' => 'One per line. Used in the page keywords tag. Rankings mostly come from page titles, descriptions and content, so use the same phrases there.'],
+                ['name' => 'alternate_names', 'label' => 'Other names for the site', 'type' => 'list', 'help' => 'One per line, e.g. "Hassan Ads Expert". Tells Google other names the site is known by.'],
+                ['name' => 'google_verification', 'label' => 'Google Search Console code', 'type' => 'text', 'help' => 'From Search Console → Add property → HTML tag: paste only the content="…" value.'],
+                ['name' => 'bing_verification', 'label' => 'Bing Webmaster code', 'type' => 'text', 'help' => 'From Bing Webmaster Tools → HTML meta tag: paste only the content="…" value.'],
+            ]],
         ]],
     ],
 
