@@ -4,9 +4,11 @@
     $before = $caseStudy->beforeImages()->first();
     $after = $caseStudy->afterImages()->first();
     $group = 'case-'.$caseStudy->id;
+    // The frame takes the screenshots' own shape, so wide reports don't float in empty space.
+    $ratio = $before?->width && $after?->width ? max($before->width, $after->width).' / '.max($before->height, $after->height) : null;
 @endphp
 
-<div {{ $attributes->merge(['class' => 'compare']) }} data-compare style="--pos: 50%">
+<div {{ $attributes->merge(['class' => 'compare']) }} data-compare style="--pos: 50%@if ($ratio); --ratio: {{ $ratio }}@endif">
     <div class="compare__layer compare__layer--after">
         @if ($after)
             <img src="{{ $after->url() }}" alt="After: {{ $after->caption ?: $caseStudy->title }}" loading="lazy" decoding="async"

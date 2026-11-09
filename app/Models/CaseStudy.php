@@ -12,6 +12,7 @@ class CaseStudy extends Model
         'slug',
         'title',
         'brand',
+        'website',
         'industry',
         'country',
         'category',

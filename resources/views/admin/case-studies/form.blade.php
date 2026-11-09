@@ -43,6 +43,10 @@
                 <input class="admin-input" id="brand" name="brand" value="{{ old('brand', $cs->brand) }}" maxlength="120">
             </div>
             <div class="col-md-4">
+                <label class="admin-label" for="website">Website link <small>(optional)</small></label>
+                <input class="admin-input" type="url" id="website" name="website" value="{{ old('website', $cs->website) }}" maxlength="255" placeholder="https://">
+            </div>
+            <div class="col-md-4">
                 <label class="admin-label" for="industry">Industry *</label>
                 <input class="admin-input" id="industry" name="industry" value="{{ old('industry', $cs->industry) }}" required maxlength="120">
             </div>

@@ -48,7 +48,7 @@
                         <button type="button" class="filter-chip" data-cs-filter="category" data-value="{{ $key }}" aria-pressed="false">{{ config('portfolio.categories.'.$key, ucfirst($key)) }}</button>
                     @endforeach
                 </div>
-                <p class="filters__count" aria-live="polite" data-cs-count>Showing {{ $caseStudies->count() }} of {{ $caseStudies->count() }}</p>
+                <p class="filters__count" aria-live="polite" data-cs-showing>Showing {{ $caseStudies->count() }} of {{ $caseStudies->count() }}</p>
             </div>
         @endif
 

@@ -154,7 +154,7 @@
     const filterRoot = document.querySelector('[data-cs-filters]');
     if (filterRoot) {
         const cards = Array.from(document.querySelectorAll('#before-after [data-case-study]'));
-        const count = filterRoot.querySelector('[data-cs-count]');
+        const count = filterRoot.querySelector('[data-cs-showing]');
         const empty = document.querySelector('[data-cs-empty]');
         const state = { platform: 'all', category: 'all' };
 

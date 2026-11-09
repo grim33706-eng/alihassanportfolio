@@ -7,9 +7,12 @@
     $afters = $cs->afterImages();
     $metrics = $cs->metricRows();
     $categoryLabel = config('portfolio.categories.'.$cs->category, ucfirst($cs->category));
+    // Wide dashboard screenshots get the full card width so their figures stay readable.
+    $sample = $befores->first();
+    $wide = $sample && $sample->width && $sample->height && $sample->width / $sample->height > 2.2;
 @endphp
 
-<article {{ $attributes->merge(['class' => 'case-study'.($compact ? ' case-study--compact' : '')]) }}
+<article {{ $attributes->merge(['class' => 'case-study'.($compact ? ' case-study--compact' : '').($wide ? ' case-study--wide' : '')]) }}
     id="case-{{ $cs->slug }}"
     data-case-study
     data-platforms="{{ implode(' ', $cs->platforms ?? []) }}"
@@ -33,6 +36,7 @@
             <span>{{ $cs->industry }}</span>
             <span><x-icon name="map-pin" size="14" /> {{ $cs->country }}</span>
             @if ($cs->period)<span>{{ $cs->period }}</span>@endif
+            @if ($cs->website)<a href="{{ $cs->website }}" target="_blank" rel="noopener">Visit website <x-icon name="arrow-up-right" size="14" /></a>@endif
         </p>
     </header>
 

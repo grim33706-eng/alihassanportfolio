@@ -37,6 +37,7 @@ class CaseStudyRequest extends FormRequest
             'title' => ['required', 'string', 'max:160'],
             'slug' => ['required', 'string', 'max:120', Rule::unique('case_studies', 'slug')->ignore($id)],
             'brand' => ['nullable', 'string', 'max:120'],
+            'website' => ['nullable', 'url:http,https', 'max:255'],
             'industry' => ['required', 'string', 'max:120'],
             'country' => ['required', 'string', 'max:120'],
             'category' => ['required', Rule::in(array_keys(config('portfolio.categories')))],

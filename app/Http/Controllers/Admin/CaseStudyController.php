@@ -89,7 +89,7 @@ class CaseStudyController extends Controller
     private function attributes(CaseStudyRequest $request): array
     {
         $data = $request->safe()->only([
-            'title', 'slug', 'brand', 'industry', 'country', 'category', 'platforms', 'period',
+            'title', 'slug', 'brand', 'website', 'industry', 'country', 'category', 'platforms', 'period',
             'strategy', 'improvements', 'metrics', 'is_demo', 'is_featured', 'is_published', 'sort_order',
         ]);
         $data['metrics'] = ! empty($data['metrics']) ? array_values($data['metrics']) : null;
