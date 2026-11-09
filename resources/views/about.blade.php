@@ -111,6 +111,16 @@
                     <div class="timeline__card">
                         <div class="timeline__head">
                             <span class="timeline__period">{{ $job['period'] }}</span>
+                            @if (! empty($job['niches']))
+                                <div class="timeline__niches">
+                                    <span class="timeline__niche-label">Niche</span>
+                                    <ul role="list">
+                                        @foreach ($job['niches'] as $niche)
+                                            <li>{{ $niche }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                         </div>
                         <ul class="timeline__list" role="list">
                             @foreach ($job['highlights'] as $highlight)

@@ -463,6 +463,7 @@ return [
                     ['name' => 'company', 'label' => 'Company', 'type' => 'text'],
                     ['name' => 'mode', 'label' => 'Type / location', 'type' => 'text', 'help' => 'e.g. Remote, On-site'],
                     ['name' => 'period', 'label' => 'Period', 'type' => 'text', 'help' => 'e.g. Aug 2026 – Present'],
+                    ['name' => 'niches', 'label' => 'Niches', 'type' => 'list', 'help' => 'One per line. Shown as tags on the card.'],
                     ['name' => 'highlights', 'label' => 'Highlights', 'type' => 'list'],
                 ],
             ]],

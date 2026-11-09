@@ -221,6 +221,7 @@ return [
             'company' => 'Dynasty Marketing Agency',
             'mode' => 'On-site',
             'period' => 'Aug 2026 – Present',
+            'niches' => ['B2B Lead Generation', 'B2C Lead Generation'],
             'highlights' => [
                 'Campaign priorities, account workflows, client delivery and performance reporting.',
                 'Generate qualified B2B and B2C leads through Meta, Google and TikTok Ads for clients in the USA and Canada, with a focus on conversion performance and lead quality.',
@@ -233,6 +234,7 @@ return [
             'company' => 'SuperWise International Pvt. Ltd.',
             'mode' => 'Social & paid media',
             'period' => 'Aug 2026 – Present',
+            'niches' => ['Social Media', 'Lead Generation'],
             'highlights' => [
                 'Manage the company\'s social media accounts end to end: content strategy, monthly content calendars, regular posting and consistent brand messaging.',
                 'Create posts, short-form videos, reels, scripts and captions with ChatGPT, Gemini, HeyGen and Captions AI to keep a steady content pipeline.',
@@ -245,6 +247,7 @@ return [
             'company' => 'Zela Boost',
             'mode' => 'Remote',
             'period' => 'Jun 2026 – Present',
+            'niches' => ['Real Estate', 'E-Commerce', 'Software', 'Service Businesses'],
             'highlights' => [
                 'Manage Meta, Google and TikTok campaigns for real estate, e-commerce, software and service-based businesses.',
                 'Oversee an eight-brand portfolio: three e-commerce and five lead-generation accounts, including day-to-day setup and delivery.',
@@ -257,6 +260,7 @@ return [
             'company' => 'NextQuick Solutions',
             'mode' => 'Marketing Team',
             'period' => 'Jul 2026 – Aug 2026',
+            'niches' => ['E-Commerce', 'Lead Generation', 'Real Estate'],
             'highlights' => [
                 'Led a cross-functional marketing team of 10+: paid media specialists, graphic designers and video content creators.',
                 'Managed advertising for five e-commerce brands and lead generation for 11 more brands across a multi-account portfolio.',
@@ -269,6 +273,7 @@ return [
             'company' => 'Chapter001',
             'mode' => 'Remote',
             'period' => 'Mar 2026 – Present',
+            'niches' => ['Education', 'Cloud Restaurants', 'Local Businesses'],
             'highlights' => [
                 'Launch and optimise Meta and TikTok campaigns for education, cloud restaurant and local-business clients: targeting, bids, budgets and creative testing.',
                 'Plan social content calendars and posting, with AI-assisted copy, video concepts, reels and engagement-focused creatives.',
@@ -280,6 +285,7 @@ return [
             'company' => 'IU Affilboost',
             'mode' => 'UK & France clients',
             'period' => 'Mar 2026 – Aug 2026',
+            'niches' => ['Service Businesses', 'Lead Generation'],
             'highlights' => [
                 'Managed Meta Ads and TikTok Ads for UK and France service businesses, generating qualified leads through tailored targeting, creative tests and conversion-focused campaigns.',
                 'Led the marketing team and managed daily ad budgets of PKR 20,000–40,000 across client accounts, testing audiences and creatives to optimise CPL.',
@@ -292,6 +298,7 @@ return [
             'company' => 'Digimarkyl',
             'mode' => 'Remote',
             'period' => 'Dec 2025 – Jul 2026',
+            'niches' => ['Lead Generation', 'Social Media'],
             'highlights' => [
                 'Helped execute and optimise Meta campaigns in Pakistan, Saudi Arabia, the UAE, Oman and Bangladesh through segmentation, budget monitoring and A/B tests.',
                 'Supported company and client social media through content calendars, posting, creative coordination and AI-assisted posts and videos.',
@@ -303,6 +310,7 @@ return [
             'company' => 'Adymizing',
             'mode' => 'Internship',
             'period' => 'Sep 2025 – Dec 2025',
+            'niches' => ['E-Commerce', 'Digital Services', 'Education'],
             'highlights' => [
                 'Managed Meta campaigns for e-commerce, digital services and education, testing cold, retargeting and lookalike audiences.',
                 'Monitored ROAS, CTR, CPL and CPA while supporting content planning, scheduled publishing and ad creative preparation.',
@@ -313,6 +321,7 @@ return [
             'company' => 'Nextech Skills',
             'mode' => 'Internship',
             'period' => 'May 2025 – Aug 2025',
+            'niches' => ['Student Lead Generation'],
             'highlights' => [
                 'Supported Meta Ads setup, student lead-generation funnels, audience targeting and A/B testing.',
                 'Tracked CTR, CPM, CPL and conversions; assisted with content calendars, posting and AI-supported short-form video concepts.',
@@ -323,6 +332,7 @@ return [
             'company' => 'The Social Links',
             'mode' => 'International campaigns',
             'period' => 'Dec 2024 – Jun 2026',
+            'niches' => ['E-Commerce', 'Fashion', 'Food', 'Bedding'],
             'highlights' => [
                 'Launched and optimised conversion-focused campaigns driving e-commerce sales in Australia, Canada, the UK and the USA.',
                 'Scaled from two or three accounts to as many as 10 brands at once, managing approximately PKR 60,000–80,000 in daily Meta ad spend.',
@@ -335,6 +345,7 @@ return [
             'company' => 'Orbit Creator',
             'mode' => 'Multan, Pakistan',
             'period' => 'Feb 2022 – Dec 2024',
+            'niches' => ['Local Businesses', 'Lead Generation'],
             'highlights' => [
                 'Managed lead-generation campaigns for local businesses through Meta, Google and TikTok Ads.',
                 'Handled up to 15 client accounts at once: setup, targeting, publishing, budget monitoring and optimisation.',
