@@ -43,6 +43,11 @@
                 </div>
             </div>
             <div class="col-lg-5">
+                @if (! empty($person['photo']))
+                    <figure class="about-portrait" data-reveal-card>
+                        <img src="{{ media_url($person['photo']) }}" alt="{{ $person['name'] }}, {{ $person['role'] }}" loading="lazy" decoding="async">
+                    </figure>
+                @endif
                 <div class="fact-stack">
                     @foreach ($c['background']['facts'] as $fact)
                         <div class="fact" data-reveal-card>

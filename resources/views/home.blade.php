@@ -138,7 +138,7 @@
             <div class="col-lg-5">
                 <div class="portrait-card" data-reveal-card>
                     @if (! empty($person['photo']))
-                        <img class="portrait-card__photo" src="{{ media_url($person['photo']) }}" alt="{{ $person['name'] }}" loading="lazy" decoding="async">
+                        <img class="portrait-card__photo" src="{{ media_url($person['photo']) }}" alt="{{ $person['name'] }}, {{ $person['role'] }}" loading="lazy" decoding="async">
                     @else
                         <div class="portrait-card__monogram" aria-hidden="true">{{ config('content.site.monogram') }}</div>
                     @endif

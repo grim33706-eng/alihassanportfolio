@@ -34,6 +34,7 @@ return [
         'first_name' => 'Ali',
         'role' => 'Performance Marketing Manager',
         'location' => 'Lahore, Pakistan',
+        'photo' => 'assets/img/ali-hassan.jpg',
         'years' => '4+',
         'email' => env('PORTFOLIO_CONTACT_EMAIL'),
         'phone' => '+92 309 0796683',

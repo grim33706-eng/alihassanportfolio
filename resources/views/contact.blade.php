@@ -34,6 +34,12 @@
             </div>
             <div class="col-lg-5">
                 <div class="contact-aside">
+                    @if (! empty($person['photo']))
+                        <div class="contact-person" data-reveal-card>
+                            <span class="contact-person__photo"><img src="{{ media_url($person['photo']) }}" alt="{{ $person['name'] }}" loading="lazy" decoding="async"></span>
+                            <span><strong>{{ $person['name'] }}</strong><small>{{ $person['role'] }}</small></span>
+                        </div>
+                    @endif
                     @if ($person['show_email'] && $person['email'])
                         <a class="contact-line" href="mailto:{{ $person['email'] }}" data-reveal-card>
                             <span class="icon-chip icon-chip--sm"><x-icon name="mail" size="20" /></span>
