@@ -80,6 +80,11 @@
         }
     }
 
+    const shots = document.querySelector('[data-meta-shots]');
+    if (shots) {
+        gsap.from(shots.querySelectorAll('.meta-shot'), { y: 40, opacity: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out', scrollTrigger: once(shots) });
+    }
+
     /* ---- ROAS scale ------------------------------------------------------ */
     const roas = document.querySelector('[data-roas]');
     if (roas) {

@@ -54,6 +54,11 @@ if (! function_exists('media_url')) {
      */
     function media_url(?string $path): ?string
     {
-        return $path ? asset('storage/'.ltrim($path, '/')) : null;
+        if (! $path) {
+            return null;
+        }
+
+        // Images shipped with the site live in public/assets; uploads live in storage.
+        return asset(str_starts_with($path, 'assets/') ? $path : 'storage/'.ltrim($path, '/'));
     }
 }

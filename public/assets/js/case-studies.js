@@ -118,8 +118,9 @@
         const img = dialog.querySelector('[data-lb-img]');
         const stage = dialog.querySelector('[data-lb-stage]');
         img.src = item.src;
-        img.alt = `${item.stage === 'after' ? 'After' : 'Before'} screenshot${item.caption ? `: ${item.caption}` : ''}`;
-        stage.textContent = item.stage === 'after' ? 'After' : 'Before';
+        const stageLabel = item.label || (item.stage === 'after' ? 'After' : 'Before');
+        img.alt = `${stageLabel} screenshot${item.caption ? `: ${item.caption}` : ''}`;
+        stage.textContent = stageLabel;
         stage.dataset.stage = item.stage;
         dialog.querySelector('[data-lb-count]').textContent = `${index + 1} / ${items.length}`;
         dialog.querySelector('[data-lb-caption]').textContent = item.caption || '';
@@ -134,10 +135,12 @@
         if (!opener) return;
         const template = document.querySelector(`template[data-lightbox-group="${opener.dataset.lightboxOpen}"]`);
         if (!template) return;
+        e.preventDefault();
         items = Array.from(template.content.querySelectorAll('a')).map((a) => ({
             src: a.getAttribute('href'),
             stage: a.dataset.stage,
             caption: a.dataset.caption,
+            label: a.dataset.label,
         }));
         if (!items.length) return;
         if (!dialog) buildDialog();

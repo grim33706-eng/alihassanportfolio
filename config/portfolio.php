@@ -96,6 +96,14 @@ return [
             ['label' => 'August 2026', 'note' => 'One campaign', 'value' => 142900, 'spend' => 18705.13, 'purchases' => 27, 'views' => 1422, 'atc' => 103],
             ['label' => 'September 2026', 'note' => 'One campaign', 'value' => 80800, 'spend' => 14200.80, 'purchases' => 11, 'views' => 696, 'atc' => 33],
         ],
+        'screenshots_title' => 'The original Ads Manager reports',
+        'screenshots_note' => 'Click any report to view it full size.',
+        'screenshots' => [
+            ['label' => 'Oct 2024 – Nov 2026', 'image' => 'assets/img/results/meta-oct-2024-nov-2026.jpg'],
+            ['label' => 'April 2026', 'image' => 'assets/img/results/meta-apr-2026.jpg'],
+            ['label' => 'August 2026', 'image' => 'assets/img/results/meta-aug-2026.jpg'],
+            ['label' => 'September 2026', 'image' => 'assets/img/results/meta-sep-2026.jpg'],
+        ],
         'note' => 'Amounts in Rs, as reported by Meta Ads Manager. Past performance does not guarantee future results.',
     ],
 

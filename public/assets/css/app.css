@@ -1610,6 +1610,18 @@ body.no-scroll { overflow: hidden; }
 .meta-month__stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.95rem 1rem; margin: 1.35rem 0 0; padding-top: 1.2rem; border-top: 1px solid var(--border-soft); }
 .meta-month__stats dt { font-size: 0.75rem; font-weight: 400; color: var(--text-3); }
 .meta-month__stats dd { margin: 0.1rem 0 0; font-family: var(--font-display); font-weight: 600; font-size: 1rem; }
+.meta-shots { display: grid; gap: 1rem; }
+.meta-shot { margin: 0; border-radius: var(--radius); overflow: hidden; background: #151b2d; border: 1px solid rgba(109, 147, 255, 0.24); box-shadow: 0 22px 50px -32px rgba(79, 124, 255, 0.75); transition: border-color 0.35s, box-shadow 0.35s, translate 0.35s var(--ease); }
+.meta-shot:hover { translate: 0 -3px; border-color: rgba(109, 147, 255, 0.55); box-shadow: 0 26px 56px -28px rgba(79, 124, 255, 0.95); }
+.meta-shot__bar { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 1rem; border-bottom: 1px solid var(--border-soft); font-size: 0.82rem; }
+.meta-shot__dots { display: inline-flex; gap: 0.3rem; }
+.meta-shot__dots i { width: 9px; height: 9px; border-radius: 50%; background: rgba(166, 176, 195, 0.28); }
+.meta-shot__label { font-weight: 600; }
+.meta-shot__source { margin-left: auto; font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-3); }
+.meta-shot__link { display: block; overflow-x: auto; cursor: zoom-in; background: #fff; }
+.meta-shot__link img { display: block; width: 100%; height: auto; }
+/* Keep the figures readable on phones: the report scrolls sideways inside its frame. */
+@media (max-width: 767.98px) { .meta-shot__link img { width: 760px; max-width: none; } }
 .meta-note { margin-top: 1.25rem; }
 
 /* ---------- FAQ (Services) ---------- */

@@ -8,6 +8,10 @@
     $a = $m['account'] ?? [];
     $campaigns = collect($m['campaigns'] ?? []);
     $months = collect($m['months'] ?? []);
+    $screenshots = collect($m['screenshots'] ?? \App\Support\SiteContent::default('portfolio.meta_results.screenshots') ?? [])
+        ->filter(fn ($s) => ! empty($s['image']))->values();
+    // Real dimensions reserve the space, so lazy images don't shift the page.
+    $imageSize = fn ($path) => @getimagesize(str_starts_with($path, 'assets/') ? public_path($path) : storage_path('app/public/'.$path)) ?: [null, null];
 
     $ratio = fn ($top, $bottom) => (float) $bottom > 0 ? (float) $top / (float) $bottom : 0;
     $rs = fn ($n, $decimals = 0) => 'Rs'.number_format((float) $n, $decimals);
@@ -139,6 +143,36 @@
                     </article>
                 @endforeach
             </div>
+        @endif
+
+        {{-- The reports themselves --}}
+        @if ($screenshots->isNotEmpty())
+            <div class="meta-sub">
+                <h3 class="meta-sub__title">{{ txt($m['screenshots_title'] ?? 'The original Ads Manager reports') }}</h3>
+                <p class="meta-sub__text">{{ txt($m['screenshots_note'] ?? 'Click any report to view it full size.') }}</p>
+            </div>
+            <div class="meta-shots" data-meta-shots>
+                @foreach ($screenshots as $shot)
+                    @php
+                        [$width, $height] = $imageSize($shot['image']);
+                    @endphp
+                    <figure class="meta-shot">
+                        <figcaption class="meta-shot__bar">
+                            <span class="meta-shot__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                            <span class="meta-shot__label">{{ txt($shot['label']) }}</span>
+                            <span class="meta-shot__source">Meta Ads Manager</span>
+                        </figcaption>
+                        <a class="meta-shot__link" href="{{ media_url($shot['image']) }}" target="_blank" rel="noopener" data-lightbox-open="meta-reports" data-lightbox-index="{{ $loop->index }}" aria-label="View the {{ txt($shot['label']) }} report full size">
+                            <img src="{{ media_url($shot['image']) }}" alt="Meta Ads Manager report, {{ txt($shot['label']) }}" loading="lazy" decoding="async" @if ($width) width="{{ $width }}" height="{{ $height }}" @endif>
+                        </a>
+                    </figure>
+                @endforeach
+            </div>
+            <template data-lightbox-group="meta-reports">
+                @foreach ($screenshots as $shot)
+                    <a href="{{ media_url($shot['image']) }}" data-label="Report" data-caption="Meta Ads Manager, {{ txt($shot['label']) }}"></a>
+                @endforeach
+            </template>
         @endif
 
         <p class="chart-note meta-note">{{ txt($m['note']) }}</p>

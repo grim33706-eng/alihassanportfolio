@@ -383,6 +383,12 @@ return [
                         ['name' => 'views', 'label' => 'Content views', 'type' => 'number'],
                         ['name' => 'atc', 'label' => 'Adds to cart', 'type' => 'number'],
                     ]],
+                    ['name' => 'screenshots_title', 'label' => 'Screenshots heading', 'type' => 'text'],
+                    ['name' => 'screenshots_note', 'label' => 'Screenshots note', 'type' => 'text'],
+                    ['name' => 'screenshots', 'label' => 'Ads Manager screenshots', 'type' => 'repeater', 'item_label' => 'label', 'fields' => [
+                        ['name' => 'label', 'label' => 'Date range', 'type' => 'text'],
+                        ['name' => 'image', 'label' => 'Screenshot', 'type' => 'image', 'help' => 'Hide or crop client names before uploading.'],
+                    ]],
                     ['name' => 'note', 'label' => 'Footnote', 'type' => 'text'],
                 ],
             ]],
