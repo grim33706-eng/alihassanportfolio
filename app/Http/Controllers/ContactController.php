@@ -33,7 +33,7 @@ class ContactController extends Controller
         } catch (Throwable $e) {
             Log::error('Contact message could not be saved.', ['error' => $e->getMessage()]);
 
-            return $this->respond($request, false, 'Sorry — your message could not be sent right now. Please try again shortly or reach out on LinkedIn.', 500);
+            return $this->respond($request, false, 'Sorry, your message could not be sent right now. Please try again shortly or reach out on LinkedIn.', 500);
         }
 
         // A failed notification should not lose the message: it is already stored.
@@ -45,7 +45,7 @@ class ContactController extends Controller
             }
         }
 
-        return $this->respond($request, true, 'Thank you, '.Str::before($message->name, ' ').'! Your message has been sent — I\'ll get back to you soon.');
+        return $this->respond($request, true, 'Thank you, '.Str::before($message->name, ' ').'! Your message has been sent. I\'ll get back to you soon.');
     }
 
     private function respond(ContactRequest $request, bool $ok, string $text, int $status = 200): RedirectResponse|JsonResponse

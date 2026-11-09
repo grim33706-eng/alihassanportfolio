@@ -48,7 +48,7 @@ return [
         'intro' => 'Performance Marketing Manager with 4+ years in paid acquisition, B2B/B2C Lead Generation and E-Commerce sales across Meta, Google and TikTok for businesses across the USA, Canada, UK, France, Australia, UAE, Saudi Arabia, Oman, Azerbaijan, Uzbekistan, Bangladesh and Pakistan.',
         'summary' => [
             'I plan, launch and scale paid campaigns that are built around one question: what does each click, lead and sale actually return? Over four years I have moved from managing local lead-generation accounts to leading a seven-person PPC team and cross-functional marketing teams of 10+ people.',
-            'My work covers the full performance loop — account structure, audience and keyword research, conversion tracking with Meta Pixel, Google Tag Manager and GA4, creative direction with designers and video editors, and the day-to-day optimisation that keeps budgets pointed at what works.',
+            'My work covers the full performance loop: account structure, audience and keyword research, conversion tracking with Meta Pixel, Google Tag Manager and GA4, creative direction with designers and video editors, and the day-to-day optimisation that keeps budgets pointed at what works.',
             'Across a portfolio of up to ten e-commerce brands, that loop delivered an average return on ad spend of approximately 4x, with top-performing campaigns reaching 8–10x.',
         ],
     ],
@@ -71,14 +71,14 @@ return [
         'meta' => [
             'name' => 'Meta Ads',
             'tagline' => 'Facebook & Instagram campaigns for sales and leads',
-            'summary' => 'Meta is where most of my e-commerce revenue has been built — from fashion and home textiles to jewellery and food brands — and where I run B2B and B2C lead generation for clients in North America and beyond.',
+            'summary' => 'Meta is where most of my e-commerce revenue has been built, from fashion and home textiles to jewellery and food brands, and where I run B2B and B2C lead generation for clients in North America and beyond.',
             'services' => [
-                ['icon' => 'target', 'title' => 'Audience targeting & segmentation', 'text' => 'Cold, retargeting and lookalike audiences, segmented and tuned to lead quality and acquisition cost — not just volume.'],
+                ['icon' => 'target', 'title' => 'Audience targeting & segmentation', 'text' => 'Cold, retargeting and lookalike audiences, segmented and tuned to lead quality and acquisition cost, not just volume.'],
                 ['icon' => 'cart', 'title' => 'E-commerce sales campaigns', 'text' => 'Conversion-focused campaigns for fashion, home textiles, jewellery and food brands in Australia, Canada, the UK and the USA.'],
                 ['icon' => 'funnel', 'title' => 'B2B & B2C lead generation', 'text' => 'Lead campaigns for real estate, software and service businesses, monitored for lead quality and conversion volume.'],
                 ['icon' => 'repeat', 'title' => 'Remarketing strategy', 'text' => 'Remarketing planned alongside prospecting to bring warm audiences back to convert.'],
                 ['icon' => 'layers', 'title' => 'Creative testing & direction', 'text' => 'A/B tests on hooks, angles and formats, briefed to designers and video editors and revised from performance data.'],
-                ['icon' => 'pulse', 'title' => 'Meta Pixel & conversion tracking', 'text' => 'Pixel setup and conversion events that give the algorithm — and the reporting — reliable signals.'],
+                ['icon' => 'pulse', 'title' => 'Meta Pixel & conversion tracking', 'text' => 'Pixel setup and conversion events that give the algorithm, and the reporting, reliable signals.'],
             ],
             'metrics' => [
                 ['value' => 'PKR 60–80k', 'label' => 'Daily Meta ad spend managed'],
@@ -88,7 +88,7 @@ return [
         'google' => [
             'name' => 'Google Ads',
             'tagline' => 'Search, Performance Max & remarketing that capture intent',
-            'summary' => 'On Google I focus on capturing existing demand: tight keyword strategy, ad copy that earns clicks, and Performance Max and remarketing that close the loop — including for an international bedding brand.',
+            'summary' => 'On Google I focus on capturing existing demand: tight keyword strategy, ad copy that earns clicks, and Performance Max and remarketing that close the loop, including for an international bedding brand.',
             'services' => [
                 ['icon' => 'search', 'title' => 'Search campaigns', 'text' => 'Keyword research, match strategy and ad copywriting for Search campaigns built around buying intent.'],
                 ['icon' => 'spark', 'title' => 'Performance Max', 'text' => 'Performance Max campaigns for e-commerce, managed alongside Search and remarketing.'],
@@ -130,14 +130,14 @@ return [
             'slug' => 'strategy',
             'icon' => 'compass',
             'title' => 'Campaign Strategy & Planning',
-            'text' => 'Campaign objectives, budget distribution and channel mix planned around each brand\'s goals — across single accounts or multi-brand portfolios.',
+            'text' => 'Campaign objectives, budget distribution and channel mix planned around each brand\'s goals, across single accounts or multi-brand portfolios.',
             'points' => ['Objectives & funnel planning', 'Budget allocation', 'Multi-brand portfolio management', 'TikTok Ads alongside Meta & Google'],
         ],
         [
             'slug' => 'research',
             'icon' => 'target',
             'title' => 'Audience & Keyword Research',
-            'text' => 'Finding the people and the search terms that convert — and cutting the ones that only spend.',
+            'text' => 'Finding the people and the search terms that convert, and cutting the ones that only spend.',
             'points' => ['Keyword research & bidding strategy', 'Audience targeting & segmentation', 'Local and international market targeting', 'Lead-quality review'],
         ],
         [
@@ -151,7 +151,7 @@ return [
             'slug' => 'optimisation',
             'icon' => 'chart',
             'title' => 'Campaign Optimisation & Reporting',
-            'text' => 'Regular performance reviews that turn results into the next round of tests — and clear reporting on what to keep, change or cut.',
+            'text' => 'Regular performance reviews that turn results into the next round of tests, and clear reporting on what to keep, change or cut.',
             'points' => ['A/B testing & creative optimisation', 'Bid, budget & audience adjustments', 'Performance reporting', 'Team review of conversion signals'],
         ],
     ],
@@ -178,7 +178,7 @@ return [
             'mode' => 'On-site',
             'period' => 'Aug 2026 – Present',
             'highlights' => [
-                'Lead a seven-person team of PPC and Google Ads specialists — campaign priorities, account workflows, client delivery and performance reporting.',
+                'Lead a seven-person team of PPC and Google Ads specialists: campaign priorities, account workflows, client delivery and performance reporting.',
                 'Generate qualified B2B and B2C leads through Meta, Google and TikTok Ads for clients in the USA and Canada, with a focus on conversion performance and lead quality.',
                 'Oversee end-to-end campaign setup, keyword research, audience targeting, budget allocation, bid management and account optimisation.',
                 'Work with graphic designers and video editors on ad concepts, messaging experiments, video formats and revisions to weaker assets.',
@@ -190,9 +190,9 @@ return [
             'mode' => 'Social & paid media',
             'period' => 'Aug 2026 – Present',
             'highlights' => [
-                'Manage the company\'s social media accounts end to end — content strategy, monthly content calendars, regular posting and consistent brand messaging.',
+                'Manage the company\'s social media accounts end to end: content strategy, monthly content calendars, regular posting and consistent brand messaging.',
                 'Create posts, short-form videos, reels, scripts and captions with ChatGPT, Gemini, HeyGen and Captions AI to keep a steady content pipeline.',
-                'Plan, build, launch and optimise Meta Ads and Google Ads campaigns — setup, audience targeting, creatives, budgets and ongoing testing.',
+                'Plan, build, launch and optimise Meta Ads and Google Ads campaigns: setup, audience targeting, creatives, budgets and ongoing testing.',
                 'Review reach, impressions, engagement, CTR, CPC and lead metrics to refine content and improve campaign efficiency.',
             ],
         ],
@@ -214,7 +214,7 @@ return [
             'mode' => 'Marketing Team',
             'period' => 'Jul 2026 – Aug 2026',
             'highlights' => [
-                'Led a cross-functional marketing team of 10+ — paid media specialists, graphic designers and video content creators.',
+                'Led a cross-functional marketing team of 10+: paid media specialists, graphic designers and video content creators.',
                 'Managed advertising for five e-commerce brands and lead generation for 11 more brands across a multi-account portfolio.',
                 'Ran real estate and other paid lead campaigns targeting Dubai, Azerbaijan and Uzbekistan.',
                 'Directed creative angles, hooks, ad formats and tests based on campaign performance data.',
@@ -226,7 +226,7 @@ return [
             'mode' => 'Remote',
             'period' => 'Mar 2026 – Present',
             'highlights' => [
-                'Launch and optimise Meta and TikTok campaigns for education, cloud restaurant and local-business clients — targeting, bids, budgets and creative testing.',
+                'Launch and optimise Meta and TikTok campaigns for education, cloud restaurant and local-business clients: targeting, bids, budgets and creative testing.',
                 'Plan social content calendars and posting, with AI-assisted copy, video concepts, reels and engagement-focused creatives.',
                 'Monitor reach, engagement, traffic, CTR, CPL and ROAS, using reports to improve both organic content and paid results.',
             ],
@@ -293,7 +293,7 @@ return [
             'period' => 'Feb 2022 – Dec 2024',
             'highlights' => [
                 'Managed lead-generation campaigns for local businesses through Meta, Google and TikTok Ads.',
-                'Handled up to 15 client accounts at once — setup, targeting, publishing, budget monitoring and optimisation.',
+                'Handled up to 15 client accounts at once: setup, targeting, publishing, budget monitoring and optimisation.',
                 'Implemented conversion tracking with Meta Pixel, Google Tag Manager and GA4, tracking leads and conversion events to improve acquisition.',
             ],
         ],
@@ -385,10 +385,10 @@ return [
             'slug' => 'north-america-lead-gen',
             'title' => 'B2B & B2C lead generation for North American clients',
             'category' => 'leads',
-            'industry' => 'Agency clients — B2B & B2C',
+            'industry' => 'Agency clients (B2B & B2C)',
             'markets' => ['USA', 'Canada'],
             'platforms' => ['meta', 'google', 'tiktok'],
-            'objective' => 'Deliver qualified leads with strong conversion performance — not just lead volume.',
+            'objective' => 'Deliver qualified leads with strong conversion performance, not just lead volume.',
             'work' => ['Keyword research & audience targeting', 'Budget allocation & bid management', 'Ad-testing priorities from lead-quality reviews', 'Leading a seven-person PPC team'],
             'outcome' => null,
             'period' => 'Aug 2026 – Present',

@@ -68,7 +68,7 @@
         [
             '@type' => 'ProfessionalService',
             '@id' => $ids['service'],
-            'name' => $name.' — Meta Ads & Google Ads Expert',
+            'name' => $name.' | Meta Ads & Google Ads Expert',
             'url' => $home,
             'image' => $shareImage,
             'description' => txt(config('content.services.seo_description')),
@@ -134,7 +134,7 @@
 <meta property="og:image" content="{{ $shareImage }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="{{ $name }} — {{ $person['role'] }}">
+<meta property="og:image:alt" content="{{ $name }} | {{ $person['role'] }}">
 @if ($page === 'home')
     <meta property="profile:first_name" content="{{ $person['first_name'] ?? $name }}">
     <meta property="profile:last_name" content="{{ trim(\Illuminate\Support\Str::after($name, $person['first_name'] ?? '')) }}">

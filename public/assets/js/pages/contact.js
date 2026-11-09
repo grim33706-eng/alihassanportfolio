@@ -89,10 +89,10 @@
             } else if (response.status === 419) {
                 showStatus(false, 'Your session expired. Please refresh the page and try again.');
             } else {
-                showStatus(false, data.message || 'Sorry — something went wrong. Please try again.');
+                showStatus(false, data.message || 'Sorry, something went wrong. Please try again.');
             }
         } catch (err) {
-            showStatus(false, 'Network error — please check your connection and try again.');
+            showStatus(false, 'Network error. Please check your connection and try again.');
         } finally {
             submit.disabled = false;
             submitLabel.textContent = 'Send message';

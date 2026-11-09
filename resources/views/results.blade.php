@@ -117,7 +117,7 @@
                     <p class="chart-subtitle">{{ txt($scale['chart_subtitle']) }}</p>
                     <ul class="bar-chart__rows" role="list">
                         @foreach ($scale['bars'] as $row)
-                            <li class="bar-chart__row" tabindex="0" data-tip="{{ $row['role'] }}: {{ $row['value'] }} {{ $row['unit'] }} — {{ $row['detail'] }}">
+                            <li class="bar-chart__row" tabindex="0" data-tip="{{ $row['role'] }}: {{ $row['value'] }} {{ $row['unit'] }} ({{ $row['detail'] }})">
                                 <span class="bar-chart__name">{{ $row['role'] }}<small>{{ $row['detail'] }}</small></span>
                                 <span class="bar-chart__track"><span class="bar-chart__bar" style="--w: {{ round($row['value'] / $scopeMax * 100) }}%" data-bar></span></span>
                                 <span class="bar-chart__value"><span data-count="{{ $row['value'] }}">{{ $row['value'] }}</span> <small>{{ $row['unit'] }}</small></span>

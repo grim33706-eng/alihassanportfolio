@@ -72,8 +72,8 @@ return [
     ],
 
     'home' => [
-        'seo_title' => '{name} — Performance Marketer & Meta, Google Ads Expert',
-        'seo_description' => '{name} — performance marketer and Meta & Google Ads expert in Lahore, Pakistan, with 4+ years of PPC, TikTok Ads, e-commerce and lead-gen campaigns.',
+        'seo_title' => '{name} | Performance Marketer & Meta, Google Ads Expert',
+        'seo_description' => '{name}, performance marketer and Meta & Google Ads expert in Lahore, Pakistan, with 4+ years of PPC, TikTok Ads, e-commerce and lead-gen campaigns.',
         'hero' => [
             'title' => "Paid media that turns ad spend into *revenue* and qualified\u{00A0}leads.",
             'primary' => 'View my work',
@@ -137,11 +137,11 @@ return [
             'eyebrow' => 'Achievements',
             'title' => 'Documented milestones',
             'items' => [
-                ['headline' => '~4x average ROAS', 'detail' => 'Across an e-commerce portfolio of up to 10 brands, with top campaigns reaching 8–10x — The Social Links.'],
+                ['headline' => '~4x average ROAS', 'detail' => 'Across an e-commerce portfolio of up to 10 brands, with top campaigns reaching 8–10x at The Social Links.'],
                 ['headline' => '2–3 → 10 brands', 'detail' => 'Scaled the managed portfolio while handling approximately PKR 60,000–80,000 in daily Meta ad spend.'],
-                ['headline' => 'Team of 10+ led', 'detail' => 'Paid media specialists, designers and video creators across 5 e-commerce and 11 lead-generation brands — NextQuick Solutions.'],
-                ['headline' => '7-person PPC team', 'detail' => 'Leading PPC and Google Ads specialists on lead generation for USA and Canada clients — Dynasty Marketing Agency.'],
-                ['headline' => '15 accounts at once', 'detail' => 'Managed local lead-generation clients end to end — Orbit Creator.'],
+                ['headline' => 'Team of 10+ led', 'detail' => 'Paid media specialists, designers and video creators across 5 e-commerce and 11 lead-generation brands at NextQuick Solutions.'],
+                ['headline' => '7-person PPC team', 'detail' => 'Leading PPC and Google Ads specialists on lead generation for USA and Canada clients at Dynasty Marketing Agency.'],
+                ['headline' => '15 accounts at once', 'detail' => 'Managed local lead-generation clients end to end at Orbit Creator.'],
             ],
             'button' => 'See results in context',
         ],
@@ -164,7 +164,7 @@ return [
         ],
         'background' => [
             'eyebrow' => 'Background',
-            'title' => 'A performance marketer who leads with data — and with people.',
+            'title' => 'A performance marketer who leads with data, and with people.',
             'facts' => [
                 ['icon' => 'briefcase', 'label' => 'Current focus', 'value' => 'PPC Team Lead at Dynasty Marketing Agency, Performance Marketing Manager at Zela Boost, plus paid and social media at SuperWise International and Chapter001'],
                 ['icon' => 'users', 'label' => 'Leadership', 'value' => 'Seven-person PPC team; cross-functional marketing teams of 10+'],
@@ -176,8 +176,8 @@ return [
             'eyebrow' => 'Specialisation',
             'title' => 'Meta Ads and Google Ads, run as one system',
             'cards' => [
-                ['icon' => 'meta', 'title' => 'Meta Ads', 'text' => 'E-commerce sales for fashion, home textiles, jewellery and food brands, plus B2B and B2C lead generation — with audience segmentation, remarketing and constant creative testing.'],
-                ['icon' => 'google', 'title' => 'Google Ads', 'text' => 'Search, Display, Performance Max and remarketing — backed by keyword research, bidding strategy, ad copywriting and Quality Score and CTR improvements.'],
+                ['icon' => 'meta', 'title' => 'Meta Ads', 'text' => 'E-commerce sales for fashion, home textiles, jewellery and food brands, plus B2B and B2C lead generation, with audience segmentation, remarketing and constant creative testing.'],
+                ['icon' => 'google', 'title' => 'Google Ads', 'text' => 'Search, Display, Performance Max and remarketing, backed by keyword research, bidding strategy, ad copywriting and Quality Score and CTR improvements.'],
             ],
         ],
         'approach' => [
@@ -222,9 +222,9 @@ return [
             'items' => [
                 ['q' => 'Who is {name}?', 'a' => '{name} is a performance marketer based in {location} with 4+ years in paid advertising. He runs Meta Ads, Google Ads and TikTok Ads for e-commerce sales and B2B/B2C lead generation, and has led a seven-person PPC team.'],
                 ['q' => 'Is {name} a Meta Ads expert?', 'a' => 'Yes. Meta Ads (Facebook and Instagram) are his main platform: account structure, prospecting and remarketing, creative testing with designers and video editors, and Meta Pixel setup. Across an e-commerce portfolio his campaigns averaged about 4x ROAS, with top campaigns at 8–10x.'],
-                ['q' => 'Does {first_name} manage Google Ads too?', 'a' => 'Yes — Search, Display, Performance Max and remarketing campaigns, with keyword research, bidding strategy, Quality Score and CTR improvement, and conversion tracking through Google Tag Manager and GA4.'],
+                ['q' => 'Does {first_name} manage Google Ads too?', 'a' => 'Yes. Search, Display, Performance Max and remarketing campaigns, with keyword research, bidding strategy, Quality Score and CTR improvement, and conversion tracking through Google Tag Manager and GA4.'],
                 ['q' => 'Which countries has {first_name} run ad campaigns for?', 'a' => 'Twelve markets: the UK, France, the USA, Canada, Australia, the UAE, Saudi Arabia, Oman, Bangladesh, Azerbaijan, Uzbekistan and Pakistan.'],
-                ['q' => 'What kinds of businesses does {first_name} work with?', 'a' => 'E-commerce brands (fashion, home textiles, bedding, jewellery and food), real estate, software and service businesses — for both online sales and lead generation.'],
+                ['q' => 'What kinds of businesses does {first_name} work with?', 'a' => 'E-commerce brands (fashion, home textiles, bedding, jewellery and food), real estate, software and service businesses, for both online sales and lead generation.'],
                 ['q' => 'How can I hire {name}?', 'a' => 'Send a message through the contact page or connect on LinkedIn. He is open to freelance ad management projects and full-time performance marketing roles.'],
             ],
         ],
@@ -271,7 +271,7 @@ return [
         'roas' => [
             'eyebrow' => 'Return on ad spend',
             'title' => 'Around 4x on average. Up to 10x at the top.',
-            'lead' => 'Measured across the e-commerce portfolio at The Social Links (Dec 2024 – Jun 2026) — fashion, home textiles, jewellery and food brands selling into Australia, Canada, the UK and the USA.',
+            'lead' => 'Measured across the e-commerce portfolio at The Social Links (Dec 2024 – Jun 2026): fashion, home textiles, jewellery and food brands selling into Australia, Canada, the UK and the USA.',
             'chart_title' => 'ROAS, The Social Links e-commerce portfolio',
             'average' => 4,
             'average_label' => '~4x',
@@ -321,7 +321,7 @@ return [
                 ['icon' => 'target', 'title' => 'Audience & keyword refinement', 'text' => 'Segments, keywords and bids adjusted from campaign and lead-quality data.'],
                 ['icon' => 'gauge', 'title' => 'Search efficiency', 'text' => 'Quality Score and click-through-rate improvements on Google Search campaigns.'],
                 ['icon' => 'chart', 'title' => 'Budget allocation', 'text' => 'Budgets moved between campaigns, audiences and brands towards what performs.'],
-                ['icon' => 'funnel', 'title' => 'Lead-quality review', 'text' => 'Lead quality, conversion volume and acquisition costs reviewed — not just lead counts.'],
+                ['icon' => 'funnel', 'title' => 'Lead-quality review', 'text' => 'Lead quality, conversion volume and acquisition costs reviewed, not just lead counts.'],
             ],
         ],
         'markets' => [
@@ -338,7 +338,7 @@ return [
         'hero' => [
             'eyebrow' => 'International experience',
             'title' => 'One strategist, *twelve markets.*',
-            'lead' => 'Paid campaigns for e-commerce brands and lead-generation clients across North America, Europe, the Gulf, Central and South Asia and Australia — run from Lahore.',
+            'lead' => 'Paid campaigns for e-commerce brands and lead-generation clients across North America, Europe, the Gulf, Central and South Asia and Australia, run from Lahore.',
         ],
         'markets' => [
             'eyebrow' => 'Markets',
@@ -373,7 +373,7 @@ return [
         'tips' => [
             "Your business or the role you're hiring for",
             "Platforms you're using or considering",
-            'Target markets and main goal — sales or leads',
+            'Target markets and main goal: sales or leads',
             'Rough monthly budget, if known',
         ],
     ],
