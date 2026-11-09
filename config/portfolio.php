@@ -45,7 +45,7 @@ return [
         'notify_email' => env('PORTFOLIO_NOTIFY_EMAIL'),
 
         'headline' => 'Paid media that turns ad spend into revenue and qualified leads.',
-        'intro' => 'Performance Marketing Manager with 4+ years in paid acquisition, B2B/B2C Lead Generation and E-Commerce sales across Meta, Google and TikTok — for businesses across the UK, USA, France, Oman, UAE, Bangladesh, Saudi Arabia and Uzbekistan.',
+        'intro' => 'Performance Marketing Manager with 4+ years in paid acquisition, B2B/B2C Lead Generation and E-Commerce sales across Meta, Google and TikTok for businesses across the UK, USA, France, Oman, UAE, Bangladesh, Saudi Arabia and Uzbekistan.',
         'summary' => [
             'I plan, launch and scale paid campaigns that are built around one question: what does each click, lead and sale actually return? Over four years I have moved from managing local lead-generation accounts to leading a seven-person PPC team and cross-functional marketing teams of 10+ people.',
             'My work covers the full performance loop — account structure, audience and keyword research, conversion tracking with Meta Pixel, Google Tag Manager and GA4, creative direction with designers and video editors, and the day-to-day optimisation that keeps budgets pointed at what works.',
