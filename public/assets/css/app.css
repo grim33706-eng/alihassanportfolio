@@ -1798,9 +1798,6 @@ body.no-scroll { overflow: hidden; }
 .timeline__card { padding: clamp(1.25rem, 3vw, 2rem); border-radius: var(--radius-lg); background: var(--surface); border: 1px solid var(--border-soft); transition: border-color 0.4s; }
 .timeline__card:hover { border-color: rgba(109, 147, 255, 0.3); }
 .timeline__head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1rem; margin-bottom: 1rem; }
-.timeline__role { font-size: 1.25rem; }
-.timeline__company { margin-top: 0.25rem; color: var(--accent-2); font-weight: 600; font-size: 0.95rem; }
-.timeline__company span { color: var(--text-3); font-weight: 400; }
 .timeline__period { align-self: flex-start; padding: 0.3rem 0.75rem; border-radius: 999px; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-2); border: 1px solid var(--border); white-space: nowrap; }
 .timeline__list { display: grid; gap: 0.55rem; list-style: none; }
 .timeline__list li { position: relative; padding-left: 1.1rem; color: var(--text-2); font-size: 0.94rem; }

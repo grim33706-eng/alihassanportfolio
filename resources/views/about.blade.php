@@ -110,10 +110,6 @@
                     <span class="timeline__dot" aria-hidden="true"></span>
                     <div class="timeline__card">
                         <div class="timeline__head">
-                            <div>
-                                <h3 class="timeline__role">{{ $job['role'] }}</h3>
-                                <p class="timeline__company">{{ $job['company'] }} <span>· {{ $job['mode'] }}</span></p>
-                            </div>
                             <span class="timeline__period">{{ $job['period'] }}</span>
                         </div>
                         <ul class="timeline__list" role="list">
