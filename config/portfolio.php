@@ -222,7 +222,7 @@ return [
             'mode' => 'On-site',
             'period' => 'Aug 2026 – Present',
             'highlights' => [
-                'Lead a seven-person team of PPC and Google Ads specialists: campaign priorities, account workflows, client delivery and performance reporting.',
+                'Campaign priorities, account workflows, client delivery and performance reporting.',
                 'Generate qualified B2B and B2C leads through Meta, Google and TikTok Ads for clients in the USA and Canada, with a focus on conversion performance and lead quality.',
                 'Oversee end-to-end campaign setup, keyword research, audience targeting, budget allocation, bid management and account optimisation.',
                 'Work with graphic designers and video editors on ad concepts, messaging experiments, video formats and revisions to weaker assets.',
