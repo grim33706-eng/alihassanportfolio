@@ -1624,6 +1624,23 @@ body.no-scroll { overflow: hidden; }
 @media (max-width: 767.98px) { .meta-shot__link img { width: 760px; max-width: none; } }
 .meta-note { margin-top: 1.25rem; }
 
+/* ---------- Google Ads results (Results page) ---------- */
+
+.google-accounts { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+.google-account { padding: clamp(1.25rem, 3vw, 2rem); border-radius: var(--radius-lg); background: linear-gradient(160deg, rgba(27, 35, 56, 0.9), rgba(15, 21, 38, 0.9)); border: 1px solid var(--border-soft); }
+.google-account__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem; }
+.google-account__name { margin: 0.75rem 0 0; font-size: clamp(1.25rem, 2.4vw, 1.6rem); }
+.google-account__link { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.55rem 1rem; border-radius: 999px; font-weight: 600; font-size: 0.86rem; color: var(--text); text-decoration: none; border: 1px solid rgba(109, 147, 255, 0.4); background: rgba(79, 124, 255, 0.1); transition: background 0.3s, border-color 0.3s; }
+.google-account__link:hover { color: var(--text); background: rgba(79, 124, 255, 0.24); border-color: var(--accent); }
+.google-account__metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin: 1.35rem 0; }
+@media (min-width: 768px) { .google-account__metrics { grid-template-columns: repeat(4, 1fr); } }
+.google-account__metrics div { padding: 0.9rem 1rem; border-radius: var(--radius); background: rgba(8, 12, 25, 0.42); border: 1px solid var(--border-soft); border-top: 3px solid #4285f4; }
+.google-account__metrics div:nth-child(2) { border-top-color: #ea4335; }
+.google-account__metrics div:nth-child(3) { border-top-color: #34a853; }
+.google-account__metrics div:nth-child(4) { border-top-color: #fbbc04; }
+.google-account__metrics dt { font-size: 0.76rem; font-weight: 400; color: var(--text-3); }
+.google-account__metrics dd { margin: 0.15rem 0 0; font-family: var(--font-display); font-weight: 700; font-size: 1.45rem; }
+
 /* ---------- FAQ (Services) ---------- */
 
 .faq-layout { display: grid; gap: 2rem; }

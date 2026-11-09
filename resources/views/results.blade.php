@@ -63,6 +63,9 @@
 {{-- ============ META ADS RESULTS ============ --}}
 @include('partials.meta-results')
 
+{{-- ============ GOOGLE ADS RESULTS ============ --}}
+@include('partials.google-results')
+
 {{-- ============ BEFORE & AFTER ============ --}}
 @include('partials.case-studies-section', [
     'caseStudies' => $caseStudies,

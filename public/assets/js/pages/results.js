@@ -85,6 +85,11 @@
         gsap.from(shots.querySelectorAll('.meta-shot'), { y: 40, opacity: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out', scrollTrigger: once(shots) });
     }
 
+    /* ---- Google Ads results --------------------------------------------- */
+    document.querySelectorAll('[data-google-account]').forEach((account) => {
+        gsap.from(account, { y: 50, opacity: 0, duration: 0.9, ease: 'power3.out', scrollTrigger: once(account) });
+    });
+
     /* ---- ROAS scale ------------------------------------------------------ */
     const roas = document.querySelector('[data-roas]');
     if (roas) {

@@ -108,6 +108,54 @@ return [
     ],
 
     /*
+    | Google Ads account reports. Figures are text, exactly as Google Ads rounds them.
+    */
+    'google_results' => [
+        'eyebrow' => 'Google Ads',
+        'title' => 'Google Ads results for *dental practices*',
+        'lead' => 'Account overviews as reported by Google Ads. Click any report to view it full size.',
+        'accounts' => [
+            [
+                'name' => "Children's Dentistry of Texas & Orthodontics",
+                'url' => 'https://childrensdentistryoftexas.com/',
+                'period' => 'Oct 3 – Nov 1, 2026',
+                'metrics' => [
+                    ['label' => 'Clicks', 'value' => '292'],
+                    ['label' => 'Conversions', 'value' => '73'],
+                    ['label' => 'Cost per conversion', 'value' => '$55.72'],
+                    ['label' => 'Cost', 'value' => '$4.07K'],
+                ],
+                'image' => 'assets/img/results/google-childrens-dentistry.jpg',
+            ],
+            [
+                'name' => 'Ann Arbor Smiles',
+                'url' => 'https://annarborsmiles.com/',
+                'period' => 'Oct 3 – Nov 1, 2026',
+                'metrics' => [
+                    ['label' => 'Clicks', 'value' => '887'],
+                    ['label' => 'Conversions', 'value' => '159'],
+                    ['label' => 'Cost per conversion', 'value' => '$40.02'],
+                    ['label' => 'Cost', 'value' => '$6.36K'],
+                ],
+                'image' => 'assets/img/results/google-ann-arbor-smiles.jpg',
+            ],
+            [
+                'name' => 'Advanced Dental Esthetics',
+                'url' => '',
+                'period' => 'Aug 4 – Nov 1, 2026',
+                'metrics' => [
+                    ['label' => 'Impressions', 'value' => '8.57K'],
+                    ['label' => 'Conversions', 'value' => '90'],
+                    ['label' => 'Cost per conversion', 'value' => '$52.12'],
+                    ['label' => 'Cost', 'value' => '$4.69K'],
+                ],
+                'image' => 'assets/img/results/google-advanced-dental-esthetics.jpg',
+            ],
+        ],
+        'note' => 'Figures as reported by Google Ads for the dates shown. Past performance does not guarantee future results.',
+    ],
+
+    /*
     | Homepage tabs. Meta Ads first, Google Ads second.
     | Only services evidenced in the CV are listed.
     */

@@ -394,6 +394,30 @@ return [
             ]],
         ],
 
+        'google-results' => [
+            'label' => 'Google Ads results', 'group' => 'Content', 'icon' => 'google', 'route' => 'results',
+            'description' => 'The Google Ads section on the Results page.',
+            'parts' => [[
+                'key' => 'portfolio.google_results',
+                'fields' => [
+                    ['name' => 'eyebrow', 'label' => 'Small label', 'type' => 'text'],
+                    ['name' => 'title', 'label' => 'Title', 'type' => 'rich'],
+                    ['name' => 'lead', 'label' => 'Intro', 'type' => 'textarea'],
+                    ['name' => 'accounts', 'label' => 'Accounts', 'type' => 'repeater', 'item_label' => 'name', 'fields' => [
+                        ['name' => 'name', 'label' => 'Account name', 'type' => 'text'],
+                        ['name' => 'url', 'label' => 'Website link', 'type' => 'text', 'help' => 'Full address, e.g. https://example.com/. Leave empty for no button.'],
+                        ['name' => 'period', 'label' => 'Date range', 'type' => 'text'],
+                        ['name' => 'metrics', 'label' => 'Figures', 'type' => 'repeater', 'item_label' => 'label', 'fields' => [
+                            ['name' => 'label', 'label' => 'Label', 'type' => 'text'],
+                            ['name' => 'value', 'label' => 'Value', 'type' => 'text'],
+                        ]],
+                        ['name' => 'image', 'label' => 'Screenshot', 'type' => 'image'],
+                    ]],
+                    ['name' => 'note', 'label' => 'Footnote', 'type' => 'text'],
+                ],
+            ]],
+        ],
+
         'stats' => [
             'label' => 'Key figures', 'group' => 'Content', 'icon' => 'gauge',
             'description' => 'The headline figures shown on Home and Results. Numbers count up when they scroll into view.',
