@@ -190,6 +190,13 @@ html.cursor-active,
 html.cursor-active * { cursor: none !important; }
 html.cursor-active.cursor-text input,
 html.cursor-active.cursor-text textarea { cursor: text !important; }
+/* The viewer opens in the browser's top layer, above the custom cursor: use the normal pointer there. */
+html.cursor-active .lightbox,
+html.cursor-active .lightbox *,
+html.cursor-active .lightbox::backdrop { cursor: auto !important; }
+html.cursor-active .lightbox button { cursor: pointer !important; }
+html:has(.lightbox[open]) .cursor-dot,
+html:has(.lightbox[open]) .cursor-ring { opacity: 0; }
 
 .cursor-dot,
 .cursor-ring {
