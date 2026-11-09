@@ -137,7 +137,7 @@
 
 @push('schema')
     <script type="application/ld+json">{!! json_encode([
-        '@context' => 'https://schema.org',
+        '@@context' => 'https://schema.org',
         '@type' => 'FAQPage',
         'mainEntity' => collect($c['faq']['items'])->map(fn ($item) => [
             '@type' => 'Question',
