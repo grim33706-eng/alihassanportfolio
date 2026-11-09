@@ -64,6 +64,42 @@ return [
     ],
 
     /*
+    | Meta Ads results, copied from Ads Manager reports. Only totals are stored:
+    | ROAS and cost-per figures are calculated from them on the page.
+    */
+    'meta_results' => [
+        'eyebrow' => 'Meta Ads Manager',
+        'title' => 'Meta Ads results, *straight from Ads Manager*',
+        'lead' => 'Website purchases as reported by Meta. Campaign names are kept private to protect client confidentiality.',
+        'account' => [
+            'period' => 'Oct 2024 – Nov 2026',
+            'value' => 3999835,
+            'spend' => 525493.97,
+            'reach' => 119053,
+            'views' => 41695,
+            'atc' => 2253,
+        ],
+        'campaigns_title' => 'Largest campaigns by spend',
+        'campaigns_note' => 'The seven biggest campaigns in this period. The totals above include every campaign.',
+        'campaigns' => [
+            ['label' => 'Campaign 1', 'value' => 2167519, 'spend' => 250163.85, 'purchases' => 418],
+            ['label' => 'Campaign 2', 'value' => 691126, 'spend' => 102965.48, 'purchases' => 126],
+            ['label' => 'Campaign 3', 'value' => 254690, 'spend' => 41603.11, 'purchases' => 42],
+            ['label' => 'Campaign 4', 'value' => 409300, 'spend' => 37782.87, 'purchases' => 63],
+            ['label' => 'Campaign 5', 'value' => 123100, 'spend' => 19389.21, 'purchases' => 17],
+            ['label' => 'Campaign 6', 'value' => 95000, 'spend' => 19125.93, 'purchases' => 13],
+            ['label' => 'Campaign 7', 'value' => 98700, 'spend' => 19018.61, 'purchases' => 12],
+        ],
+        'months_title' => 'Single-month snapshots',
+        'months' => [
+            ['label' => 'April 2026', 'note' => 'Two campaigns combined', 'value' => 197000, 'spend' => 32344.23, 'purchases' => 31, 'views' => 3316, 'atc' => 158],
+            ['label' => 'August 2026', 'note' => 'One campaign', 'value' => 142900, 'spend' => 18705.13, 'purchases' => 27, 'views' => 1422, 'atc' => 103],
+            ['label' => 'September 2026', 'note' => 'One campaign', 'value' => 80800, 'spend' => 14200.80, 'purchases' => 11, 'views' => 696, 'atc' => 33],
+        ],
+        'note' => 'Amounts in Rs, as reported by Meta Ads Manager. Past performance does not guarantee future results.',
+    ],
+
+    /*
     | Homepage tabs. Meta Ads first, Google Ads second.
     | Only services evidenced in the CV are listed.
     */

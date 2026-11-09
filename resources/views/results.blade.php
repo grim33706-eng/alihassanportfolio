@@ -60,6 +60,9 @@
     </div>
 </section>
 
+{{-- ============ META ADS RESULTS ============ --}}
+@include('partials.meta-results')
+
 {{-- ============ BEFORE & AFTER ============ --}}
 @include('partials.case-studies-section', [
     'caseStudies' => $caseStudies,

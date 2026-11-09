@@ -287,14 +287,16 @@
     function counters() {
         document.querySelectorAll('[data-count]').forEach((el) => {
             const target = parseFloat(el.dataset.count);
+            const decimals = parseInt(el.dataset.decimals || '0', 10);
+            const format = (v) => v.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
             const state = { v: 0 };
-            el.textContent = '0';
+            el.textContent = format(0);
             gsap.to(state, {
                 v: target,
                 duration: 1.8,
                 ease: 'power2.out',
                 scrollTrigger: { trigger: el, start: 'top 92%', once: true },
-                onUpdate: () => { el.textContent = Math.round(state.v); },
+                onUpdate: () => { el.textContent = format(state.v); },
             });
         });
     }

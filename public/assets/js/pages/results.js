@@ -51,6 +51,35 @@
         window.App.whenLoaded(() => tl.play());
     }
 
+    /* ---- Meta Ads results ----------------------------------------------- */
+    const meta = document.querySelector('[data-meta-results]');
+    if (meta) {
+        const report = meta.querySelector('[data-meta-report]');
+        const reportTl = gsap.timeline({ scrollTrigger: once(report) });
+        reportTl.from(report, { y: 50, opacity: 0, duration: 0.9, ease: 'power3.out' })
+            .from(report.querySelectorAll('[data-meta-bar]'), { scaleX: 0, duration: 1.3, ease: 'power3.inOut', stagger: 0.15 }, '-=0.4')
+            .from(report.querySelectorAll('[data-meta-funnel]'), { scaleX: 0, duration: 0.9, ease: 'power3.out', stagger: 0.14 }, '-=1.1');
+
+        const table = meta.querySelector('[data-meta-campaigns]');
+        if (table) {
+            const tableTl = gsap.timeline({ scrollTrigger: once(table) });
+            tableTl.from(table, { y: 40, opacity: 0, duration: 0.8, ease: 'power3.out' })
+                .from(table.querySelectorAll('.meta-table__row'), { y: 16, opacity: 0, duration: 0.45, stagger: 0.07 }, '-=0.4')
+                .from(table.querySelectorAll('[data-meta-roas]'), { scaleX: 0, duration: 0.9, ease: 'power3.out', stagger: 0.07 }, '-=0.7');
+        }
+
+        const months = meta.querySelector('[data-meta-months]');
+        if (months) {
+            const cards = months.querySelectorAll('.meta-month');
+            const monthsTl = gsap.timeline({ scrollTrigger: once(months) });
+            monthsTl.from(cards, { y: 50, opacity: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out', clearProps: 'transform' });
+            months.querySelectorAll('[data-meta-ring]').forEach((ring, i) => {
+                monthsTl.fromTo(ring, { attr: { 'stroke-dasharray': '0 100' } },
+                    { attr: { 'stroke-dasharray': ring.getAttribute('stroke-dasharray') }, duration: 1.2, ease: 'power3.out' }, 0.3 + i * 0.12);
+            });
+        }
+    }
+
     /* ---- ROAS scale ------------------------------------------------------ */
     const roas = document.querySelector('[data-roas]');
     if (roas) {

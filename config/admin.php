@@ -348,6 +348,46 @@ return [
             ]],
         ],
 
+        'meta-results' => [
+            'label' => 'Meta Ads results', 'group' => 'Content', 'icon' => 'meta', 'route' => 'results',
+            'description' => 'The Ads Manager section on the Results page. Enter totals only: ROAS and cost per purchase are calculated automatically.',
+            'parts' => [[
+                'key' => 'portfolio.meta_results',
+                'fields' => [
+                    ['name' => 'eyebrow', 'label' => 'Small label', 'type' => 'text'],
+                    ['name' => 'title', 'label' => 'Title', 'type' => 'rich'],
+                    ['name' => 'lead', 'label' => 'Intro', 'type' => 'textarea'],
+                    ['name' => 'account', 'type' => 'group', 'label' => 'Overall report', 'fields' => [
+                        ['name' => 'period', 'label' => 'Date range', 'type' => 'text'],
+                        ['name' => 'value', 'label' => 'Purchase value (Rs)', 'type' => 'number', 'step' => 'any'],
+                        ['name' => 'spend', 'label' => 'Amount spent (Rs)', 'type' => 'number', 'step' => 'any'],
+                        ['name' => 'reach', 'label' => 'Accounts reached', 'type' => 'number'],
+                        ['name' => 'views', 'label' => 'Content views', 'type' => 'number'],
+                        ['name' => 'atc', 'label' => 'Adds to cart', 'type' => 'number'],
+                    ]],
+                    ['name' => 'campaigns_title', 'label' => 'Campaigns heading', 'type' => 'text'],
+                    ['name' => 'campaigns_note', 'label' => 'Campaigns note', 'type' => 'text'],
+                    ['name' => 'campaigns', 'label' => 'Campaigns', 'type' => 'repeater', 'item_label' => 'label', 'fields' => [
+                        ['name' => 'label', 'label' => 'Name shown', 'type' => 'text'],
+                        ['name' => 'value', 'label' => 'Purchase value (Rs)', 'type' => 'number', 'step' => 'any'],
+                        ['name' => 'spend', 'label' => 'Amount spent (Rs)', 'type' => 'number', 'step' => 'any'],
+                        ['name' => 'purchases', 'label' => 'Purchases', 'type' => 'number'],
+                    ]],
+                    ['name' => 'months_title', 'label' => 'Monthly cards heading', 'type' => 'text'],
+                    ['name' => 'months', 'label' => 'Monthly cards', 'type' => 'repeater', 'item_label' => 'label', 'fields' => [
+                        ['name' => 'label', 'label' => 'Month', 'type' => 'text'],
+                        ['name' => 'note', 'label' => 'Small note', 'type' => 'text'],
+                        ['name' => 'value', 'label' => 'Purchase value (Rs)', 'type' => 'number', 'step' => 'any'],
+                        ['name' => 'spend', 'label' => 'Amount spent (Rs)', 'type' => 'number', 'step' => 'any'],
+                        ['name' => 'purchases', 'label' => 'Purchases', 'type' => 'number'],
+                        ['name' => 'views', 'label' => 'Content views', 'type' => 'number'],
+                        ['name' => 'atc', 'label' => 'Adds to cart', 'type' => 'number'],
+                    ]],
+                    ['name' => 'note', 'label' => 'Footnote', 'type' => 'text'],
+                ],
+            ]],
+        ],
+
         'stats' => [
             'label' => 'Key figures', 'group' => 'Content', 'icon' => 'gauge',
             'description' => 'The headline figures shown on Home and Results. Numbers count up when they scroll into view.',
