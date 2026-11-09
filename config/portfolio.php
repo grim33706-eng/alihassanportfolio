@@ -221,7 +221,7 @@ return [
             'company' => 'Dynasty Marketing Agency',
             'mode' => 'On-site',
             'period' => 'Aug 2026 – Present',
-            'niches' => ['B2B Lead Generation', 'B2C Lead Generation'],
+            'niches' => ['Aesthetics Clinic', 'Dentist'],
             'highlights' => [
                 'Campaign priorities, account workflows, client delivery and performance reporting.',
                 'Generate qualified B2B and B2C leads through Meta, Google and TikTok Ads for clients in the USA and Canada, with a focus on conversion performance and lead quality.',
